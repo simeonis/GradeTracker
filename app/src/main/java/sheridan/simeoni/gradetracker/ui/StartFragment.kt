@@ -9,9 +9,6 @@ import android.widget.Button
 import androidx.navigation.fragment.findNavController
 import sheridan.simeoni.gradetracker.R
 
-/**
- * A simple [Fragment] subclass as the default destination in the navigation.
- */
 class StartFragment : Fragment() {
 
     override fun onCreateView(

@@ -9,9 +9,6 @@ import android.widget.Button
 import androidx.navigation.fragment.findNavController
 import sheridan.simeoni.gradetracker.R
 
-/**
- * A simple [Fragment] subclass as the second destination in the navigation.
- */
 class YearFragment : Fragment() {
 
     override fun onCreateView(
