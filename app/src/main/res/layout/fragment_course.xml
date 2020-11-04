@@ -9,7 +9,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/course_label"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -17,13 +17,14 @@
             tools:text="Select Course" />
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/course_recycler"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight=".5"
             tools:listitem="@layout/fragment_course_item" />
 
         <Button
-            android:id="@+id/button_year"
+            android:id="@+id/course_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
