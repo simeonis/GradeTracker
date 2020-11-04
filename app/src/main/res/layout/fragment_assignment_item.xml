@@ -8,7 +8,7 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/assignment_name_label"
+            android:id="@+id/assignment_item_name_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
@@ -22,19 +22,19 @@
             tools:text="Midterm" />
 
         <TextView
-            android:id="@+id/grade_label"
+            android:id="@+id/assignment_item_grade_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/weight_label"
-            app:layout_constraintStart_toEndOf="@+id/assignment_name_label"
+            app:layout_constraintEnd_toStartOf="@+id/assignment_item_weight_label"
+            app:layout_constraintStart_toEndOf="@+id/assignment_item_name_label"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="-/40" />
 
         <TextView
-            android:id="@+id/weight_label"
+            android:id="@+id/assignment_item_weight_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="32dp"
