@@ -3,26 +3,53 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
+    android:label="@string/course_fragment_label"
+    app:startDestination="@id/StartFragment">
 
     <fragment
-        android:id="@+id/FirstFragment"
-        android:name="sheridan.simeoni.gradetracker.FirstFragment"
-        android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first">
+        android:id="@+id/StartFragment"
+        android:name="sheridan.simeoni.gradetracker.ui.StartFragment"
+        android:label="@string/start_fragment_label"
+        tools:layout="@layout/fragment_start">
 
         <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
+            android:id="@+id/action_start_to_year"
+            app:destination="@id/YearFragment"
+            app:popUpTo="@id/StartFragment" />
     </fragment>
     <fragment
-        android:id="@+id/SecondFragment"
-        android:name="sheridan.simeoni.gradetracker.SecondFragment"
-        android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second">
-
+        android:id="@+id/YearFragment"
+        android:name="sheridan.simeoni.gradetracker.ui.YearFragment"
+        android:label="@string/year_fragment_label"
+        tools:layout="@layout/fragment_year">
         <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
+            android:id="@+id/action_year_to_course"
+            app:destination="@id/courseFragment"
+            app:popUpTo="@id/YearFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/courseFragment"
+        android:name="sheridan.simeoni.gradetracker.ui.CourseFragment"
+        android:label="@string/course_fragment_label"
+        tools:layout="@layout/fragment_course">
+        <action
+            android:id="@+id/action_course_to_assignment"
+            app:destination="@id/assignmentFragment"
+            app:popUpTo="@id/courseFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/assignmentFragment"
+        android:name="sheridan.simeoni.gradetracker.ui.AssignmentFragment"
+        android:label="@string/assignment_fragment_label"
+        tools:layout="@layout/fragment_assignment">
+        <action
+            android:id="@+id/action_assignment_to_grade"
+            app:destination="@id/gradeFragment"
+            app:popUpTo="@id/assignmentFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/gradeFragment"
+        android:name="sheridan.simeoni.gradetracker.ui.GradeFragment"
+        android:label="@string/grade_fragment_label"
+        tools:layout="@layout/fragment_grade"/>
 </navigation>
