@@ -10,6 +10,10 @@
     <string name="grade_fragment_label">Grade Fragment</string>
 
     <!-- Buttons -->
+    <string name="begin">Begin</string>
     <string name="next">Next</string>
+
+    <!-- Labels -->
+    <string name="grade_tracker">Grade Tracker</string>
 
 </resources>
