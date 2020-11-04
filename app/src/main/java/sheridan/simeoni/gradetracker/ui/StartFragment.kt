@@ -25,7 +25,7 @@ class StartFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        view.findViewById<Button>(R.id.button_start).setOnClickListener {
+        view.findViewById<Button>(R.id.start_begin_button).setOnClickListener {
             findNavController().navigate(R.id.action_start_to_year)
         }
     }
