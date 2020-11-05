@@ -10,15 +10,29 @@
     <string name="assignment_fragment_label">Assignment Fragment</string>
     <string name="grade_fragment_label">Grade Fragment</string>
 
-    <!-- Dialogs -->
+    <!-- About Dialogs -->
     <string name="authors"><b>Created by:</b>\n\nShae Simeoni\nSeth Climenhaga\nJacob Collins\n\n
         Sheridan College, 2020</string>
 
-    <!-- Buttons -->
-    <string name="begin">Begin</string>
+    <!-- Shared -->
     <string name="next">Next</string>
+    <string name="add">Add</string>
 
-    <!-- Labels -->
+    <!-- Start Fragment -->
     <string name="grade_tracker">Grade Tracker</string>
+    <string name="begin">Begin</string>
 
+    <!-- Term Fragment -->
+
+    <!-- Course Fragment -->
+
+    <!-- Assignment Fragment -->
+    <string name="total_points">Total Points</string>
+    <string name="enter_assignment">Enter Assignment</string>
+    <string name="weight">Weight</string>
+    <string name="assignment_name_hint">Assignment Name</string>
+    <string name="grade_points_hint">Maximum Grade</string>
+    <string name="grade_weight_hint">Grade Weight (%)</string>
+
+    <!-- Grade Fragment -->
 </resources>
