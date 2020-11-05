@@ -24,7 +24,14 @@
             tools:listitem="@layout/fragment_year_item" />
 
         <Button
-            android:id="@+id/year_button"
+            android:id="@+id/term_add_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="Add" />
+
+        <Button
+            android:id="@+id/term_next_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
