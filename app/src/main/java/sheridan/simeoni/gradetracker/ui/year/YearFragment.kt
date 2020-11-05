@@ -1,4 +1,4 @@
-package sheridan.simeoni.gradetracker.ui
+package sheridan.simeoni.gradetracker.ui.year
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

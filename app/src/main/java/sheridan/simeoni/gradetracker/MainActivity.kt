@@ -8,7 +8,9 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.widget.Toolbar
 import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 
 class MainActivity : AppCompatActivity() {
@@ -36,8 +38,12 @@ class MainActivity : AppCompatActivity() {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        return when (item.itemId) {
-            R.id.action_settings -> true
+        return NavigationUI.onNavDestinationSelected(item, findNavController(R.id.nav_host)) ||
+            when (item.itemId) {
+                R.id.action_about -> {
+                    findNavController(R.id.nav_host).navigate(R.id.action_global_to_about)
+                    true
+                }
             else -> super.onOptionsItemSelected(item)
         }
     }

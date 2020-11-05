@@ -19,7 +19,7 @@
     </fragment>
     <fragment
         android:id="@+id/YearFragment"
-        android:name="sheridan.simeoni.gradetracker.ui.YearFragment"
+        android:name="sheridan.simeoni.gradetracker.ui.year.YearFragment"
         android:label="@string/year_fragment_label"
         tools:layout="@layout/fragment_year">
         <action
@@ -29,7 +29,7 @@
     </fragment>
     <fragment
         android:id="@+id/courseFragment"
-        android:name="sheridan.simeoni.gradetracker.ui.CourseFragment"
+        android:name="sheridan.simeoni.gradetracker.ui.course.CourseFragment"
         android:label="@string/course_fragment_label"
         tools:layout="@layout/fragment_course">
         <action
@@ -39,7 +39,7 @@
     </fragment>
     <fragment
         android:id="@+id/assignmentFragment"
-        android:name="sheridan.simeoni.gradetracker.ui.AssignmentFragment"
+        android:name="sheridan.simeoni.gradetracker.ui.assignment.AssignmentFragment"
         android:label="@string/assignment_fragment_label"
         tools:layout="@layout/fragment_assignment">
         <action
@@ -49,7 +49,12 @@
     </fragment>
     <fragment
         android:id="@+id/gradeFragment"
-        android:name="sheridan.simeoni.gradetracker.ui.GradeFragment"
+        android:name="sheridan.simeoni.gradetracker.ui.grade.GradeFragment"
         android:label="@string/grade_fragment_label"
         tools:layout="@layout/fragment_grade"/>
+    <dialog
+        android:id="@+id/aboutDialog"
+        android:name="sheridan.simeoni.gradetracker.ui.dialog.AboutDialog"
+        android:label="AboutDialog" />
+    <action android:id="@+id/action_global_to_about" app:destination="@id/aboutDialog" />
 </navigation>
