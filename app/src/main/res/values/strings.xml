@@ -28,7 +28,7 @@
 
     <!-- Assignment Fragment -->
     <string name="total_points">Total Points</string>
-    <string name="enter_assignment">Enter Assignment</string>
+    <string name="enter_assignment">Assignment</string>
     <string name="weight">Weight</string>
     <string name="assignment_name_hint">Assignment Name</string>
     <string name="grade_points_hint">Maximum Grade</string>
