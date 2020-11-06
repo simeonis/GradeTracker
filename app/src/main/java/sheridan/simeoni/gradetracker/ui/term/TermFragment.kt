@@ -7,17 +7,24 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.RecyclerView
 import sheridan.simeoni.gradetracker.R
 import sheridan.simeoni.gradetracker.ui.dialog.TermDialog
 
 class TermFragment : Fragment() {
-
+    private lateinit var adapter: TermRecyclerViewAdapter
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_term, container, false)
+        val view = inflater.inflate(R.layout.fragment_term, container, false)
+        val recyclerView = view.findViewById<RecyclerView>(R.id.term_recycler)
+        adapter = TermRecyclerViewAdapter(view.context)
+        recyclerView.adapter = adapter
+
+
+        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
