@@ -1,11 +1,11 @@
 package sheridan.simeoni.gradetracker.ui.assignment
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import sheridan.simeoni.gradetracker.R
+import sheridan.simeoni.gradetracker.databinding.FragmentAssignmentItemBinding
 
 class AssignmentRecyclerViewAdapter : RecyclerView.Adapter<AssignmentRecyclerViewAdapter.ViewHolder>() {
 
@@ -16,23 +16,34 @@ class AssignmentRecyclerViewAdapter : RecyclerView.Adapter<AssignmentRecyclerVie
         }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context)
-                .inflate(R.layout.fragment_assignment_item, parent, false)
-        return ViewHolder(view)
+        return ViewHolder.from(parent)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = assignments!![position]
-        holder.nameView.text = item
-        holder.gradeView.text = "-/40"
-        holder.weightView.text = "20%"
+        holder.bind(assignments!![position], assignments!!.size)
     }
 
     override fun getItemCount(): Int = assignments?.size ?: 0
 
-    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val nameView: TextView = view.findViewById(R.id.assignment_item_name_label)
-        val gradeView: TextView = view.findViewById(R.id.assignment_item_grade_label)
-        val weightView: TextView = view.findViewById(R.id.assignment_item_weight_label)
+    class ViewHolder private constructor(
+        private val binding: FragmentAssignmentItemBinding): RecyclerView.ViewHolder(binding.root) {
+
+        fun bind(name : String, size: Int) {
+            binding.assignmentItemNameLabel.text = name
+            binding.assignmentItemGradeLabel.text = "-/40"
+            binding.assignmentItemWeightLabel.text = String.format("%.1f", (100f / size))
+            binding.root.setOnClickListener {
+                it.findNavController().navigate(R.id.action_assignment_to_grade)
+            }
+            binding.executePendingBindings()
+        }
+
+        companion object {
+            fun from(parent: ViewGroup): ViewHolder {
+                val layoutInflater = LayoutInflater.from(parent.context)
+                val binding = FragmentAssignmentItemBinding.inflate(layoutInflater, parent, false)
+                return ViewHolder(binding)
+            }
+        }
     }
 }
