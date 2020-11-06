@@ -1,4 +1,4 @@
-package sheridan.simeoni.gradetracker.ui.year
+package sheridan.simeoni.gradetracker.ui.term
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -10,14 +10,14 @@ import androidx.navigation.fragment.findNavController
 import sheridan.simeoni.gradetracker.R
 import sheridan.simeoni.gradetracker.ui.dialog.TermDialog
 
-class YearFragment : Fragment() {
+class TermFragment : Fragment() {
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_year, container, false)
+        return inflater.inflate(R.layout.fragment_term, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

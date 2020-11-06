@@ -14,18 +14,18 @@
 
         <action
             android:id="@+id/action_start_to_year"
-            app:destination="@id/YearFragment"
+            app:destination="@id/TermFragment"
             app:popUpTo="@id/StartFragment" />
     </fragment>
     <fragment
-        android:id="@+id/YearFragment"
-        android:name="sheridan.simeoni.gradetracker.ui.year.YearFragment"
+        android:id="@+id/TermFragment"
+        android:name="sheridan.simeoni.gradetracker.ui.term.TermFragment"
         android:label="@string/year_fragment_label"
-        tools:layout="@layout/fragment_year">
+        tools:layout="@layout/fragment_term">
         <action
             android:id="@+id/action_year_to_course"
             app:destination="@id/courseFragment"
-            app:popUpTo="@id/YearFragment" />
+            app:popUpTo="@id/TermFragment" />
     </fragment>
     <fragment
         android:id="@+id/courseFragment"
