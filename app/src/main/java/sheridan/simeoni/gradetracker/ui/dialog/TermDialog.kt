@@ -6,12 +6,7 @@ import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import sheridan.simeoni.gradetracker.R
-/**
- *GradeTracker
-createdbyseth*
-studentID:991599894
- *on2020-11-05
- */
+
 class TermDialog : DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {

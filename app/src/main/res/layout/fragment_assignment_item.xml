@@ -9,7 +9,7 @@
 
         <TextView
             android:id="@+id/assignment_item_name_label"
-            android:layout_width="wrap_content"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginTop="16dp"
