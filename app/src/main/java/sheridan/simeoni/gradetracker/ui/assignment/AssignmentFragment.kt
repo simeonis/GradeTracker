@@ -8,29 +8,20 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.navigation.fragment.findNavController
 import sheridan.simeoni.gradetracker.R
+import sheridan.simeoni.gradetracker.databinding.FragmentAssignmentBinding
 import sheridan.simeoni.gradetracker.ui.dialog.AssignmentDialog
 
 class AssignmentFragment : Fragment() {
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    private lateinit var binding: FragmentAssignmentBinding
 
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_assignment, container, false)
-    }
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        binding = FragmentAssignmentBinding.inflate(inflater, container, false)
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+        binding.assignmentAddButton.setOnClickListener { openDialog() }
+        binding.assignmentNextButton.setOnClickListener { findNavController().navigate(R.id.action_assignment_to_grade) }
 
-        view.findViewById<Button>(R.id.assignment_add_button).setOnClickListener {
-            openDialog()
-        }
-
-        view.findViewById<Button>(R.id.assignment_next_button).setOnClickListener {
-            findNavController().navigate(R.id.action_assignment_to_grade)
-        }
+        return binding.root
     }
 
     private fun openDialog() {
