@@ -40,12 +40,16 @@
     <fragment
         android:id="@+id/assignmentFragment"
         android:name="sheridan.simeoni.gradetracker.ui.assignment.AssignmentFragment"
-        android:label="@string/assignment_fragment_label"
+        android:label="{title}"
         tools:layout="@layout/fragment_assignment">
         <action
             android:id="@+id/action_assignment_to_grade"
             app:destination="@id/gradeFragment"
             app:popUpTo="@id/assignmentFragment" />
+        <argument
+            android:name="title"
+            app:argType="string"
+            android:defaultValue="BLANK" />
     </fragment>
     <fragment
         android:id="@+id/gradeFragment"

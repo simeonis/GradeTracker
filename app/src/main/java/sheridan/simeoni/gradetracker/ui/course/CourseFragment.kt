@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
 import sheridan.simeoni.gradetracker.R
 import sheridan.simeoni.gradetracker.ui.dialog.CourseDialog
@@ -28,7 +29,8 @@ class CourseFragment : Fragment() {
             openDialog()
         }
         view.findViewById<Button>(R.id.course_button).setOnClickListener {
-            findNavController().navigate(R.id.action_course_to_assignment)
+            val bundle = bundleOf("title" to "PROG20082")
+            findNavController().navigate(R.id.action_course_to_assignment, bundle)
         }
     }
 

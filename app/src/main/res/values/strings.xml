@@ -33,6 +33,7 @@
     <string name="assignment_name_hint">Assignment Name</string>
     <string name="grade_points_hint">Maximum Grade</string>
     <string name="grade_weight_hint">Grade Weight (%)</string>
+    <string name="add_assignment">Add Assignment</string>
 
     <!-- Grade Fragment -->
 </resources>
