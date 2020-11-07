@@ -1,36 +1,33 @@
 package sheridan.simeoni.gradetracker.ui.assignment
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import androidx.navigation.fragment.findNavController
-import sheridan.simeoni.gradetracker.R
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import sheridan.simeoni.gradetracker.databinding.FragmentAssignmentBinding
 import sheridan.simeoni.gradetracker.ui.dialog.AssignmentDialog
 
 class AssignmentFragment : Fragment() {
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    private lateinit var binding: FragmentAssignmentBinding
+    private lateinit var adapter: AssignmentRecyclerViewAdapter
 
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_assignment, container, false)
-    }
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        binding = FragmentAssignmentBinding.inflate(inflater, container, false)
+        adapter = AssignmentRecyclerViewAdapter()
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        view.findViewById<Button>(R.id.assignment_add_button).setOnClickListener {
-            openDialog()
+        with(binding) {
+            assignmentRecycler.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
+            assignmentRecycler.adapter = adapter
+            assignmentRecycler.layoutManager = LinearLayoutManager(context)
         }
 
-        view.findViewById<Button>(R.id.assignment_next_button).setOnClickListener {
-            findNavController().navigate(R.id.action_assignment_to_grade)
-        }
+        binding.assignmentAddButton.setOnClickListener { openDialog() }
+
+        return binding.root
     }
 
     private fun openDialog() {
