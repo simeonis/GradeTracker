@@ -1,47 +1,49 @@
 package sheridan.simeoni.gradetracker.ui.term
 
-import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import sheridan.simeoni.gradetracker.R
-/**
- *GradeTracker
-createdbyseth*
-studentID:991599894
- *on2020-11-06
- */
-class TermRecyclerViewAdapter(private val context: Context) : RecyclerView.Adapter<TermRecyclerViewAdapter.ViewHolder>() {
+import sheridan.simeoni.gradetracker.databinding.FragmentTermItemBinding
 
-    var history: List<String>? = null
-        set(value){
+class TermRecyclerViewAdapter : RecyclerView.Adapter<TermRecyclerViewAdapter.ViewHolder>() {
+
+    var terms: List<String>? = listOf("Term 1", "Term 2", "Term 3", "Term 4", "Term 5", "Term 6", "Term 7", "Term 8")
+        set(value) {
             field = value
             notifyDataSetChanged()
         }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.fragment_term_item, parent, false)
-        history = listOf("HI", "Hi", "Hi")
-        return ViewHolder(view)
+        return ViewHolder.from(parent)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val savedRoll = history!![position]
-        holder.idView.text =  "HI"
-        holder.contentView.text = "HI There"
+        holder.bind(terms!![position], terms!!.size)
     }
 
-    override fun getItemCount(): Int = history?.size ?: 0
+    override fun getItemCount(): Int = terms?.size ?: 0
 
-    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val idView: TextView = view.findViewById(R.id.term_percent_label)
-        val contentView: TextView = view.findViewById(R.id.term_progress_label)
+    class ViewHolder private constructor(
+            private val binding: FragmentTermItemBinding ): RecyclerView.ViewHolder(binding.root) {
 
-        override fun toString(): String {
-            return super.toString() + " '" + contentView.text + "'"
+        fun bind(name : String, size: Int) {
+            binding.termItemLabel.text = name
+            binding.termPercentLabel.text = "Avg: 100%"
+            binding.termProgressLabel.text = "Prog: 100%"
+            binding.root.setOnClickListener {
+                it.findNavController().navigate(R.id.action_year_to_course)
+            }
+            binding.executePendingBindings()
+        }
+
+        companion object {
+            fun from(parent: ViewGroup): ViewHolder {
+                val layoutInflater = LayoutInflater.from(parent.context)
+                val binding = FragmentTermItemBinding.inflate(layoutInflater, parent, false)
+                return ViewHolder(binding)
+            }
         }
     }
 }

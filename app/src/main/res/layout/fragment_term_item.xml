@@ -1,40 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
 
-    <TextView
-        android:id="@+id/term_item_label"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginStart="5dp"
-        android:layout_weight="1"
-        android:text="Term 1"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        android:textStyle="bold" />
+    </data>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="vertical">
+        android:background="#7289DA"
+        android:paddingLeft="10dp"
+        android:paddingTop="14dp"
+        android:paddingRight="18dp"
+        android:paddingBottom="14dp">
 
         <TextView
-            android:id="@+id/term_percent_label"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:id="@+id/term_item_label"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
             android:layout_marginStart="5dp"
-            android:text="Classes"
+            android:layout_weight="0"
+            android:gravity="center_vertical"
+            android:paddingRight="10dp"
+            android:text="Term 1"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            android:textSize="30sp" />
+            android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/term_progress_label"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:text="Progress"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            android:textSize="30sp" />
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#FFFFFF"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/term_percent_label"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="5dp"
+                android:layout_weight="0.54"
+                android:gravity="center_vertical"
+                android:paddingStart="5dp"
+                android:text="Avg: 100%"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                android:textSize="24sp" />
+
+            <View
+                android:id="@+id/divider"
+                android:layout_width="3dp"
+                android:layout_height="35dp"
+                android:layout_gravity="center"
+                android:layout_weight="0"
+                android:background="?android:attr/listDivider" />
+
+            <TextView
+                android:id="@+id/term_progress_label"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="5dp"
+                android:layout_weight="0.5"
+                android:gravity="center_vertical"
+                android:paddingRight="5dp"
+                android:text="Prog: 100%"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                android:textSize="24sp" />
+        </LinearLayout>
     </LinearLayout>
-</LinearLayout>
+</layout>
