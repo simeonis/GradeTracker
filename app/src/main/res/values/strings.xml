@@ -5,7 +5,7 @@
 
     <!-- Strings used for fragments for navigation -->
     <string name="start_fragment_label">Start Fragment</string>
-    <string name="year_fragment_label">Year Fragment</string>
+    <string name="term_fragment_label">Term Fragment</string>
     <string name="course_fragment_label">Course Fragment</string>
     <string name="assignment_fragment_label">Assignment Fragment</string>
     <string name="grade_fragment_label">Grade Fragment</string>
@@ -23,6 +23,9 @@
     <string name="begin">Begin</string>
 
     <!-- Term Fragment -->
+    <string name="term_name_hint">Term Name</string>
+    <string name="enter_term">Enter Term</string>
+    <string name="add_term">Add Term</string>
 
     <!-- Course Fragment -->
 
@@ -34,6 +37,8 @@
     <string name="grade_points_hint">Maximum Grade</string>
     <string name="grade_weight_hint">Grade Weight (%)</string>
     <string name="add_assignment">Add Assignment</string>
+
+
 
     <!-- Grade Fragment -->
 </resources>

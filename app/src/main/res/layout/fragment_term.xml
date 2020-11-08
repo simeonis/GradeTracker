@@ -6,33 +6,32 @@
 
     </data>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".ui.term.TermFragment"
-        android:orientation="vertical">
+    <RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#7289DA"
+    android:orientation="vertical"
+    tools:context=".ui.assignment.AssignmentFragment">
 
-        <TextView
-            android:id="@+id/term_label"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display3"
-            tools:text="Select Term" />
 
-        <androidx.recyclerview.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/term_recycler"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight=".5"
+            android:layout_height="match_parent"
             tools:listitem="@layout/fragment_term_item" />
 
-        <Button
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/term_add_button"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="@string/add" />
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="10dp"
+            android:backgroundTint="#ADFFFFFF"
+            android:clickable="true"
+            android:contentDescription="@string/add"
+            app:elevation="6dp"
+            app:srcCompat="@android:drawable/ic_input_add" />
 
-    </LinearLayout>
+    </RelativeLayout>
 </layout>
