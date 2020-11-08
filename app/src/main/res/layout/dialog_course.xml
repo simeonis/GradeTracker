@@ -1,11 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
+    android:background="#7289DA"
     android:orientation="vertical"
     android:padding="10dp">
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="casual"
+        android:gravity="center"
+        android:text="@string/add_course"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textColor="@color/textTile"
+        android:textSize="30sp"
+        android:textStyle="bold" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,10 +29,13 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:fontFamily="casual"
             android:gravity="center_vertical"
-            android:paddingRight="20dp"
-            android:text="Enter Course"
+            android:paddingStart="0dp"
+            android:paddingEnd="20dp"
+            android:text="@string/enter_course"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:textColor="#FFFFFF"
             android:textSize="18sp"
             android:textStyle="bold" />
 
@@ -30,10 +45,12 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:autofillHints="Term "
-            android:hint="Enter Course"
+            android:fontFamily="casual"
+            android:hint="@string/enter_course_hint"
             android:inputType="text" />
 
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -44,9 +61,11 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:fontFamily="casual"
             android:gravity="center_vertical"
-            android:text="Enter Course Code"
+            android:text="@string/enter_course_code"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:textColor="#FFFFFF"
             android:textSize="18sp"
             android:textStyle="bold" />
 
@@ -56,10 +75,12 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:autofillHints="Term "
-            android:hint="Course Code"
+            android:fontFamily="casual"
+            android:hint="@string/course_code_hint"
             android:inputType="text" />
 
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -70,9 +91,11 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:fontFamily="casual"
             android:gravity="center_vertical"
-            android:text="Enter Target Grade"
+            android:text="@string/enter_target_grade"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:textColor="#FFFFFF"
             android:textSize="18sp"
             android:textStyle="bold" />
 
@@ -82,7 +105,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:autofillHints="Term "
-            android:hint="Target Grade"
+            android:fontFamily="casual"
+            android:hint="@string/target_grade_hint"
             android:inputType="text" />
 
     </LinearLayout>

@@ -28,6 +28,13 @@
     <string name="add_term">Add Term</string>
 
     <!-- Course Fragment -->
+    <string name="add_course">Add Course</string>
+    <string name="enter_course">Enter Course</string>
+    <string name="enter_course_hint">Enter Course</string>
+    <string name="enter_course_code">Enter Course Code</string>
+    <string name="course_code_hint">Course Code</string>
+    <string name="enter_target_grade">Enter Target Grade</string>
+    <string name="target_grade_hint">Target Grade</string>
 
     <!-- Assignment Fragment -->
     <string name="total_points">Total Points</string>
@@ -38,7 +45,8 @@
     <string name="grade_weight_hint">Grade Weight (%)</string>
     <string name="add_assignment">Add Assignment</string>
 
-
-
     <!-- Grade Fragment -->
+
+
+
 </resources>

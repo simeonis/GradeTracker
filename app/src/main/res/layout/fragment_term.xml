@@ -11,7 +11,7 @@
     android:layout_height="match_parent"
     android:background="#7289DA"
     android:orientation="vertical"
-    tools:context=".ui.assignment.AssignmentFragment">
+    tools:context=".ui.term.TermFragment">
 
 
     <androidx.recyclerview.widget.RecyclerView
