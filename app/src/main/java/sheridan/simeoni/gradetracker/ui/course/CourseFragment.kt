@@ -8,15 +8,19 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import sheridan.simeoni.gradetracker.R
 import sheridan.simeoni.gradetracker.databinding.FragmentCourseBinding
 import sheridan.simeoni.gradetracker.databinding.FragmentTermBinding
 import sheridan.simeoni.gradetracker.ui.dialog.CourseDialog
 import sheridan.simeoni.gradetracker.ui.dialog.TermDialog
+import sheridan.simeoni.gradetracker.ui.term.TermRecyclerViewAdapter
 
 class CourseFragment : Fragment() {
 
     private lateinit var binding: FragmentCourseBinding
+    private lateinit var adapter: CourseRecyclerViewAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -24,13 +28,18 @@ class CourseFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentCourseBinding.inflate(inflater, container, false)
-        binding.courseAddButton.setOnClickListener { openDialog() }
+        adapter = CourseRecyclerViewAdapter()
 
+        with(binding) {
+            courseRecycler.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
+            courseRecycler.adapter = adapter
+            courseRecycler.layoutManager = LinearLayoutManager(context)
+        }
+
+        binding.courseAddButton.setOnClickListener { openDialog() }
 
         return binding.root
     }
-//    val bundle = bundleOf("title" to "PROG20082")
-//    findNavController().navigate(R.id.action_course_to_assignment, bundle)
 
     private fun openDialog(){
         val courseDialog = CourseDialog()
