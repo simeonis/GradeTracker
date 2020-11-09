@@ -13,43 +13,45 @@
         tools:layout="@layout/fragment_start">
 
         <action
-            android:id="@+id/action_start_to_year"
+            android:id="@+id/action_start_to_term"
             app:destination="@id/TermFragment"
             app:popUpTo="@id/StartFragment" />
     </fragment>
     <fragment
         android:id="@+id/TermFragment"
         android:name="sheridan.simeoni.gradetracker.ui.term.TermFragment"
-        android:label="@string/term_fragment_label"
         tools:layout="@layout/fragment_term">
         <action
-            android:id="@+id/action_year_to_course"
+            android:id="@+id/action_term_to_course"
             app:destination="@id/courseFragment"
             app:popUpTo="@id/TermFragment" />
+        <argument
+            android:name="startData"
+            app:argType="sheridan.simeoni.gradetracker.model.StartData" />
     </fragment>
     <fragment
         android:id="@+id/courseFragment"
         android:name="sheridan.simeoni.gradetracker.ui.course.CourseFragment"
-        android:label="@string/course_fragment_label"
         tools:layout="@layout/fragment_course">
         <action
             android:id="@+id/action_course_to_assignment"
             app:destination="@id/assignmentFragment"
             app:popUpTo="@id/courseFragment" />
+        <argument
+            android:name="termData"
+            app:argType="sheridan.simeoni.gradetracker.model.TermData" />
     </fragment>
     <fragment
         android:id="@+id/assignmentFragment"
         android:name="sheridan.simeoni.gradetracker.ui.assignment.AssignmentFragment"
-        android:label="{title}"
         tools:layout="@layout/fragment_assignment">
         <action
             android:id="@+id/action_assignment_to_grade"
             app:destination="@id/gradeFragment"
             app:popUpTo="@id/assignmentFragment" />
         <argument
-            android:name="title"
-            app:argType="string"
-            android:defaultValue="BLANK" />
+            android:name="courseData"
+            app:argType="sheridan.simeoni.gradetracker.model.CourseData" />
     </fragment>
     <fragment
         android:id="@+id/gradeFragment"

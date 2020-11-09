@@ -8,10 +8,14 @@ import androidx.recyclerview.widget.RecyclerView
 import sheridan.simeoni.gradetracker.R
 import sheridan.simeoni.gradetracker.databinding.FragmentCourseItemBinding
 import sheridan.simeoni.gradetracker.databinding.FragmentTermItemBinding
+import sheridan.simeoni.gradetracker.model.AssignmentData
+import sheridan.simeoni.gradetracker.model.CourseData
+import sheridan.simeoni.gradetracker.model.GradeData
+import sheridan.simeoni.gradetracker.model.TermData
 
 class CourseRecyclerViewAdapter : RecyclerView.Adapter<CourseRecyclerViewAdapter.ViewHolder>() {
 
-    var terms: List<String>? = listOf("Course 1", "Course 2", "Course 3", "Course 4", "Course 5", "Course 6", "Course 7", "Course 8")
+    var safeArgs: TermData? = null
         set(value) {
             field = value
             notifyDataSetChanged()
@@ -22,21 +26,21 @@ class CourseRecyclerViewAdapter : RecyclerView.Adapter<CourseRecyclerViewAdapter
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(terms!![position], terms!!.size)
+        holder.bind(safeArgs!!.courseData[position])
     }
 
-    override fun getItemCount(): Int = terms?.size ?: 0
+    override fun getItemCount(): Int = safeArgs?.courseData?.size ?: 0
 
     class ViewHolder private constructor(
             private val binding: FragmentCourseItemBinding ): RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(name : String, size: Int) {
-            binding.courseItemLabel.text = name
+        fun bind(data: CourseData) {
+            binding.courseItemLabel.text = data.name
             binding.courseGradeLabel.text = "100%"
             binding.courseGradeTargetLabel.text = "100%"
             binding.root.setOnClickListener {
-                val bundle = bundleOf("title" to "PROG20082")
-                it.findNavController().navigate(R.id.action_course_to_assignment, bundle)
+                val action = CourseFragmentDirections.actionCourseToAssignment(data)
+                it.findNavController().navigate(action)
             }
             binding.executePendingBindings()
         }

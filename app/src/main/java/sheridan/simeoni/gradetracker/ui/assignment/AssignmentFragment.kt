@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import sheridan.simeoni.gradetracker.databinding.FragmentAssignmentBinding
@@ -14,6 +15,7 @@ class AssignmentFragment : Fragment() {
 
     private lateinit var binding: FragmentAssignmentBinding
     private lateinit var adapter: AssignmentRecyclerViewAdapter
+    private val safeArgs: AssignmentFragmentArgs by navArgs()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentAssignmentBinding.inflate(inflater, container, false)
@@ -24,6 +26,9 @@ class AssignmentFragment : Fragment() {
             assignmentRecycler.adapter = adapter
             assignmentRecycler.layoutManager = LinearLayoutManager(context)
         }
+
+        adapter.safeArgs = safeArgs.courseData
+        activity?.title = safeArgs.courseData.name
 
         binding.assignmentAddButton.setOnClickListener { openDialog() }
 

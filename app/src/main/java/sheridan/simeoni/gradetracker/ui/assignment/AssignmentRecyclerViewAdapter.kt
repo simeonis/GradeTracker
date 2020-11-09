@@ -6,10 +6,13 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import sheridan.simeoni.gradetracker.R
 import sheridan.simeoni.gradetracker.databinding.FragmentAssignmentItemBinding
+import sheridan.simeoni.gradetracker.model.AssignmentData
+import sheridan.simeoni.gradetracker.model.CourseData
+import sheridan.simeoni.gradetracker.model.GradeData
 
 class AssignmentRecyclerViewAdapter : RecyclerView.Adapter<AssignmentRecyclerViewAdapter.ViewHolder>() {
 
-    var assignments: List<String>? = listOf("Quiz 1", "Quiz 2", "Quiz 3", "A1", "A2", "A3", "Midterm", "Final")
+    var safeArgs: CourseData? = null
         set(value) {
             field = value
             notifyDataSetChanged()
@@ -20,18 +23,18 @@ class AssignmentRecyclerViewAdapter : RecyclerView.Adapter<AssignmentRecyclerVie
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(assignments!![position], assignments!!.size)
+        holder.bind(safeArgs!!.assignmentData[position])
     }
 
-    override fun getItemCount(): Int = assignments?.size ?: 0
+    override fun getItemCount(): Int = safeArgs?.assignmentData?.size ?: 0
 
     class ViewHolder private constructor(
         private val binding: FragmentAssignmentItemBinding): RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(name : String, size: Int) {
-            binding.assignmentItemNameLabel.text = name
-            binding.assignmentItemGradeLabel.text = "-/100"
-            binding.assignmentItemWeightLabel.text = String.format("%.1f", (100f / size)) + "%"
+        fun bind(data : AssignmentData) {
+            binding.assignmentItemNameLabel.text = data.name
+            binding.assignmentItemGradeLabel.text = "-/40"
+            binding.assignmentItemWeightLabel.text = "25%"
             binding.root.setOnClickListener {
                 it.findNavController().navigate(R.id.action_assignment_to_grade)
             }

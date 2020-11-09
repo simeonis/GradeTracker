@@ -6,10 +6,14 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import sheridan.simeoni.gradetracker.R
 import sheridan.simeoni.gradetracker.databinding.FragmentTermItemBinding
+import sheridan.simeoni.gradetracker.model.AssignmentData
+import sheridan.simeoni.gradetracker.model.CourseData
+import sheridan.simeoni.gradetracker.model.StartData
+import sheridan.simeoni.gradetracker.model.TermData
 
 class TermRecyclerViewAdapter : RecyclerView.Adapter<TermRecyclerViewAdapter.ViewHolder>() {
 
-    var terms: List<String>? = listOf("Term 1", "Term 2", "Term 3", "Term 4", "Term 5", "Term 6", "Term 7", "Term 8")
+    var safeArgs: StartData? = null
         set(value) {
             field = value
             notifyDataSetChanged()
@@ -20,20 +24,21 @@ class TermRecyclerViewAdapter : RecyclerView.Adapter<TermRecyclerViewAdapter.Vie
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(terms!![position], terms!!.size)
+        holder.bind(safeArgs!!.termData[position])
     }
 
-    override fun getItemCount(): Int = terms?.size ?: 0
+    override fun getItemCount(): Int = safeArgs?.termData?.size ?: 0
 
     class ViewHolder private constructor(
             private val binding: FragmentTermItemBinding ): RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(name : String, size: Int) {
-            binding.termItemLabel.text = name
+        fun bind(data: TermData) {
+            binding.termItemLabel.text = data.name
             binding.termPercentLabel.text = "Avg: 100%"
             binding.termProgressLabel.text = "Prog: 100%"
             binding.root.setOnClickListener {
-                it.findNavController().navigate(R.id.action_year_to_course)
+                val action = TermFragmentDirections.actionTermToCourse(data)
+                it.findNavController().navigate(action)
             }
             binding.executePendingBindings()
         }
