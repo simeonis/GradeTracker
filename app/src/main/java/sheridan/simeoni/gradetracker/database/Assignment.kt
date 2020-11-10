@@ -1,16 +1,15 @@
 package sheridan.simeoni.gradetracker.database
 
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.PrimaryKey
+import androidx.room.*
+import androidx.room.ForeignKey.CASCADE
 
-@Entity(tableName = "Assignment")
+@Entity(tableName = "Assignment", primaryKeys = ["Assignment","Term"])
 data class Assignment(
-
-    @PrimaryKey(autoGenerate = true)
-    var id: Long,
 
     @ColumnInfo(name = "Assignment")
     val assignmentTitle: String,
 
-    )
+    @ColumnInfo(name = "Term")
+    val term: String,
+
+)

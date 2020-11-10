@@ -7,9 +7,7 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "Term")
 data class Term(
 
-    @PrimaryKey(autoGenerate = true)
-    var id: Long,
-
+    @PrimaryKey
     @ColumnInfo(name = "Term")
     val assignmentTitle: String,
 
@@ -21,5 +19,4 @@ data class Term(
 
     @ColumnInfo(name = "Progress")
     val targetGrade: Int,
-
     )

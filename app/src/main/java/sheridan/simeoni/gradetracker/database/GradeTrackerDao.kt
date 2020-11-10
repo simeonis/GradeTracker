@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
+import androidx.room.Transaction
 
 @Dao
 interface GradeTrackerDao {
@@ -12,6 +13,10 @@ interface GradeTrackerDao {
 
     @Query("SELECT * FROM Grade WHERE id=:key")
     fun get(key: Long) : LiveData<Grade>
+
+    @Transaction
+    @Query("SELECT * FROM Course")
+    fun getOwnersWithDogs(): List<CourseWithAssignments>
 
     @Query("SELECT * FROM Grade ORDER BY id")
     fun getAll() : LiveData<List<Grade>>
