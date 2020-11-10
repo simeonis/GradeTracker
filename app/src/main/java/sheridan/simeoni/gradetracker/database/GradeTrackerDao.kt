@@ -16,7 +16,7 @@ interface GradeTrackerDao {
 
     @Transaction
     @Query("SELECT * FROM Course")
-    fun getOwnersWithDogs(): List<CourseWithAssignments>
+    fun getCourseWithAssignments(): List<CourseWithAssignments>
 
     @Query("SELECT * FROM Grade ORDER BY id")
     fun getAll() : LiveData<List<Grade>>

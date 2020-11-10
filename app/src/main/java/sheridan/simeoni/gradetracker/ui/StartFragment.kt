@@ -6,8 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.findNavController
+import kotlinx.coroutines.launch
 import sheridan.simeoni.gradetracker.R
+import sheridan.simeoni.gradetracker.database.GradeTrackerDao
+import sheridan.simeoni.gradetracker.database.GradeTrackerDatabase
 import sheridan.simeoni.gradetracker.databinding.FragmentStartBinding
 
 class StartFragment : Fragment() {

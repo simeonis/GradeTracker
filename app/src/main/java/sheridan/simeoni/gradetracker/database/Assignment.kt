@@ -9,6 +9,10 @@ data class Assignment(
     @ColumnInfo(name = "Assignment")
     val assignmentTitle: String,
 
+    @ColumnInfo(name = "AssignmentCourseID")
+    val assignmentCourseID: String,
+
+
     @ColumnInfo(name = "Term")
     val term: String,
 
