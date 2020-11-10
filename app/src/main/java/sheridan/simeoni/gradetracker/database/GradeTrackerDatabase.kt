@@ -8,7 +8,7 @@ import androidx.room.RoomDatabase
 @Database(entities = [Grade::class], version = 1, exportSchema = false)
 abstract class GradeTrackerDatabase : RoomDatabase() {
 
-    abstract val savedRollDao: SavedRollDao
+    abstract val gradeTrackerDao: GradeTrackerDao
 
     companion object{
 
