@@ -13,6 +13,9 @@ data class Course(
     @ColumnInfo(name = "CourseID")
     val courseID: String,
 
+    @ColumnInfo(name = "CourseTermID")
+    val courseTermID: String,
+
     @ColumnInfo(name = "assignmentTitle")
     val assignmentTitle: String,
 
