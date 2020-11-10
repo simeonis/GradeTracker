@@ -10,10 +10,10 @@ data class Course(
     @PrimaryKey(autoGenerate = true)
     var id: Long,
 
-    @ColumnInfo(name = "assignmentCourseID")
-    val assignemntCourseID: String,
+    @ColumnInfo(name = "CourseID")
+    val courseID: String,
 
-    @ColumnInfo(name = "Course")
+    @ColumnInfo(name = "assignmentTitle")
     val assignmentTitle: String,
 
     @ColumnInfo(name = "Course_Grade")
