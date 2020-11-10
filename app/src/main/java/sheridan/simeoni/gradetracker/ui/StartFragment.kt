@@ -20,8 +20,8 @@ class StartFragment : Fragment() {
         binding.startBeginButton.setOnClickListener {
             val action = StartFragmentDirections.actionStartToTerm(
                 StartData("Select Term",
-                    listOf(TermData("Term 1", listOf(CourseData("Course 1", listOf(AssignmentData("A1", listOf(GradeData(80, 100, 15.0f, 90))))))),
-                        TermData("Term 2", listOf(CourseData("Course 1", listOf(AssignmentData("Quiz 1", listOf(GradeData(8, 10, 15.0f, 9))))))))))
+                    listOf(TermData("Term 1", listOf(CourseData("Course 1", listOf(AssignmentData("Midterm", GradeData(80, 100, 15.0f, 90)))))),
+                        TermData("Term 2", listOf(CourseData("Course 1", listOf(AssignmentData("Quiz 1", GradeData(8, 10, 15.0f, 9)))))))))
             findNavController().navigate(action)
         }
 

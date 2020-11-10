@@ -33,8 +33,10 @@ class AssignmentRecyclerViewAdapter : RecyclerView.Adapter<AssignmentRecyclerVie
 
         fun bind(data : AssignmentData) {
             binding.assignmentItemNameLabel.text = data.name
-            binding.assignmentItemGradeLabel.text = "-/40"
-            binding.assignmentItemWeightLabel.text = "25%"
+            binding.assignmentItemGradeLabel.text = String.format("%s/%d",
+                    if (data.gradeData.grade == -1) "-"
+                    else data.gradeData.grade.toString(), data.gradeData.totalGrade)
+            binding.assignmentItemWeightLabel.text = String.format("%.1f%%", data.gradeData.weight)
             binding.root.setOnClickListener {
                 it.findNavController().navigate(R.id.action_assignment_to_grade)
             }
