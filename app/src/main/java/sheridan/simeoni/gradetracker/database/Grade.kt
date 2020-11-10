@@ -14,6 +14,9 @@ data class Grade(
     @ColumnInfo(name = "Assignment_Name")
     val assignmentTitle: String,
 
+    @ColumnInfo(name = "GradeAssignmentID")
+    val gradeAssignmentID: String,
+
     @ColumnInfo(name = "Grade")
     val grade: Int,
 

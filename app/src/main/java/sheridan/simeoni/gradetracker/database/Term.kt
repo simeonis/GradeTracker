@@ -8,8 +8,8 @@ import androidx.room.PrimaryKey
 data class Term(
 
     @PrimaryKey
-    @ColumnInfo(name = "Term")
-    val assignmentTitle: String,
+    @ColumnInfo(name = "TermID")
+    val termID: String,
 
     @ColumnInfo(name = "Average")
     val grade: Int,
