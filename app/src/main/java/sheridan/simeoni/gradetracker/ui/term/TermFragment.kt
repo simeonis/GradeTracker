@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -22,6 +23,7 @@ import sheridan.simeoni.gradetracker.ui.dialog.TermDialog
 class TermFragment : Fragment() {
 
     private lateinit var binding: FragmentTermBinding
+    private val viewModel : TermViewModel by viewModels()
     private lateinit var adapter: TermRecyclerViewAdapter
     private val safeArgs: TermFragmentArgs by navArgs()
 
@@ -44,6 +46,7 @@ class TermFragment : Fragment() {
     }
     private fun openDialog(){
         val termDialog = TermDialog()
+        viewModel.add("Term1")
         termDialog.show(childFragmentManager, "dialogTerm" )
     }
 }

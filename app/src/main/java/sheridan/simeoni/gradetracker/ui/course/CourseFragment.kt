@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.core.os.bundleOf
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -22,12 +23,15 @@ import sheridan.simeoni.gradetracker.ui.term.TermRecyclerViewAdapter
 class CourseFragment : Fragment() {
 
     private lateinit var binding: FragmentCourseBinding
+    private val viewModel: CourseViewModel by viewModels()
     private lateinit var adapter: CourseRecyclerViewAdapter
     private val safeArgs: CourseFragmentArgs by navArgs()
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         binding = FragmentCourseBinding.inflate(inflater, container, false)
+        binding.lifecycleOwner = this
         adapter = CourseRecyclerViewAdapter()
 
         with(binding) {
@@ -36,16 +40,19 @@ class CourseFragment : Fragment() {
             courseRecycler.layoutManager = LinearLayoutManager(context)
         }
 
-        adapter.safeArgs = safeArgs.termData
+        //adapter.safeArgs = safeArgs.termData
         activity?.title = safeArgs.termData.name
 
+
         binding.courseAddButton.setOnClickListener { openDialog() }
+
 
         return binding.root
     }
 
     private fun openDialog(){
         val courseDialog = CourseDialog()
+        viewModel.add("Course1", "Term1", -1, -1)
         courseDialog.show(childFragmentManager, "dialogTerm" )
     }
 }

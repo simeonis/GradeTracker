@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import sheridan.simeoni.gradetracker.databinding.FragmentStartBinding
 import sheridan.simeoni.gradetracker.model.*
-import sheridan.simeoni.gradetracker.ui.course.CourseFragmentArgs
+
 
 class StartFragment : Fragment() {
 

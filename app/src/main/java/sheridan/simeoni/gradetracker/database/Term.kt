@@ -7,7 +7,9 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "Term")
 data class Term(
 
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
+    var id: Long,
+
     @ColumnInfo(name = "TermID")
     val termID: String,
 

@@ -9,7 +9,13 @@ import androidx.room.Transaction
 @Dao
 interface GradeTrackerDao {
     @Insert
-    suspend fun insert(savedRoll: Grade): Long
+    suspend fun insert(grade: Grade)
+
+    @Insert
+    suspend fun insert(course: Course)
+
+    @Insert
+    suspend fun insert(term: Term)
 
     @Query("SELECT * FROM Grade WHERE id=:key")
     fun get(key: Long) : LiveData<Grade>
