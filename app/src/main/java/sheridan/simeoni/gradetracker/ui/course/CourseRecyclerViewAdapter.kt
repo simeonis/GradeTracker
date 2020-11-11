@@ -6,16 +6,14 @@ import androidx.core.os.bundleOf
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import sheridan.simeoni.gradetracker.R
+import sheridan.simeoni.gradetracker.database.Course
 import sheridan.simeoni.gradetracker.databinding.FragmentCourseItemBinding
 import sheridan.simeoni.gradetracker.databinding.FragmentTermItemBinding
-import sheridan.simeoni.gradetracker.model.AssignmentData
-import sheridan.simeoni.gradetracker.model.CourseData
-import sheridan.simeoni.gradetracker.model.GradeData
-import sheridan.simeoni.gradetracker.model.TermData
+import sheridan.simeoni.gradetracker.model.*
 
 class CourseRecyclerViewAdapter : RecyclerView.Adapter<CourseRecyclerViewAdapter.ViewHolder>() {
 
-    var safeArgs: TermData? = null
+    var courses: List<Course>? = null
         set(value) {
             field = value
             notifyDataSetChanged()
@@ -26,20 +24,20 @@ class CourseRecyclerViewAdapter : RecyclerView.Adapter<CourseRecyclerViewAdapter
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(safeArgs!!.courseData[position])
+        holder.bind(courses!![position])
     }
 
-    override fun getItemCount(): Int = safeArgs?.courseData?.size ?: 0
+    override fun getItemCount(): Int = courses?.size ?: 0
 
     class ViewHolder private constructor(
             private val binding: FragmentCourseItemBinding ): RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(data: CourseData) {
-            binding.courseItemLabel.text = data.name
-            binding.courseGradeLabel.text = "100%"
-            binding.courseGradeTargetLabel.text = "100%"
+        fun bind(course: Course) {
+            binding.courseItemLabel.text = course.courseName
+            binding.courseGradeLabel.text = course.grade.toString()
+            binding.courseGradeTargetLabel.text = course.targetGrade.toString()
             binding.root.setOnClickListener {
-                val action = CourseFragmentDirections.actionCourseToAssignment(data)
+                val action = CourseFragmentDirections.actionCourseToAssignment(KeyEnvelope(course.courseName, course.id))
                 it.findNavController().navigate(action)
             }
             binding.executePendingBindings()

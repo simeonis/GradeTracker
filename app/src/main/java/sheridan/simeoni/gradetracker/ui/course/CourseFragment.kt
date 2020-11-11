@@ -23,10 +23,11 @@ import sheridan.simeoni.gradetracker.ui.term.TermRecyclerViewAdapter
 class CourseFragment : Fragment() {
 
     private lateinit var binding: FragmentCourseBinding
-    private val viewModel: CourseViewModel by viewModels()
     private lateinit var adapter: CourseRecyclerViewAdapter
     private val safeArgs: CourseFragmentArgs by navArgs()
-
+    private val viewModel: CourseViewModel by viewModels {
+        CourseViewModelFactory(safeArgs.keyEnveloppe.key, requireActivity().application)
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -40,9 +41,8 @@ class CourseFragment : Fragment() {
             courseRecycler.layoutManager = LinearLayoutManager(context)
         }
 
-        //adapter.safeArgs = safeArgs.termData
-        activity?.title = safeArgs.termData.name
-
+        activity?.title = safeArgs.keyEnveloppe.title
+        viewModel.courses.observe(viewLifecycleOwner) { adapter.courses = it }
 
         binding.courseAddButton.setOnClickListener { openDialog() }
 
@@ -52,7 +52,7 @@ class CourseFragment : Fragment() {
 
     private fun openDialog(){
         val courseDialog = CourseDialog()
-        viewModel.add("Course1", "Term1", -1, -1)
+        viewModel.add("Course1", -1, -1)
         courseDialog.show(childFragmentManager, "dialogTerm" )
     }
 }

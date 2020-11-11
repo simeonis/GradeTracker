@@ -8,17 +8,15 @@ import androidx.room.PrimaryKey
 data class Term(
 
     @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "TermID")
     var id: Long,
 
-    @ColumnInfo(name = "TermID")
-    val termID: String,
+    @ColumnInfo(name = "TermName")
+    val termName: String,
 
     @ColumnInfo(name = "Average")
-    val grade: Int,
-
-    @ColumnInfo(name = "Num_Classes")
-    val weight: Int,
+    val average: Int,
 
     @ColumnInfo(name = "Progress")
-    val targetGrade: Int,
+    val progress: Int
     )
