@@ -9,5 +9,5 @@ data class TermWithCourse(
                 parentColumn = "TermID",
                 entityColumn = "CourseTermID"
         )
-        val assignemnts: List<Assignment>
+        val assignemnts: List<Course>
 )

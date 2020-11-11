@@ -3,9 +3,10 @@ package sheridan.simeoni.gradetracker.database
 import androidx.room.*
 import androidx.room.ForeignKey.CASCADE
 
-@Entity(tableName = "Assignment", primaryKeys = ["Assignment","Term"])
+@Entity(tableName = "Assignment")
 data class Assignment(
 
+    @PrimaryKey
     @ColumnInfo(name = "Assignment")
     val assignmentTitle: String,
 
@@ -14,7 +15,6 @@ data class Assignment(
 
     @ColumnInfo(name = "AssignmentCourseID")
     val assignmentCourseID: String,
-
 
     @ColumnInfo(name = "Term")
     val term: String,

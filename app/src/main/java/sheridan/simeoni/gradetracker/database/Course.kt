@@ -6,18 +6,12 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "Course")
 data class Course(
-
-    @PrimaryKey(autoGenerate = true)
-    var id: Long,
-
+    @PrimaryKey
     @ColumnInfo(name = "CourseID")
     val courseID: String,
 
     @ColumnInfo(name = "CourseTermID")
     val courseTermID: String,
-
-    @ColumnInfo(name = "assignmentTitle")
-    val assignmentTitle: String,
 
     @ColumnInfo(name = "Course_Grade")
     val grade: Int,
