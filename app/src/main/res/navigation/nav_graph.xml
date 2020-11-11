@@ -25,9 +25,6 @@
             android:id="@+id/action_term_to_course"
             app:destination="@id/courseFragment"
             app:popUpTo="@id/TermFragment" />
-        <argument
-            android:name="startData"
-            app:argType="sheridan.simeoni.gradetracker.model.StartData" />
     </fragment>
     <fragment
         android:id="@+id/courseFragment"
@@ -38,8 +35,8 @@
             app:destination="@id/assignmentFragment"
             app:popUpTo="@id/courseFragment" />
         <argument
-            android:name="termData"
-            app:argType="sheridan.simeoni.gradetracker.model.TermData" />
+            android:name="keyEnveloppe"
+            app:argType="sheridan.simeoni.gradetracker.model.KeyEnvelope" />
     </fragment>
     <fragment
         android:id="@+id/assignmentFragment"
@@ -50,8 +47,8 @@
             app:destination="@id/gradeFragment"
             app:popUpTo="@id/assignmentFragment" />
         <argument
-            android:name="courseData"
-            app:argType="sheridan.simeoni.gradetracker.model.CourseData" />
+            android:name="keyEnvelope"
+            app:argType="sheridan.simeoni.gradetracker.model.KeyEnvelope" />
     </fragment>
     <fragment
         android:id="@+id/gradeFragment"

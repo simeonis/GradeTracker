@@ -7,7 +7,7 @@ data class TermWithCourse(
         @Embedded val course: Course,
         @Relation(
                 parentColumn = "TermID",
-                entityColumn = "CourseTermID"
+                entityColumn = "TermID"
         )
-        val assignemnts: List<Assignment>
+        val courses: List<Course>
 )

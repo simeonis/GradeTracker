@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.core.os.bundleOf
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -24,10 +25,14 @@ class CourseFragment : Fragment() {
     private lateinit var binding: FragmentCourseBinding
     private lateinit var adapter: CourseRecyclerViewAdapter
     private val safeArgs: CourseFragmentArgs by navArgs()
+    private val viewModel: CourseViewModel by viewModels {
+        CourseViewModelFactory(safeArgs.keyEnveloppe.key, requireActivity().application)
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         binding = FragmentCourseBinding.inflate(inflater, container, false)
+        binding.lifecycleOwner = this
         adapter = CourseRecyclerViewAdapter()
 
         with(binding) {
@@ -36,16 +41,18 @@ class CourseFragment : Fragment() {
             courseRecycler.layoutManager = LinearLayoutManager(context)
         }
 
-        adapter.safeArgs = safeArgs.termData
-        activity?.title = safeArgs.termData.name
+        activity?.title = safeArgs.keyEnveloppe.title
+        viewModel.courses.observe(viewLifecycleOwner) { adapter.courses = it }
 
         binding.courseAddButton.setOnClickListener { openDialog() }
+
 
         return binding.root
     }
 
     private fun openDialog(){
         val courseDialog = CourseDialog()
+        viewModel.add("Course1", -1, -1)
         courseDialog.show(childFragmentManager, "dialogTerm" )
     }
 }

@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import sheridan.simeoni.gradetracker.R
+import sheridan.simeoni.gradetracker.database.Assignment
 import sheridan.simeoni.gradetracker.databinding.FragmentAssignmentItemBinding
 import sheridan.simeoni.gradetracker.model.AssignmentData
 import sheridan.simeoni.gradetracker.model.CourseData
@@ -12,7 +13,7 @@ import sheridan.simeoni.gradetracker.model.GradeData
 
 class AssignmentRecyclerViewAdapter : RecyclerView.Adapter<AssignmentRecyclerViewAdapter.ViewHolder>() {
 
-    var safeArgs: CourseData? = null
+    var assignments: List<Assignment>? = null
         set(value) {
             field = value
             notifyDataSetChanged()
@@ -23,20 +24,20 @@ class AssignmentRecyclerViewAdapter : RecyclerView.Adapter<AssignmentRecyclerVie
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(safeArgs!!.assignmentData[position])
+        holder.bind(assignments!![position])
     }
 
-    override fun getItemCount(): Int = safeArgs?.assignmentData?.size ?: 0
+    override fun getItemCount(): Int = assignments?.size ?: 0
 
     class ViewHolder private constructor(
         private val binding: FragmentAssignmentItemBinding): RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(data : AssignmentData) {
-            binding.assignmentItemNameLabel.text = data.name
+        fun bind(assignment: Assignment) {
+            binding.assignmentItemNameLabel.text = assignment.assignmentName
             binding.assignmentItemGradeLabel.text = String.format("%s/%d",
-                    if (data.gradeData.grade == -1) "-"
-                    else data.gradeData.grade.toString(), data.gradeData.totalGrade)
-            binding.assignmentItemWeightLabel.text = String.format("%.1f%%", data.gradeData.weight)
+                    if (assignment.grade == -1) "-"
+                    else assignment.grade.toString(), assignment.gradeTotal)
+            binding.assignmentItemWeightLabel.text = String.format("%.1f%%", assignment.weight)
             binding.root.setOnClickListener {
                 it.findNavController().navigate(R.id.action_assignment_to_grade)
             }

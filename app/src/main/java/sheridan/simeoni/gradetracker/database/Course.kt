@@ -8,21 +8,18 @@ import androidx.room.PrimaryKey
 data class Course(
 
     @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "CourseID")
     var id: Long,
 
-    @ColumnInfo(name = "CourseID")
-    val courseID: String,
+    @ColumnInfo(name = "TermID")
+    val termID: Long,
 
-    @ColumnInfo(name = "CourseTermID")
-    val courseTermID: String,
+    @ColumnInfo(name = "CourseName")
+    val courseName: String,
 
-    @ColumnInfo(name = "assignmentTitle")
-    val assignmentTitle: String,
-
-    @ColumnInfo(name = "Course_Grade")
+    @ColumnInfo(name = "CourseGrade")
     val grade: Int,
 
-    @ColumnInfo(name = "Course_Target_Grade")
+    @ColumnInfo(name = "CourseTargetGrade")
     val targetGrade: Int,
-
     )

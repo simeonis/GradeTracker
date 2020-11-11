@@ -5,15 +5,13 @@ import android.view.ViewGroup
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import sheridan.simeoni.gradetracker.R
+import sheridan.simeoni.gradetracker.database.Term
 import sheridan.simeoni.gradetracker.databinding.FragmentTermItemBinding
-import sheridan.simeoni.gradetracker.model.AssignmentData
-import sheridan.simeoni.gradetracker.model.CourseData
-import sheridan.simeoni.gradetracker.model.StartData
-import sheridan.simeoni.gradetracker.model.TermData
+import sheridan.simeoni.gradetracker.model.*
 
 class TermRecyclerViewAdapter : RecyclerView.Adapter<TermRecyclerViewAdapter.ViewHolder>() {
 
-    var safeArgs: StartData? = null
+    var terms: List<Term>? = null
         set(value) {
             field = value
             notifyDataSetChanged()
@@ -24,20 +22,20 @@ class TermRecyclerViewAdapter : RecyclerView.Adapter<TermRecyclerViewAdapter.Vie
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(safeArgs!!.termData[position])
+        holder.bind(terms!![position])
     }
 
-    override fun getItemCount(): Int = safeArgs?.termData?.size ?: 0
+    override fun getItemCount(): Int = terms?.size ?: 0
 
     class ViewHolder private constructor(
             private val binding: FragmentTermItemBinding ): RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(data: TermData) {
-            binding.termItemLabel.text = data.name
-            binding.termPercentLabel.text = "Avg: 100%"
-            binding.termProgressLabel.text = "Prog: 100%"
+        fun bind(term: Term) {
+            binding.termItemLabel.text = term.termName
+            binding.termPercentLabel.text = term.average.toString()
+            binding.termProgressLabel.text = term.progress.toString()
             binding.root.setOnClickListener {
-                val action = TermFragmentDirections.actionTermToCourse(data)
+                val action = TermFragmentDirections.actionTermToCourse(KeyEnvelope(term.termName, term.id))
                 it.findNavController().navigate(action)
             }
             binding.executePendingBindings()
