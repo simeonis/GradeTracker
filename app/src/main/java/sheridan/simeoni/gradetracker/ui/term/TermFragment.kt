@@ -1,31 +1,21 @@
 package sheridan.simeoni.gradetracker.ui.term
 
 import android.os.Bundle
-import android.view.KeyCharacterMap
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import sheridan.simeoni.gradetracker.R
-import sheridan.simeoni.gradetracker.database.Term
-import sheridan.simeoni.gradetracker.databinding.FragmentAssignmentBinding
 import sheridan.simeoni.gradetracker.databinding.FragmentTermBinding
-import sheridan.simeoni.gradetracker.databinding.FragmentTermItemBinding
-import sheridan.simeoni.gradetracker.model.KeyEnvelope
-import sheridan.simeoni.gradetracker.ui.assignment.AssignmentRecyclerViewAdapter
-import sheridan.simeoni.gradetracker.ui.course.CourseFragmentArgs
 import sheridan.simeoni.gradetracker.ui.dialog.TermDialog
 
 class TermFragment : Fragment() {
 
     private lateinit var binding: FragmentTermBinding
     private lateinit var adapter: TermRecyclerViewAdapter
+    private val viewModel : TermViewModel by viewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentTermBinding.inflate(inflater, container, false)
@@ -48,6 +38,7 @@ class TermFragment : Fragment() {
 
     private fun openDialog(){
         val termDialog = TermDialog()
+        viewModel.add("Term1")
         termDialog.show(childFragmentManager, "dialogTerm" )
     }
 }
