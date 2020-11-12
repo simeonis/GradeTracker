@@ -24,4 +24,9 @@ class TermViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
+    fun delete (termID: Long) {
+        viewModelScope.launch {
+            gradeTrackerDao.deleteTerm(termID)
+        }
+    }
 }

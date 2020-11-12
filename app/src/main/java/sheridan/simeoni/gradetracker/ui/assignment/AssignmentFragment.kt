@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,6 +14,7 @@ import sheridan.simeoni.gradetracker.databinding.FragmentAssignmentBinding
 import sheridan.simeoni.gradetracker.ui.course.CourseViewModel
 import sheridan.simeoni.gradetracker.ui.course.CourseViewModelFactory
 import sheridan.simeoni.gradetracker.ui.dialog.AssignmentDialog
+import sheridan.simeoni.gradetracker.ui.dialog.ConfirmationDialog
 
 class AssignmentFragment : Fragment() {
 
@@ -37,6 +39,12 @@ class AssignmentFragment : Fragment() {
         viewModel.assignments.observe(viewLifecycleOwner) { adapter.assignments = it }
 
         binding.assignmentAddButton.setOnClickListener { openDialog() }
+
+        val savedStateHandle = findNavController().currentBackStackEntry?.savedStateHandle
+        savedStateHandle?.getLiveData<Long>(ConfirmationDialog.CONFIRMATION_RESULT)?.observe(viewLifecycleOwner)
+        {
+            viewModel.delete(it)
+        }
 
         return binding.root
     }

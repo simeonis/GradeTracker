@@ -10,6 +10,7 @@ import sheridan.simeoni.gradetracker.databinding.FragmentAssignmentItemBinding
 import sheridan.simeoni.gradetracker.model.AssignmentData
 import sheridan.simeoni.gradetracker.model.CourseData
 import sheridan.simeoni.gradetracker.model.GradeData
+import sheridan.simeoni.gradetracker.ui.course.CourseFragmentDirections
 
 class AssignmentRecyclerViewAdapter : RecyclerView.Adapter<AssignmentRecyclerViewAdapter.ViewHolder>() {
 
@@ -40,6 +41,11 @@ class AssignmentRecyclerViewAdapter : RecyclerView.Adapter<AssignmentRecyclerVie
             binding.assignmentItemWeightLabel.text = String.format("%.1f%%", assignment.weight)
             binding.root.setOnClickListener {
                 it.findNavController().navigate(R.id.action_assignment_to_grade)
+            }
+            binding.root.setOnLongClickListener {
+                val action = AssignmentFragmentDirections.actionAssignmentToDelete(assignment.id, assignment.assignmentName)
+                it.findNavController().navigate(action)
+                true
             }
             binding.executePendingBindings()
         }

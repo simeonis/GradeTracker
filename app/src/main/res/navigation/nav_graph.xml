@@ -25,6 +25,9 @@
             android:id="@+id/action_term_to_course"
             app:destination="@id/courseFragment"
             app:popUpTo="@id/TermFragment" />
+        <action
+            android:id="@+id/action_term_to_delete"
+            app:destination="@id/confirmationDialog" />
     </fragment>
     <fragment
         android:id="@+id/courseFragment"
@@ -37,6 +40,9 @@
         <argument
             android:name="keyEnveloppe"
             app:argType="sheridan.simeoni.gradetracker.model.KeyEnvelope" />
+        <action
+            android:id="@+id/action_course_to_delete"
+            app:destination="@id/confirmationDialog" />
     </fragment>
     <fragment
         android:id="@+id/assignmentFragment"
@@ -49,6 +55,9 @@
         <argument
             android:name="keyEnvelope"
             app:argType="sheridan.simeoni.gradetracker.model.KeyEnvelope" />
+        <action
+            android:id="@+id/action_assignment_to_delete"
+            app:destination="@id/confirmationDialog" />
     </fragment>
     <fragment
         android:id="@+id/gradeFragment"
@@ -60,4 +69,15 @@
         android:name="sheridan.simeoni.gradetracker.ui.dialog.AboutDialog"
         android:label="AboutDialog" />
     <action android:id="@+id/action_global_to_about" app:destination="@id/aboutDialog" />
+    <dialog
+        android:id="@+id/confirmationDialog"
+        android:name="sheridan.simeoni.gradetracker.ui.dialog.ConfirmationDialog"
+        android:label="ConfirmationDialog" >
+        <argument
+            android:name="requestCode"
+            app:argType="long" />
+        <argument
+            android:name="message"
+            app:argType="string" />
+    </dialog>
 </navigation>

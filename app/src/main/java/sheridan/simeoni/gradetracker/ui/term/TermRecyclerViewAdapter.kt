@@ -38,6 +38,11 @@ class TermRecyclerViewAdapter : RecyclerView.Adapter<TermRecyclerViewAdapter.Vie
                 val action = TermFragmentDirections.actionTermToCourse(KeyEnvelope(term.termName, term.id))
                 it.findNavController().navigate(action)
             }
+            binding.root.setOnLongClickListener {
+                val action = TermFragmentDirections.actionTermToDelete(term.id, term.termName)
+                it.findNavController().navigate(action)
+                true
+            }
             binding.executePendingBindings()
         }
 

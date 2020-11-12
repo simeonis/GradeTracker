@@ -10,6 +10,7 @@ import sheridan.simeoni.gradetracker.database.Course
 import sheridan.simeoni.gradetracker.databinding.FragmentCourseItemBinding
 import sheridan.simeoni.gradetracker.databinding.FragmentTermItemBinding
 import sheridan.simeoni.gradetracker.model.*
+import sheridan.simeoni.gradetracker.ui.term.TermFragmentDirections
 
 class CourseRecyclerViewAdapter : RecyclerView.Adapter<CourseRecyclerViewAdapter.ViewHolder>() {
 
@@ -39,6 +40,11 @@ class CourseRecyclerViewAdapter : RecyclerView.Adapter<CourseRecyclerViewAdapter
             binding.root.setOnClickListener {
                 val action = CourseFragmentDirections.actionCourseToAssignment(KeyEnvelope(course.courseName, course.id))
                 it.findNavController().navigate(action)
+            }
+            binding.root.setOnLongClickListener {
+                val action = CourseFragmentDirections.actionCourseToDelete(course.id, course.courseName)
+                it.findNavController().navigate(action)
+                true
             }
             binding.executePendingBindings()
         }

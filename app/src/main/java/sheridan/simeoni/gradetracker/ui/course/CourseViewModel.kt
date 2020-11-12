@@ -25,4 +25,9 @@ class CourseViewModel(envelopeKey: Long, application: Application) : AndroidView
         }
     }
 
+    fun delete (courseID: Long) {
+        viewModelScope.launch {
+            gradeTrackerDao.deleteCourse(courseID)
+        }
+    }
 }
