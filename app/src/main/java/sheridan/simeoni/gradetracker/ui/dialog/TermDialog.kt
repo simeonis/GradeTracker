@@ -2,22 +2,35 @@ package sheridan.simeoni.gradetracker.ui.dialog
 
 import android.app.Dialog
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.viewModels
 import sheridan.simeoni.gradetracker.R
+import sheridan.simeoni.gradetracker.ui.term.TermViewModel
+import sheridan.simeoni.gradetracker.databinding.DialogTermBinding
+import sheridan.simeoni.gradetracker.databinding.FragmentTermBinding
 
 class TermDialog : DialogFragment() {
 
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        return activity?.let{
-            val builder = AlertDialog.Builder(it, R.style.CustomDialogBackGround)
-            val inflater = requireActivity().layoutInflater
+    private val termViewModel: TermViewModel by viewModels()
+    private lateinit var binding: DialogTermBinding
 
-            builder.setView(inflater.inflate(R.layout.dialog_term, null))
-                    .setPositiveButton(android.R.string.ok,null)
-                    .setNegativeButton(android.R.string.cancel,null)
-            builder.create()
-        }?: throw IllegalStateException("Fragment cannot be null")
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+
+        binding = DialogTermBinding.inflate(inflater, container, false)
+
+        binding.doneButton.setOnClickListener {
+            val termName = binding.dialogTermNameInput.text.toString()
+            submit(termName)
+            dismiss()
+        }
+        return binding.root
+    }
+
+    private fun submit(name : String){
+        termViewModel.add(name)
     }
 }

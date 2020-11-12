@@ -1,6 +1,7 @@
 package sheridan.simeoni.gradetracker.ui.term
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -22,4 +23,5 @@ class TermViewModel(application: Application) : AndroidViewModel(application) {
             gradeTrackerDao.insert(Term(0, termName, -1, 0))
         }
     }
+
 }
