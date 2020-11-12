@@ -16,6 +16,7 @@ import sheridan.simeoni.gradetracker.R
 import sheridan.simeoni.gradetracker.databinding.FragmentCourseBinding
 import sheridan.simeoni.gradetracker.databinding.FragmentTermBinding
 import sheridan.simeoni.gradetracker.ui.assignment.AssignmentFragmentArgs
+import sheridan.simeoni.gradetracker.ui.dialog.ConfirmationDialog
 import sheridan.simeoni.gradetracker.ui.dialog.CourseDialog
 import sheridan.simeoni.gradetracker.ui.dialog.TermDialog
 import sheridan.simeoni.gradetracker.ui.term.TermRecyclerViewAdapter
@@ -45,6 +46,12 @@ class CourseFragment : Fragment() {
         viewModel.courses.observe(viewLifecycleOwner) { adapter.courses = it }
 
         binding.courseAddButton.setOnClickListener { openDialog() }
+
+        val savedStateHandle = findNavController().currentBackStackEntry?.savedStateHandle
+        savedStateHandle?.getLiveData<Long>(ConfirmationDialog.CONFIRMATION_RESULT)?.observe(viewLifecycleOwner)
+        {
+            viewModel.delete(it)
+        }
 
 
         return binding.root

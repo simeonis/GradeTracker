@@ -21,4 +21,9 @@ class AssignmentViewModel(envelopeKey: Long, application: Application) : Android
         }
     }
 
+    fun delete (assignmentID: Long) {
+        viewModelScope.launch {
+            gradeTrackerDao.deleteAssignment(assignmentID)
+        }
+    }
 }

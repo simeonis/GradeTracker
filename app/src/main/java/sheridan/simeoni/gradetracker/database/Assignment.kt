@@ -3,7 +3,11 @@ package sheridan.simeoni.gradetracker.database
 import androidx.room.*
 import androidx.room.ForeignKey.CASCADE
 
-@Entity(tableName = "Assignment")
+@Entity(tableName = "Assignment", foreignKeys = [ForeignKey(
+        entity = Course::class,
+        parentColumns = ["CourseID"],
+        childColumns = ["CourseID"],
+        onDelete = CASCADE)])
 data class Assignment(
 
     @PrimaryKey(autoGenerate = true)

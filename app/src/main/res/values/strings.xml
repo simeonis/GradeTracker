@@ -15,6 +15,7 @@
         Sheridan College, 2020</string>
 
     <!-- Shared -->
+    <string name="delete">Delete</string>
     <string name="next">Next</string>
     <string name="add">Add</string>
 

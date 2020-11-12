@@ -6,9 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import sheridan.simeoni.gradetracker.databinding.FragmentTermBinding
+import sheridan.simeoni.gradetracker.ui.dialog.ConfirmationDialog.Companion.CONFIRMATION_RESULT
 import sheridan.simeoni.gradetracker.ui.dialog.TermDialog
 
 class TermFragment : Fragment() {
@@ -32,11 +34,16 @@ class TermFragment : Fragment() {
 
         binding.termAddButton.setOnClickListener { openDialog() }
 
-        return binding.root
+        val savedStateHandle = findNavController().currentBackStackEntry?.savedStateHandle
+        savedStateHandle?.getLiveData<Long>(CONFIRMATION_RESULT)?.observe(viewLifecycleOwner)
+        {
+            viewModel.delete(it)
+        }
 
+        return binding.root
     }
 
-    private fun openDialog(){
+    private fun openDialog() {
         val termDialog = TermDialog()
         viewModel.add("Term1")
         termDialog.show(childFragmentManager, "dialogTerm" )
