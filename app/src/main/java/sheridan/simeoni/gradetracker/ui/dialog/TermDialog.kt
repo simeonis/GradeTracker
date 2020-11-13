@@ -27,6 +27,7 @@ class TermDialog : DialogFragment() {
             submit(termName)
             dismiss()
         }
+        binding.cancelButton.setOnClickListener { dismiss() }
         return binding.root
     }
 
