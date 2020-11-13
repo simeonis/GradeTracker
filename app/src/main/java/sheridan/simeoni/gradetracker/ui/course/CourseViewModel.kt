@@ -1,6 +1,7 @@
 package sheridan.simeoni.gradetracker.ui.course
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -19,9 +20,10 @@ class CourseViewModel(envelopeKey: Long, application: Application) : AndroidView
 
     val courses : LiveData<List<Course>> = gradeTrackerDao.getAllCourses(_envelopeKey)
 
-    fun add (courseName : String, grade: Int, targetGrade: Int){
+    fun add (courseName : String, targetGrade: Int){
         viewModelScope.launch {
-            gradeTrackerDao.insert(Course(0, _envelopeKey, courseName, grade, targetGrade))
+            Log.d("Info in Course VM", courseName + _envelopeKey)
+            gradeTrackerDao.insert(Course(0, _envelopeKey, courseName, -1, targetGrade))
         }
     }
 

@@ -1,12 +1,11 @@
 package sheridan.simeoni.gradetracker.ui.course
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -14,12 +13,10 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import sheridan.simeoni.gradetracker.R
 import sheridan.simeoni.gradetracker.databinding.FragmentCourseBinding
-import sheridan.simeoni.gradetracker.databinding.FragmentTermBinding
-import sheridan.simeoni.gradetracker.ui.assignment.AssignmentFragmentArgs
 import sheridan.simeoni.gradetracker.ui.dialog.ConfirmationDialog
 import sheridan.simeoni.gradetracker.ui.dialog.CourseDialog
-import sheridan.simeoni.gradetracker.ui.dialog.TermDialog
-import sheridan.simeoni.gradetracker.ui.term.TermRecyclerViewAdapter
+import sheridan.simeoni.gradetracker.ui.dialog.CourseDialog.CourseDialogData
+
 
 class CourseFragment : Fragment() {
 
@@ -34,7 +31,7 @@ class CourseFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentCourseBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = this
-        adapter = CourseRecyclerViewAdapter()
+        adapter = CourseRecyclerViewAdapter(requireContext())
 
         with(binding) {
             courseRecycler.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
@@ -48,6 +45,11 @@ class CourseFragment : Fragment() {
         binding.courseAddButton.setOnClickListener { openDialog() }
 
         val savedStateHandle = findNavController().currentBackStackEntry?.savedStateHandle
+        savedStateHandle?.getLiveData<CourseDialogData>(CourseDialog.CONFIRMATION_COURSE_RESULT)?.observe(viewLifecycleOwner)
+        {
+            Log.d("In Course ADD", "Yes")
+            viewModel.add(it.name, it.targetGrade)
+        }
         savedStateHandle?.getLiveData<Long>(ConfirmationDialog.CONFIRMATION_RESULT)?.observe(viewLifecycleOwner)
         {
             viewModel.delete(it)
@@ -58,9 +60,9 @@ class CourseFragment : Fragment() {
     }
 
     private fun openDialog(){
-        val courseDialog = CourseDialog()
-        viewModel.add("Course1", -1, -1)
-        courseDialog.show(childFragmentManager, "dialogTerm" )
+        //val courseDialog = CourseDialog()
+        findNavController().navigate(R.id.action_course_to_courseDialog)
+        //courseDialog.show(childFragmentManager, "dialogTerm" )
     }
 }
 

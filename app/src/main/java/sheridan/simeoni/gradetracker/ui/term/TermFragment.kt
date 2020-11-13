@@ -1,6 +1,7 @@
 package sheridan.simeoni.gradetracker.ui.term
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,7 +22,7 @@ class TermFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentTermBinding.inflate(inflater, container, false)
-        adapter = TermRecyclerViewAdapter()
+        adapter = TermRecyclerViewAdapter(requireContext())
 
         with(binding) {
             termRecycler.addItemDecoration(DividerItemDecoration(context,DividerItemDecoration.VERTICAL))
@@ -39,13 +40,11 @@ class TermFragment : Fragment() {
         {
             viewModel.delete(it)
         }
-
         return binding.root
     }
 
     private fun openDialog() {
         val termDialog = TermDialog()
-        viewModel.add("Term1")
         termDialog.show(childFragmentManager, "dialogTerm" )
     }
 }

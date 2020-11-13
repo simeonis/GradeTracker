@@ -1,5 +1,8 @@
 package sheridan.simeoni.gradetracker.ui.term
 
+import android.content.Context
+import android.provider.Settings.Global.getString
+import android.provider.Settings.Secure.getString
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.findNavController
@@ -9,7 +12,7 @@ import sheridan.simeoni.gradetracker.database.Term
 import sheridan.simeoni.gradetracker.databinding.FragmentTermItemBinding
 import sheridan.simeoni.gradetracker.model.*
 
-class TermRecyclerViewAdapter : RecyclerView.Adapter<TermRecyclerViewAdapter.ViewHolder>() {
+class TermRecyclerViewAdapter(private val context: Context) : RecyclerView.Adapter<TermRecyclerViewAdapter.ViewHolder>() {
 
     var terms: List<Term>? = null
         set(value) {
@@ -18,7 +21,7 @@ class TermRecyclerViewAdapter : RecyclerView.Adapter<TermRecyclerViewAdapter.Vie
         }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder.from(parent)
+        return ViewHolder.from(parent, context)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -28,11 +31,11 @@ class TermRecyclerViewAdapter : RecyclerView.Adapter<TermRecyclerViewAdapter.Vie
     override fun getItemCount(): Int = terms?.size ?: 0
 
     class ViewHolder private constructor(
-            private val binding: FragmentTermItemBinding ): RecyclerView.ViewHolder(binding.root) {
+            private val binding: FragmentTermItemBinding, private val context: Context): RecyclerView.ViewHolder(binding.root) {
 
         fun bind(term: Term) {
             binding.termItemLabel.text = term.termName
-            binding.termPercentLabel.text = term.average.toString()
+            binding.termPercentLabel.text = if(term.average == -1) context.getString(R.string.blank) else term.average.toString()
             binding.termProgressLabel.text = term.progress.toString()
             binding.root.setOnClickListener {
                 val action = TermFragmentDirections.actionTermToCourse(KeyEnvelope(term.termName, term.id))
@@ -47,10 +50,10 @@ class TermRecyclerViewAdapter : RecyclerView.Adapter<TermRecyclerViewAdapter.Vie
         }
 
         companion object {
-            fun from(parent: ViewGroup): ViewHolder {
+            fun from(parent: ViewGroup, context : Context): ViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = FragmentTermItemBinding.inflate(layoutInflater, parent, false)
-                return ViewHolder(binding)
+                return ViewHolder(binding, context)
             }
         }
     }

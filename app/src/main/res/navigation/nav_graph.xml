@@ -43,6 +43,9 @@
         <action
             android:id="@+id/action_course_to_delete"
             app:destination="@id/confirmationDialog" />
+        <action
+            android:id="@+id/action_course_to_courseDialog"
+            app:destination="@id/courseDialog" />
     </fragment>
     <fragment
         android:id="@+id/assignmentFragment"
@@ -80,4 +83,8 @@
             android:name="message"
             app:argType="string" />
     </dialog>
+    <dialog
+        android:id="@+id/courseDialog"
+        android:name="sheridan.simeoni.gradetracker.ui.dialog.CourseDialog"
+        android:label="CourseDialog" />
 </navigation>

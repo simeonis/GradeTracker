@@ -1,5 +1,6 @@
 package sheridan.simeoni.gradetracker.ui.course
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
@@ -12,7 +13,7 @@ import sheridan.simeoni.gradetracker.databinding.FragmentTermItemBinding
 import sheridan.simeoni.gradetracker.model.*
 import sheridan.simeoni.gradetracker.ui.term.TermFragmentDirections
 
-class CourseRecyclerViewAdapter : RecyclerView.Adapter<CourseRecyclerViewAdapter.ViewHolder>() {
+class CourseRecyclerViewAdapter(private val context: Context) : RecyclerView.Adapter<CourseRecyclerViewAdapter.ViewHolder>() {
 
     var courses: List<Course>? = null
         set(value) {
@@ -21,7 +22,7 @@ class CourseRecyclerViewAdapter : RecyclerView.Adapter<CourseRecyclerViewAdapter
         }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder.from(parent)
+        return ViewHolder.from(parent, context)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -31,11 +32,11 @@ class CourseRecyclerViewAdapter : RecyclerView.Adapter<CourseRecyclerViewAdapter
     override fun getItemCount(): Int = courses?.size ?: 0
 
     class ViewHolder private constructor(
-            private val binding: FragmentCourseItemBinding ): RecyclerView.ViewHolder(binding.root) {
+            private val binding: FragmentCourseItemBinding, private val context: Context ): RecyclerView.ViewHolder(binding.root) {
 
         fun bind(course: Course) {
             binding.courseItemLabel.text = course.courseName
-            binding.courseGradeLabel.text = course.grade.toString()
+            binding.courseGradeLabel.text = if(course.grade == -1) context.getString(R.string.blank) else course.grade.toString()
             binding.courseGradeTargetLabel.text = course.targetGrade.toString()
             binding.root.setOnClickListener {
                 val action = CourseFragmentDirections.actionCourseToAssignment(KeyEnvelope(course.courseName, course.id))
@@ -50,10 +51,10 @@ class CourseRecyclerViewAdapter : RecyclerView.Adapter<CourseRecyclerViewAdapter
         }
 
         companion object {
-            fun from(parent: ViewGroup): ViewHolder {
+            fun from(parent: ViewGroup, context: Context): ViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = FragmentCourseItemBinding.inflate(layoutInflater, parent, false)
-                return ViewHolder(binding)
+                return ViewHolder(binding, context)
             }
         }
     }
