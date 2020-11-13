@@ -45,7 +45,7 @@ class CourseDialog : DialogFragment() {
         if(courseTarget.isEmpty()){
             binding.dialogCourseTargetInput.error = "required"
         }
-        else if (!courseName.isEmpty() && !courseCode.isEmpty()){
+        else if (courseName.isNotEmpty() && courseCode.isNotEmpty()){
             val savedStateHandle = findNavController().previousBackStackEntry?.savedStateHandle
             savedStateHandle?.set(CONFIRMATION_COURSE_RESULT, CourseDialogData(courseName, courseCode, courseTarget.toInt()))
             dismiss()

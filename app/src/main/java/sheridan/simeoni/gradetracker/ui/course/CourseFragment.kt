@@ -1,12 +1,12 @@
 package sheridan.simeoni.gradetracker.ui.course
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.SavedStateHandle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -42,27 +42,20 @@ class CourseFragment : Fragment() {
         activity?.title = safeArgs.keyEnveloppe.title
         viewModel.courses.observe(viewLifecycleOwner) { adapter.courses = it }
 
-        binding.courseAddButton.setOnClickListener { openDialog() }
+        binding.courseAddButton.setOnClickListener { findNavController().navigate(R.id.action_course_to_courseDialog) }
 
-        val savedStateHandle = findNavController().currentBackStackEntry?.savedStateHandle
+        val savedStateHandle: SavedStateHandle? = findNavController().currentBackStackEntry?.savedStateHandle
         savedStateHandle?.getLiveData<CourseDialogData>(CourseDialog.CONFIRMATION_COURSE_RESULT)?.observe(viewLifecycleOwner)
         {
-            Log.d("In Course ADD", "Yes")
             viewModel.add(it.name, it.targetGrade)
+            savedStateHandle.remove<CourseDialogData>(CourseDialog.CONFIRMATION_COURSE_RESULT)
         }
         savedStateHandle?.getLiveData<Long>(ConfirmationDialog.CONFIRMATION_RESULT)?.observe(viewLifecycleOwner)
         {
             viewModel.delete(it)
         }
 
-
         return binding.root
-    }
-
-    private fun openDialog(){
-        //val courseDialog = CourseDialog()
-        findNavController().navigate(R.id.action_course_to_courseDialog)
-        //courseDialog.show(childFragmentManager, "dialogTerm" )
     }
 }
 

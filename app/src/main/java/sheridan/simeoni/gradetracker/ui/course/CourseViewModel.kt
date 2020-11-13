@@ -22,7 +22,6 @@ class CourseViewModel(envelopeKey: Long, application: Application) : AndroidView
 
     fun add (courseName : String, targetGrade: Int){
         viewModelScope.launch {
-            Log.d("Info in Course VM", courseName + _envelopeKey)
             gradeTrackerDao.insert(Course(0, _envelopeKey, courseName, -1, targetGrade))
         }
     }
