@@ -7,10 +7,6 @@ import androidx.recyclerview.widget.RecyclerView
 import sheridan.simeoni.gradetracker.R
 import sheridan.simeoni.gradetracker.database.Assignment
 import sheridan.simeoni.gradetracker.databinding.FragmentAssignmentItemBinding
-import sheridan.simeoni.gradetracker.model.AssignmentData
-import sheridan.simeoni.gradetracker.model.CourseData
-import sheridan.simeoni.gradetracker.model.GradeData
-import sheridan.simeoni.gradetracker.ui.course.CourseFragmentDirections
 
 class AssignmentRecyclerViewAdapter : RecyclerView.Adapter<AssignmentRecyclerViewAdapter.ViewHolder>() {
 

@@ -10,7 +10,6 @@ import androidx.fragment.app.viewModels
 import sheridan.simeoni.gradetracker.ui.term.TermViewModel
 import sheridan.simeoni.gradetracker.databinding.DialogTermBinding
 
-
 class TermDialog : DialogFragment() {
 
     private val termViewModel: TermViewModel by viewModels()

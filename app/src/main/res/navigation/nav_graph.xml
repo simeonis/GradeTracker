@@ -61,6 +61,9 @@
         <action
             android:id="@+id/action_assignment_to_delete"
             app:destination="@id/confirmationDialog" />
+        <action
+            android:id="@+id/action_assignment_to_assignmentDialog"
+            app:destination="@id/assignmentDialog" />
     </fragment>
     <fragment
         android:id="@+id/gradeFragment"
@@ -87,4 +90,8 @@
         android:id="@+id/courseDialog"
         android:name="sheridan.simeoni.gradetracker.ui.dialog.CourseDialog"
         android:label="CourseDialog" />
+    <dialog
+        android:id="@+id/assignmentDialog"
+        android:name="sheridan.simeoni.gradetracker.ui.dialog.AssignmentDialog"
+        android:label="AssignmentDialog" />
 </navigation>
