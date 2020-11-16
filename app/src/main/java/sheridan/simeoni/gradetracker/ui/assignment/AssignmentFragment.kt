@@ -43,10 +43,10 @@ class AssignmentFragment : Fragment() {
         binding.assignmentAddButton.setOnClickListener { findNavController().navigate(R.id.action_assignment_to_assignmentDialog) }
 
         val savedStateHandle = findNavController().currentBackStackEntry?.savedStateHandle
+        savedStateHandle?.set(AssignmentDialog.CONFIRMATION_ASSIGNMENT_RESULT, null) // Dialog will override this
         savedStateHandle?.getLiveData<AssignmentDialog.AssignmentDialogData>(AssignmentDialog.CONFIRMATION_ASSIGNMENT_RESULT)?.observe(viewLifecycleOwner)
         {
-            viewModel.add(it.name,-1, it.assingmentGrade, it.assignmentWeight, -1.0f)
-            savedStateHandle.remove<AssignmentDialog.AssignmentDialogData>(AssignmentDialog.CONFIRMATION_ASSIGNMENT_RESULT)
+            if (it != null) viewModel.add(it.name,-1, it.assingmentGrade, it.assignmentWeight, -1.0f)
         }
         savedStateHandle?.getLiveData<Long>(ConfirmationDialog.CONFIRMATION_RESULT)?.observe(viewLifecycleOwner)
         {
