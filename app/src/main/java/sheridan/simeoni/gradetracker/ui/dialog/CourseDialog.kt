@@ -1,29 +1,28 @@
 package sheridan.simeoni.gradetracker.ui.dialog
 
-import android.app.Dialog
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.findFragment
 import androidx.navigation.fragment.findNavController
 import sheridan.simeoni.gradetracker.R
 import sheridan.simeoni.gradetracker.databinding.DialogCourseBinding
-import sheridan.simeoni.gradetracker.databinding.DialogTermBinding
+import sheridan.simeoni.gradetracker.ui.course.CourseFragment
 import java.io.Serializable
 
 class CourseDialog : DialogFragment() {
 
     companion object{
-        const val CONFIRMATION_COURSE_RESULT = "confirmation_course_result"
+        const val CONFIRMATION_RESULT = "confirmation_course_result"
     }
 
     private lateinit var binding: DialogCourseBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-
         binding = DialogCourseBinding.inflate(inflater, container, false)
 
         binding.doneButton.setOnClickListener { confirmed() }
@@ -47,7 +46,7 @@ class CourseDialog : DialogFragment() {
         }
         else if (courseName.isNotEmpty() && courseCode.isNotEmpty()){
             val savedStateHandle = findNavController().previousBackStackEntry?.savedStateHandle
-            savedStateHandle?.set(CONFIRMATION_COURSE_RESULT, CourseDialogData(courseName, courseCode, courseTarget.toInt()))
+            savedStateHandle?.set(CONFIRMATION_RESULT, CourseDialogData(courseName, courseCode, courseTarget.toInt()))
             dismiss()
         }
 
