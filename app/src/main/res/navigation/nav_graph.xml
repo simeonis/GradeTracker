@@ -86,5 +86,12 @@
     <dialog
         android:id="@+id/courseDialog"
         android:name="sheridan.simeoni.gradetracker.ui.dialog.CourseDialog"
-        android:label="CourseDialog" />
+        android:label="CourseDialog"
+        tools:layout="@layout/dialog_course"/>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="sheridan.simeoni.gradetracker.ui.SettingsFragment"
+        android:label="Settings"
+        tools:layout="@layout/fragment_settings" />
+    <action android:id="@+id/action_global_to_settings" app:destination="@id/settingsFragment" />
 </navigation>

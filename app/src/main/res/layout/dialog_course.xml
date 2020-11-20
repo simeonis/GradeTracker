@@ -9,7 +9,6 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#7289DA"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -17,15 +16,14 @@
 
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/dialog_course_title_label"
             android:layout_width="400dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:fontFamily="casual"
             android:gravity="center"
             android:text="@string/add_course"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            android:textColor="@color/textTile"
+            android:textAppearance="@style/Theme.GradeTracker.Text.Style1"
             android:textSize="30sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -43,8 +41,7 @@
             android:fontFamily="casual"
             android:gravity="center_vertical"
             android:text="@string/enter_target_grade"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            android:textColor="#FFFFFF"
+            android:textAppearance="@style/Theme.GradeTracker.Text.Style2"
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@+id/dialog_term_course_code_label"
@@ -62,12 +59,11 @@
             android:paddingStart="0dp"
             android:paddingEnd="20dp"
             android:text="@string/enter_course"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            android:textColor="#FFFFFF"
+            android:textAppearance="@style/Theme.GradeTracker.Text.Style2"
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView3" />
+            app:layout_constraintTop_toBottomOf="@+id/dialog_course_title_label" />
 
         <EditText
             android:id="@+id/dialog_course_name_input"
@@ -92,8 +88,7 @@
             android:fontFamily="casual"
             android:gravity="center_vertical"
             android:text="@string/enter_course_code"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            android:textColor="#FFFFFF"
+            android:textAppearance="@style/Theme.GradeTracker.Text.Style2"
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@+id/dialog_course_name_label"

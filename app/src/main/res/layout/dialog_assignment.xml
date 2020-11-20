@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#7289DA"
     android:orientation="vertical"
     android:padding="10dp">
 
@@ -14,8 +13,7 @@
         android:fontFamily="casual"
         android:gravity="center"
         android:text="@string/add_assignment"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        android:textColor="@color/textTile"
+        android:textAppearance="@style/Theme.GradeTracker.Text.Style1"
         android:textSize="30sp"
         android:textStyle="bold" />
 
@@ -36,8 +34,7 @@
             android:gravity="center_vertical"
             android:paddingRight="10dp"
             android:text="@string/enter_assignment"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            android:textColor="#FFFFFF"
+            android:textAppearance="@style/Theme.GradeTracker.Text.Style2"
             android:textSize="22sp"
             android:textStyle="bold"
             tools:ignore="RtlHardcoded,RtlSymmetry" />
@@ -70,8 +67,7 @@
             android:fontFamily="casual"
             android:gravity="center_vertical"
             android:text="@string/total_points"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            android:textColor="#FFFFFF"
+            android:textAppearance="@style/Theme.GradeTracker.Text.Style2"
             android:textSize="22sp"
             android:textStyle="bold" />
 
@@ -103,8 +99,7 @@
             android:fontFamily="casual"
             android:gravity="center_vertical"
             android:text="@string/weight"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            android:textColor="#FFFFFF"
+            android:textAppearance="@style/Theme.GradeTracker.Text.Style2"
             android:textSize="22sp"
             android:textStyle="bold" />
 

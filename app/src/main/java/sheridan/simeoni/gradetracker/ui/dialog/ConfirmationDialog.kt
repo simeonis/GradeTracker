@@ -21,7 +21,7 @@ class ConfirmationDialog : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         navController = findNavController()
 
-        return AlertDialog.Builder(requireActivity(), R.style.CustomDialogBackGround).apply {
+        return AlertDialog.Builder(requireActivity(), R.style.Theme_GradeTracker_Dialog).apply {
             setTitle("Delete Confirmation")
             setMessage(String.format("Are you sure you want to delete %s?", safeArgs.message))
             setPositiveButton(android.R.string.ok) { _, _ -> confirmed() }

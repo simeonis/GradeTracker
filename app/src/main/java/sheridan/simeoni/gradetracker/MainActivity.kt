@@ -1,8 +1,6 @@
 package sheridan.simeoni.gradetracker
 
 import android.os.Bundle
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
@@ -42,6 +40,10 @@ class MainActivity : AppCompatActivity() {
             when (item.itemId) {
                 R.id.action_about -> {
                     findNavController(R.id.nav_host).navigate(R.id.action_global_to_about)
+                    true
+                }
+                R.id.action_settings -> {
+                    findNavController(R.id.nav_host).navigate(R.id.action_global_to_settings)
                     true
                 }
             else -> super.onOptionsItemSelected(item)
