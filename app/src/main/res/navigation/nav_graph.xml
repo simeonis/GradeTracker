@@ -23,6 +23,7 @@
     <fragment
         android:id="@+id/TermFragment"
         android:name="sheridan.simeoni.gradetracker.ui.term.TermFragment"
+        android:label="Select Term"
         tools:layout="@layout/fragment_term">
         <action
             android:id="@+id/action_term_to_course"

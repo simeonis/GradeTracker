@@ -1,5 +1,7 @@
 package sheridan.simeoni.gradetracker.ui
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -20,7 +22,7 @@ class StartFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentStartBinding.inflate(inflater, container, false)
-
+        (activity as AppCompatActivity).supportActionBar?.hide()
         val sharedPreferences : SharedPreferences = requireActivity().getSharedPreferences("My_Prefs", Context.MODE_PRIVATE)
         if(!sharedPreferences.contains("filler_grade")){
             Log.d("filler bool",sharedPreferences.contains("filler_grade").toString())
@@ -37,15 +39,5 @@ class StartFragment : Fragment() {
         }
 
         return binding.root
-    }
-
-    override fun onResume() {
-        super.onResume()
-        (activity as AppCompatActivity).supportActionBar?.hide()
-    }
-
-    override fun onStop() {
-        super.onStop()
-        (activity as AppCompatActivity).supportActionBar?.show()
     }
 }

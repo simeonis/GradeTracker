@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -23,6 +24,7 @@ class TermFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentTermBinding.inflate(inflater, container, false)
         adapter = TermRecyclerViewAdapter(requireContext())
+        (activity as AppCompatActivity).supportActionBar?.show()
 
         with(binding) {
             termRecycler.addItemDecoration(DividerItemDecoration(context,DividerItemDecoration.VERTICAL))
@@ -31,7 +33,6 @@ class TermFragment : Fragment() {
         }
 
         viewModel.terms.observe(viewLifecycleOwner) { adapter.terms = it }
-        activity?.title = "Select Term"
 
         binding.termAddButton.setOnClickListener { openDialog() }
 
