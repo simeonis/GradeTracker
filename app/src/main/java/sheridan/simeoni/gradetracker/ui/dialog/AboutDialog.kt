@@ -7,7 +7,6 @@ import androidx.fragment.app.DialogFragment
 import sheridan.simeoni.gradetracker.R
 
 class AboutDialog : DialogFragment() {
-
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return AlertDialog.Builder(requireActivity())
                 .setTitle(R.string.app_name)
@@ -15,5 +14,4 @@ class AboutDialog : DialogFragment() {
                 .setPositiveButton(android.R.string.ok,null)
                 .create()
     }
-
 }

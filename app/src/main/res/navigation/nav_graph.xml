@@ -16,6 +16,9 @@
             android:id="@+id/action_start_to_term"
             app:destination="@id/TermFragment"
             app:popUpTo="@id/StartFragment" />
+        <action
+            android:id="@+id/action_start_to_data"
+            app:destination="@id/dataFragment" />
     </fragment>
     <fragment
         android:id="@+id/TermFragment"
@@ -61,6 +64,9 @@
         <action
             android:id="@+id/action_assignment_to_delete"
             app:destination="@id/confirmationDialog" />
+        <action
+            android:id="@+id/action_assignment_to_assignmentDialog"
+            app:destination="@id/assignmentDialog" />
     </fragment>
     <fragment
         android:id="@+id/gradeFragment"
@@ -87,4 +93,18 @@
         android:id="@+id/courseDialog"
         android:name="sheridan.simeoni.gradetracker.ui.dialog.CourseDialog"
         android:label="CourseDialog" />
+    <dialog
+        android:id="@+id/assignmentDialog"
+        android:name="sheridan.simeoni.gradetracker.ui.dialog.AssignmentDialog"
+        android:label="AssignmentDialog" />
+    <fragment
+        android:id="@+id/dataFragment"
+        android:name="sheridan.simeoni.gradetracker.ui.DataFragment"
+        android:label="fragment_data"
+        tools:layout="@layout/fragment_data" >
+        <action
+            android:id="@+id/action_data_to_term"
+            app:destination="@id/TermFragment"
+            app:popUpTo="@id/StartFragment" />
+    </fragment>
 </navigation>

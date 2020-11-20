@@ -1,36 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#7289DA"
-    android:orientation="vertical"
-    android:padding="10dp">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="casual"
-        android:gravity="center"
-        android:text="@string/add_assignment"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        android:textColor="@color/textTile"
-        android:textSize="30sp"
-        android:textStyle="bold" />
+    <data>
 
-    <LinearLayout
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingHorizontal="10dp">
+        android:layout_height="match_parent"
+        android:background="#7289DA">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout"
+
+            android:layout_width="415dp"
+            android:layout_height="wrap_content"
+            android:background="#2D2E30"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/dialog_assignment_weight_label"
+            app:layout_constraintVertical_bias="0.07">
+
+            <Button
+                android:id="@+id/cancel_Button"
+                android:layout_width="90dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:background="@drawable/dialog_button_background"
+                android:text="Cancel"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.658"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/done_Button"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:background="@drawable/dialog_button_background"
+                android:text="OK"
+                android:textSize="12sp"
+                app:layout_constraintStart_toEndOf="@+id/cancel_Button"
+                app:layout_constraintTop_toTopOf="@+id/cancel_Button" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="casual"
+            android:gravity="center"
+            android:text="@string/add_assignment"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:textColor="@color/textTile"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/dialog_assignment_name_label"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
             android:layout_weight="1"
             android:fontFamily="casual"
             android:gravity="center_vertical"
@@ -40,32 +82,31 @@
             android:textColor="#FFFFFF"
             android:textSize="22sp"
             android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/guideline3"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView"
             tools:ignore="RtlHardcoded,RtlSymmetry" />
 
         <EditText
             android:id="@+id/dialog_assignment_name_input"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
             android:layout_weight="1"
             android:autofillHints="Midterm"
             android:fontFamily="casual"
             android:gravity="center"
             android:hint="@string/assignment_name_hint"
-            android:inputType="text" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingHorizontal="10dp">
+            android:inputType="text"
+            app:layout_constraintBottom_toBottomOf="@+id/dialog_assignment_name_label"
+            app:layout_constraintStart_toEndOf="@+id/dialog_assignment_name_label" />
 
         <TextView
             android:id="@+id/dialog_assignment_grade_label"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
             android:layout_weight="1"
             android:fontFamily="casual"
             android:gravity="center_vertical"
@@ -73,32 +114,28 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
             android:textColor="#FFFFFF"
             android:textSize="22sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/dialog_assignment_name_label"
+            app:layout_constraintTop_toBottomOf="@+id/dialog_assignment_name_label" />
 
         <EditText
             android:id="@+id/dialog_assignment_grade_input"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:autofillHints="40"
             android:fontFamily="casual"
             android:gravity="center"
             android:hint="@string/grade_points_hint"
-            android:inputType="number" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingHorizontal="10dp">
+            android:inputType="number"
+            app:layout_constraintBottom_toBottomOf="@+id/dialog_assignment_grade_label"
+            app:layout_constraintStart_toStartOf="@+id/dialog_assignment_name_input" />
 
         <TextView
             android:id="@+id/dialog_assignment_weight_label"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
             android:layout_weight="1"
             android:fontFamily="casual"
             android:gravity="center_vertical"
@@ -106,17 +143,30 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
             android:textColor="#FFFFFF"
             android:textSize="22sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/dialog_assignment_grade_label"
+            app:layout_constraintTop_toBottomOf="@+id/dialog_assignment_grade_label" />
 
         <EditText
             android:id="@+id/dialog_assignment_weight_input"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:autofillHints="25"
             android:fontFamily="casual"
             android:gravity="center"
             android:hint="@string/grade_weight_hint"
-            android:inputType="number" />
-    </LinearLayout>
-</LinearLayout>
+            android:inputType="number"
+            app:layout_constraintBottom_toBottomOf="@+id/dialog_assignment_weight_label"
+            app:layout_constraintStart_toStartOf="@+id/dialog_assignment_grade_input" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="216dp" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

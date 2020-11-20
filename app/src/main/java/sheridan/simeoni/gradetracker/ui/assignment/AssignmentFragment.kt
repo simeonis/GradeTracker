@@ -10,11 +10,13 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import sheridan.simeoni.gradetracker.R
 import sheridan.simeoni.gradetracker.databinding.FragmentAssignmentBinding
 import sheridan.simeoni.gradetracker.ui.course.CourseViewModel
 import sheridan.simeoni.gradetracker.ui.course.CourseViewModelFactory
 import sheridan.simeoni.gradetracker.ui.dialog.AssignmentDialog
 import sheridan.simeoni.gradetracker.ui.dialog.ConfirmationDialog
+import sheridan.simeoni.gradetracker.ui.dialog.CourseDialog
 
 class AssignmentFragment : Fragment() {
 
@@ -38,20 +40,19 @@ class AssignmentFragment : Fragment() {
         activity?.title = safeArgs.keyEnvelope.title
         viewModel.assignments.observe(viewLifecycleOwner) { adapter.assignments = it }
 
-        binding.assignmentAddButton.setOnClickListener { openDialog() }
+        binding.assignmentAddButton.setOnClickListener { findNavController().navigate(R.id.action_assignment_to_assignmentDialog) }
 
         val savedStateHandle = findNavController().currentBackStackEntry?.savedStateHandle
+        savedStateHandle?.set(AssignmentDialog.CONFIRMATION_ASSIGNMENT_RESULT, null) // Dialog will override this
+        savedStateHandle?.getLiveData<AssignmentDialog.AssignmentDialogData>(AssignmentDialog.CONFIRMATION_ASSIGNMENT_RESULT)?.observe(viewLifecycleOwner)
+        {
+            if (it != null) viewModel.add(it.name,-1, it.assingmentGrade, it.assignmentWeight, -1.0f)
+        }
         savedStateHandle?.getLiveData<Long>(ConfirmationDialog.CONFIRMATION_RESULT)?.observe(viewLifecycleOwner)
         {
             viewModel.delete(it)
         }
 
         return binding.root
-    }
-
-    private fun openDialog() {
-        val assignmentDialog = AssignmentDialog()
-        viewModel.add("A1", -1, 40, 35, 15.0f)
-        assignmentDialog.show(childFragmentManager, "dialogAssignment")
     }
 }
