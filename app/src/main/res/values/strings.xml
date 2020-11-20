@@ -46,9 +46,10 @@
     <string name="grade_points_hint">Maximum Grade</string>
     <string name="grade_weight_hint">Grade Weight (%)</string>
     <string name="add_assignment">Add Assignment</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <!-- Grade Fragment -->
-
 
 
 </resources>
