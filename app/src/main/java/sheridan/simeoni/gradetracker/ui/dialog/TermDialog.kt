@@ -19,16 +19,19 @@ class TermDialog : DialogFragment() {
 
         binding = DialogTermBinding.inflate(inflater, container, false)
 
-        binding.doneButton.setOnClickListener {
-            val termName = binding.dialogTermNameInput.text.toString()
-            submit(termName)
-            dismiss()
-        }
+        binding.doneButton.setOnClickListener { submit() }
         binding.cancelButton.setOnClickListener { dismiss() }
         return binding.root
     }
 
-    private fun submit(name : String){
-        termViewModel.add(name)
+    private fun submit(){
+        val termName = binding.dialogTermNameInput.text.toString()
+        if(termName.isEmpty()){
+            binding.dialogTermNameInput.error = "required"
+        }
+        else{
+            termViewModel.add(termName)
+            dismiss()
+        }
     }
 }
