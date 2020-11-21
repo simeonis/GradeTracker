@@ -35,8 +35,12 @@ class TermRecyclerViewAdapter(private val context: Context) : RecyclerView.Adapt
 
         fun bind(term: Term) {
             binding.termItemLabel.text = term.termName
-            binding.termPercentLabel.text = if(term.average == -1) context.getString(R.string.blank) else term.average.toString()
-            binding.termProgressLabel.text = term.progress.toString()
+            binding.termPercentLabel.text =
+                    if(term.average == -1)
+                        context.getString(R.string.term_average).plus(context.getString(R.string.blank))
+                    else
+                        context.getString(R.string.term_average).plus(String.format("%d%%", term.average))
+            binding.termProgressLabel.text = context.getString(R.string.term_progress).plus(String.format("%d%%", term.progress))
             binding.root.setOnClickListener {
                 val action = TermFragmentDirections.actionTermToCourse(KeyEnvelope(term.termName, term.id))
                 it.findNavController().navigate(action)

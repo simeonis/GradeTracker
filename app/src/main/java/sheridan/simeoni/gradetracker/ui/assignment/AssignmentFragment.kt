@@ -29,7 +29,7 @@ class AssignmentFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentAssignmentBinding.inflate(inflater, container, false)
-        adapter = AssignmentRecyclerViewAdapter()
+        adapter = AssignmentRecyclerViewAdapter(requireContext())
 
         with(binding) {
             assignmentRecycler.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
@@ -46,7 +46,7 @@ class AssignmentFragment : Fragment() {
         savedStateHandle?.set(AssignmentDialog.CONFIRMATION_ASSIGNMENT_RESULT, null) // Dialog will override this
         savedStateHandle?.getLiveData<AssignmentDialog.AssignmentDialogData>(AssignmentDialog.CONFIRMATION_ASSIGNMENT_RESULT)?.observe(viewLifecycleOwner)
         {
-            if (it != null) viewModel.add(it.name,-1, it.assingmentGrade, it.assignmentWeight, -1.0f)
+            if (it != null) viewModel.add(it.name,-1, it.assignmentGrade, -1, it.assignmentWeight)
         }
         savedStateHandle?.getLiveData<Long>(ConfirmationDialog.CONFIRMATION_RESULT)?.observe(viewLifecycleOwner)
         {

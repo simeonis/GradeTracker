@@ -32,12 +32,16 @@ class CourseRecyclerViewAdapter(private val context: Context) : RecyclerView.Ada
     override fun getItemCount(): Int = courses?.size ?: 0
 
     class ViewHolder private constructor(
-            private val binding: FragmentCourseItemBinding, private val context: Context ): RecyclerView.ViewHolder(binding.root) {
+            private val binding: FragmentCourseItemBinding, private val context: Context): RecyclerView.ViewHolder(binding.root) {
 
         fun bind(course: Course) {
             binding.courseItemLabel.text = course.courseName
-            binding.courseGradeLabel.text = if(course.grade == -1) context.getString(R.string.blank) else course.grade.toString()
-            binding.courseGradeTargetLabel.text = course.targetGrade.toString()
+            binding.courseGradeLabel.text =
+                    if(course.grade == -1)
+                        context.getString(R.string.grade).plus(context.getString(R.string.blank))
+                    else
+                        context.getString(R.string.grade).plus(String.format("%d%%", course.grade))
+            binding.courseGradeTargetLabel.text = context.getString(R.string.course_target).plus(String.format("%d%%", course.targetGrade))
             binding.root.setOnClickListener {
                 val action = CourseFragmentDirections.actionCourseToAssignment(KeyEnvelope(course.courseName, course.id))
                 it.findNavController().navigate(action)

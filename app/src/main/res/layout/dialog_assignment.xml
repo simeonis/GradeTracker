@@ -151,7 +151,7 @@
             android:fontFamily="casual"
             android:gravity="center"
             android:hint="@string/grade_weight_hint"
-            android:inputType="number"
+            android:inputType="numberDecimal"
             app:layout_constraintBottom_toBottomOf="@+id/dialog_assignment_weight_label"
             app:layout_constraintStart_toStartOf="@+id/dialog_assignment_grade_input" />
 

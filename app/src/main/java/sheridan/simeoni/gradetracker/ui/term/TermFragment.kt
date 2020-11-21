@@ -11,6 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import sheridan.simeoni.gradetracker.R
 import sheridan.simeoni.gradetracker.databinding.FragmentTermBinding
 import sheridan.simeoni.gradetracker.ui.dialog.ConfirmationDialog.Companion.CONFIRMATION_RESULT
 import sheridan.simeoni.gradetracker.ui.dialog.TermDialog
@@ -23,6 +24,7 @@ class TermFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentTermBinding.inflate(inflater, container, false)
+        binding.lifecycleOwner = this
         adapter = TermRecyclerViewAdapter(requireContext())
         (activity as AppCompatActivity).supportActionBar?.show()
 
@@ -34,7 +36,7 @@ class TermFragment : Fragment() {
 
         viewModel.terms.observe(viewLifecycleOwner) { adapter.terms = it }
 
-        binding.termAddButton.setOnClickListener { openDialog() }
+        binding.termAddButton.setOnClickListener { findNavController().navigate(R.id.action_term_to_termDialog) }
 
         val savedStateHandle = findNavController().currentBackStackEntry?.savedStateHandle
         savedStateHandle?.getLiveData<Long>(CONFIRMATION_RESULT)?.observe(viewLifecycleOwner)

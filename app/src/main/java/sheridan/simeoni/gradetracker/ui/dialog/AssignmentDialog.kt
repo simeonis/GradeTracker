@@ -50,10 +50,10 @@ class AssignmentDialog : DialogFragment() {
         }
         else if (assignmentName.isNotEmpty() && assignmentGrade.isNotEmpty()){
             val savedStateHandle = findNavController().previousBackStackEntry?.savedStateHandle
-            savedStateHandle?.set(CONFIRMATION_ASSIGNMENT_RESULT, AssignmentDialogData(assignmentName, assignmentGrade.toInt(), assignmentWeight.toInt()))
+            savedStateHandle?.set(CONFIRMATION_ASSIGNMENT_RESULT, AssignmentDialogData(assignmentName, assignmentGrade.toInt(), assignmentWeight.toFloat()))
             dismiss()
         }
 
     }
-    data class AssignmentDialogData(val name : String, val assingmentGrade : Int, val assignmentWeight : Int) : Serializable
+    data class AssignmentDialogData(val name : String, val assignmentGrade : Int, val assignmentWeight : Float) : Serializable
 }

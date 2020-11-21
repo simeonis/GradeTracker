@@ -9,11 +9,37 @@
         android:scaleX="1"
         android:scaleY="1">
 
+        <TextView
+            android:id="@+id/settings_greeting_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:fontFamily="@font/baloo"
+            android:gravity="center"
+            android:textAppearance="@style/Theme.GradeTracker.Text.Style1"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Welcome back Tom" />
+
+        <ImageView
+            android:id="@+id/settings_nightmode_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:contentDescription="@string/settings_image_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/settings_greeting_label"
+            app:srcCompat="@drawable/ic_sun" />
+
         <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/settings_nightmode_switch"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_marginTop="250dp"
+            android:layout_marginTop="248dp"
             android:checked="false"
             android:scaleX="2"
             android:scaleY="2"
@@ -23,26 +49,14 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:id="@+id/settings_nightmode_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:contentDescription="@string/settings_image_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_sun" />
+            app:layout_constraintTop_toBottomOf="@+id/settings_greeting_label" />
 
         <LinearLayout
             android:id="@+id/linearLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="84dp"
             android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/settings_nightmode_switch">
@@ -51,14 +65,17 @@
                 android:id="@+id/settings_filler_grade_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/asap"
                 android:text="@string/filler_grade"
-                android:textAppearance="@style/Theme.GradeTracker.Text.Style2" />
+                android:textAppearance="@style/Theme.GradeTracker.Text.Style2"
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/settings_filler_grade_input"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:autofillHints="70%"
+                android:fontFamily="@font/asap"
                 android:hint="@string/filler_grade_hint"
                 android:inputType="number"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
@@ -70,8 +87,10 @@
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_marginTop="8dp"
+            android:fontFamily="@font/asap"
             android:text="@string/reset_data"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout" />

@@ -1,5 +1,6 @@
 package sheridan.simeoni.gradetracker.ui.assignment
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.findNavController
@@ -8,7 +9,7 @@ import sheridan.simeoni.gradetracker.R
 import sheridan.simeoni.gradetracker.database.Assignment
 import sheridan.simeoni.gradetracker.databinding.FragmentAssignmentItemBinding
 
-class AssignmentRecyclerViewAdapter : RecyclerView.Adapter<AssignmentRecyclerViewAdapter.ViewHolder>() {
+class AssignmentRecyclerViewAdapter(private val context: Context) : RecyclerView.Adapter<AssignmentRecyclerViewAdapter.ViewHolder>() {
 
     var assignments: List<Assignment>? = null
         set(value) {
@@ -17,7 +18,7 @@ class AssignmentRecyclerViewAdapter : RecyclerView.Adapter<AssignmentRecyclerVie
         }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder.from(parent)
+        return ViewHolder.from(parent, context)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -27,14 +28,16 @@ class AssignmentRecyclerViewAdapter : RecyclerView.Adapter<AssignmentRecyclerVie
     override fun getItemCount(): Int = assignments?.size ?: 0
 
     class ViewHolder private constructor(
-        private val binding: FragmentAssignmentItemBinding): RecyclerView.ViewHolder(binding.root) {
+        private val binding: FragmentAssignmentItemBinding, private val context: Context): RecyclerView.ViewHolder(binding.root) {
 
         fun bind(assignment: Assignment) {
             binding.assignmentItemNameLabel.text = assignment.assignmentName
-            binding.assignmentItemGradeLabel.text = String.format("%s/%d",
-                    if (assignment.grade == -1) "-"
-                    else assignment.grade.toString(), assignment.gradeTotal)
-            binding.assignmentItemWeightLabel.text = String.format("%.1f%%", assignment.weight)
+            binding.assignmentItemGradeLabel.text =
+                    if (assignment.grade == -1)
+                        context.getString(R.string.grade).plus(context.getString(R.string.blank))
+                    else
+                        context.getString(R.string.grade).plus(String.format("%d%%", assignment.grade/assignment.gradeTotal))
+            binding.assignmentItemWeightLabel.text = context.getString(R.string.assignment_weight).plus(String.format("%.1f%%", assignment.weight))
             binding.root.setOnClickListener {
                 it.findNavController().navigate(R.id.action_assignment_to_grade)
             }
@@ -47,10 +50,10 @@ class AssignmentRecyclerViewAdapter : RecyclerView.Adapter<AssignmentRecyclerVie
         }
 
         companion object {
-            fun from(parent: ViewGroup): ViewHolder {
+            fun from(parent: ViewGroup, context: Context): ViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = FragmentAssignmentItemBinding.inflate(layoutInflater, parent, false)
-                return ViewHolder(binding)
+                return ViewHolder(binding, context)
             }
         }
     }
