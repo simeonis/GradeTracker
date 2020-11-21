@@ -1,10 +1,12 @@
 package sheridan.simeoni.gradetracker
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.Toolbar
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
@@ -25,6 +27,20 @@ class MainActivity : AppCompatActivity() {
             Navigation.findNavController(this, R.id.nav_host)
         val appBarConfiguration = AppBarConfiguration(navController.graph)
         toolbar.setupWithNavController(navController, appBarConfiguration)
+
+        val sharedPreferences : SharedPreferences = getSharedPreferences("My_Prefs", Context.MODE_PRIVATE)
+        if(!sharedPreferences.contains("theme")){
+            val editor = sharedPreferences.edit()
+            editor.putInt("theme", 0)
+            editor.apply()
+        }
+        val theme = sharedPreferences.getInt("theme", 1)
+        if (theme == 1) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        }
+        else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
