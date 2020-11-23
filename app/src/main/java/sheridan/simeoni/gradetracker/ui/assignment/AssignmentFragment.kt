@@ -9,9 +9,12 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import sheridan.simeoni.gradetracker.R
+import sheridan.simeoni.gradetracker.database.Assignment
 import sheridan.simeoni.gradetracker.databinding.FragmentAssignmentBinding
+import sheridan.simeoni.gradetracker.helper.DragManageAdapter
 import sheridan.simeoni.gradetracker.ui.course.CourseViewModel
 import sheridan.simeoni.gradetracker.ui.course.CourseViewModelFactory
 import sheridan.simeoni.gradetracker.ui.dialog.AssignmentDialog
@@ -29,16 +32,21 @@ class AssignmentFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentAssignmentBinding.inflate(inflater, container, false)
-        adapter = AssignmentRecyclerViewAdapter(requireContext())
+        adapter = AssignmentRecyclerViewAdapter(requireContext(), binding.root)
+
+        val callback = DragManageAdapter(adapter, ItemTouchHelper.UP.or(ItemTouchHelper.DOWN),
+                ItemTouchHelper.RIGHT)
+        val helper = ItemTouchHelper(callback)
 
         with(binding) {
             assignmentRecycler.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
             assignmentRecycler.adapter = adapter
             assignmentRecycler.layoutManager = LinearLayoutManager(context)
+            helper.attachToRecyclerView(assignmentRecycler)
         }
 
         activity?.title = safeArgs.keyEnvelope.title
-        viewModel.assignments.observe(viewLifecycleOwner) { adapter.assignments = it }
+        viewModel.assignments.observe(viewLifecycleOwner) { adapter.assignments = it as MutableList<Assignment>? }
 
         binding.assignmentAddButton.setOnClickListener { findNavController().navigate(R.id.action_assignment_to_assignmentDialog) }
 
@@ -50,7 +58,7 @@ class AssignmentFragment : Fragment() {
         }
         savedStateHandle?.getLiveData<Long>(ConfirmationDialog.CONFIRMATION_RESULT)?.observe(viewLifecycleOwner)
         {
-            viewModel.delete(it)
+            if (it >= 0) viewModel.delete(it) else adapter.notifyDataSetChanged()
         }
 
         return binding.root

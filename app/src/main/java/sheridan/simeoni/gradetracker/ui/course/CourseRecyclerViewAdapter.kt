@@ -2,6 +2,7 @@ package sheridan.simeoni.gradetracker.ui.course
 
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.navigation.findNavController
@@ -10,16 +11,35 @@ import sheridan.simeoni.gradetracker.R
 import sheridan.simeoni.gradetracker.database.Course
 import sheridan.simeoni.gradetracker.databinding.FragmentCourseItemBinding
 import sheridan.simeoni.gradetracker.databinding.FragmentTermItemBinding
+import sheridan.simeoni.gradetracker.helper.DragRecyclerView
 import sheridan.simeoni.gradetracker.model.*
 import sheridan.simeoni.gradetracker.ui.term.TermFragmentDirections
 
-class CourseRecyclerViewAdapter(private val context: Context) : RecyclerView.Adapter<CourseRecyclerViewAdapter.ViewHolder>() {
+class CourseRecyclerViewAdapter(private val context: Context, private val view: View) :
+        RecyclerView.Adapter<CourseRecyclerViewAdapter.ViewHolder>(),
+        DragRecyclerView {
 
-    var courses: List<Course>? = null
+    var courses: MutableList<Course>? = null
         set(value) {
             field = value
             notifyDataSetChanged()
         }
+
+    override fun swap(p1: Int, p2: Int) {
+        val temp = courses!![p1]
+        courses!!.remove(temp)
+        courses!!.add(p2, temp)
+        notifyItemMoved(p1, p2)
+    }
+
+    override fun delete(index: Int) {
+        val course = courses!![index]
+        val action = CourseFragmentDirections.actionCourseToDelete(course.id, course.courseName)
+        view.findNavController().navigate(action)
+    }
+
+    override fun update() {
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder.from(parent, context)
@@ -45,11 +65,6 @@ class CourseRecyclerViewAdapter(private val context: Context) : RecyclerView.Ada
             binding.root.setOnClickListener {
                 val action = CourseFragmentDirections.actionCourseToAssignment(KeyEnvelope(course.courseName, course.id))
                 it.findNavController().navigate(action)
-            }
-            binding.root.setOnLongClickListener {
-                val action = CourseFragmentDirections.actionCourseToDelete(course.id, course.courseName)
-                it.findNavController().navigate(action)
-                true
             }
             binding.executePendingBindings()
         }

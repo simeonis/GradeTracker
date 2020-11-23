@@ -2,20 +2,40 @@ package sheridan.simeoni.gradetracker.ui.assignment
 
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import sheridan.simeoni.gradetracker.R
 import sheridan.simeoni.gradetracker.database.Assignment
 import sheridan.simeoni.gradetracker.databinding.FragmentAssignmentItemBinding
+import sheridan.simeoni.gradetracker.helper.DragRecyclerView
 
-class AssignmentRecyclerViewAdapter(private val context: Context) : RecyclerView.Adapter<AssignmentRecyclerViewAdapter.ViewHolder>() {
+class AssignmentRecyclerViewAdapter(private val context: Context, private val view: View) :
+        RecyclerView.Adapter<AssignmentRecyclerViewAdapter.ViewHolder>(),
+        DragRecyclerView {
 
-    var assignments: List<Assignment>? = null
+    var assignments: MutableList<Assignment>? = null
         set(value) {
             field = value
             notifyDataSetChanged()
         }
+
+    override fun swap(p1: Int, p2: Int) {
+        val temp = assignments!![p1]
+        assignments!!.remove(temp)
+        assignments!!.add(p2, temp)
+        notifyItemMoved(p1, p2)
+    }
+
+    override fun delete(index: Int) {
+        val assignment = assignments!![index]
+        val action = AssignmentFragmentDirections.actionAssignmentToDelete(assignment.id, assignment.assignmentName)
+        view.findNavController().navigate(action)
+    }
+
+    override fun update() {
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder.from(parent, context)
@@ -40,11 +60,6 @@ class AssignmentRecyclerViewAdapter(private val context: Context) : RecyclerView
             binding.assignmentItemWeightLabel.text = context.getString(R.string.assignment_weight).plus(String.format("%.1f%%", assignment.weight))
             binding.root.setOnClickListener {
                 it.findNavController().navigate(R.id.action_assignment_to_grade)
-            }
-            binding.root.setOnLongClickListener {
-                val action = AssignmentFragmentDirections.actionAssignmentToDelete(assignment.id, assignment.assignmentName)
-                it.findNavController().navigate(action)
-                true
             }
             binding.executePendingBindings()
         }
