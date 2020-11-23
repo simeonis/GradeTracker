@@ -25,12 +25,17 @@ class ConfirmationDialog : DialogFragment() {
             setTitle("Delete Confirmation")
             setMessage(String.format("Are you sure you want to delete %s?", safeArgs.message))
             setPositiveButton(android.R.string.ok) { _, _ -> confirmed() }
-            setNegativeButton(android.R.string.cancel, null)
+            setNegativeButton(android.R.string.cancel) {_, _ -> declined() }
         }.create()
     }
 
     private fun confirmed() {
         val savedStateHandle = navController.previousBackStackEntry?.savedStateHandle
         savedStateHandle?.set(CONFIRMATION_RESULT, safeArgs.requestCode)
+    }
+
+    private fun declined() {
+        val savedStateHandle = navController.previousBackStackEntry?.savedStateHandle
+        savedStateHandle?.set(CONFIRMATION_RESULT, -1L)
     }
 }

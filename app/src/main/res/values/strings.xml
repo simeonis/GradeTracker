@@ -15,6 +15,7 @@
         Sheridan College, 2020</string>
 
     <!-- Shared -->
+    <string name="grade">Grade:\u0020</string>
     <string name="delete">Delete</string>
     <string name="next">Next</string>
     <string name="add">Add</string>
@@ -34,6 +35,8 @@
     <string name="term_name_hint">Term Name</string>
     <string name="enter_term">Enter Term</string>
     <string name="add_term">Add Term</string>
+    <string name="term_average">Average:\u0020</string>
+    <string name="term_progress">Progress:\u0020</string>
 
     <!-- Course Fragment -->
     <string name="add_course">Add Course</string>
@@ -43,6 +46,7 @@
     <string name="course_code_hint">Course Code</string>
     <string name="enter_target_grade">Enter Target Grade</string>
     <string name="target_grade_hint">Target Grade</string>
+    <string name="course_target">Target:\u0020</string>
 
     <!-- Assignment Fragment -->
     <string name="total_points">Total Points</string>
@@ -52,6 +56,7 @@
     <string name="grade_points_hint">Maximum Grade</string>
     <string name="grade_weight_hint">Grade Weight (%)</string>
     <string name="add_assignment">Add Assignment</string>
+    <string name="assignment_weight">Weight:\u0020</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
