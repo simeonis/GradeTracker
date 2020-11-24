@@ -37,7 +37,6 @@ class SettingsFragment : Fragment() {
                 binding.settingsNightmodeIcon.setImageResource(R.drawable.ic_sun)
                 AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_NO)
                 editor.putInt("theme", 0)
-
             }
             editor.apply()
         }
