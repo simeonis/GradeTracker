@@ -14,8 +14,8 @@
 
 
         <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
+            android:id="@+id/dialog_assignment_title_label"
+            android:layout_width="400dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:fontFamily="casual"
@@ -45,7 +45,7 @@
             app:layout_constraintEnd_toStartOf="@+id/guideline3"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView"
+            app:layout_constraintTop_toBottomOf="@+id/dialog_assignment_title_label"
             tools:ignore="RtlHardcoded,RtlSymmetry" />
 
         <EditText
@@ -151,7 +151,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_end="167dp" />
+            app:layout_constraintGuide_end="173dp" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
