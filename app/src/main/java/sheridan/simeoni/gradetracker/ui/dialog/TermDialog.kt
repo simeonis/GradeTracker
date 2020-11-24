@@ -1,12 +1,16 @@
 package sheridan.simeoni.gradetracker.ui.dialog
 
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
+import sheridan.simeoni.gradetracker.R
 import sheridan.simeoni.gradetracker.ui.term.TermViewModel
 import sheridan.simeoni.gradetracker.databinding.DialogTermBinding
 
@@ -18,6 +22,11 @@ class TermDialog : DialogFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         binding = DialogTermBinding.inflate(inflater, container, false)
+
+        getDialog()?.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getDialog()?.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
+        getDialog()?.getWindow()?.setDimAmount(0.5f);
+
 
         binding.doneButton.setOnClickListener { submit() }
         binding.cancelButton.setOnClickListener { dismiss() }

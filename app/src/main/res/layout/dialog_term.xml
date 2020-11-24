@@ -7,15 +7,21 @@
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:outlineProvider="bounds"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/textView2"
-            android:layout_width="412dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="casual"
             android:gravity="center"
@@ -25,16 +31,17 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.46"
+            app:layout_constraintHorizontal_bias="0.502"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.023" />
+            app:layout_constraintVertical_bias="0.059" />
 
         <TextView
             android:id="@+id/dialog_term_name_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="52dp"
+            android:layout_marginStart="44dp"
+            android:layout_marginTop="16dp"
             android:layout_weight="1"
             android:fontFamily="casual"
             android:gravity="center_horizontal|center_vertical"
@@ -42,15 +49,15 @@
             android:textAppearance="@style/Theme.GradeTracker.Text.Style2"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/guideline"
-            app:layout_constraintHorizontal_bias="0.552"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView2"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintVertical_bias="0.15" />
 
         <EditText
             android:id="@+id/dialog_term_name_input"
             android:layout_width="150dp"
             android:layout_height="50dp"
+            android:layout_marginEnd="44dp"
             android:layout_weight="1"
             android:autofillHints="Term "
             android:fontFamily="casual"
@@ -58,54 +65,51 @@
             android:inputType="text"
             app:layout_constraintBottom_toBottomOf="@+id/dialog_term_name_label"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.097"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="@+id/guideline"
             app:layout_constraintTop_toTopOf="@+id/dialog_term_name_label" />
+
+        <Button
+            android:id="@+id/done_Button"
+            android:layout_width="90dp"
+            android:layout_height="35dp"
+            android:background="@drawable/dialog_button_background"
+            android:backgroundTint="#00FFFFFF"
+            android:text="@string/ok"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/cancel_Button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.147"
+            app:layout_constraintStart_toStartOf="@+id/guideline"
+            app:layout_constraintTop_toTopOf="@+id/cancel_Button"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <Button
+            android:id="@+id/cancel_Button"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/dialog_button_background"
+            android:backgroundTint="#00FFFFFF"
+            android:text="@string/cancel"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/guideline"
+            app:layout_constraintHorizontal_bias="0.769"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/dialog_term_name_label"
+            app:layout_constraintVertical_bias="0.0" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_begin="205dp" />
+            app:layout_constraintGuide_begin="191dp" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:background="#2D2E30"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/dialog_term_name_label"
-            app:layout_constraintVertical_bias="0.088"
-            tools:layout_editor_absoluteX="0dp">
 
-            <Button
-                android:id="@+id/cancel_Button"
-                android:layout_width="90dp"
-                android:layout_height="wrap_content"
-                android:background="@drawable/dialog_button_background"
-                android:text="Cancel"
-                android:textSize="12sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.697"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <Button
-                android:id="@+id/done_Button"
-                android:layout_width="70dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:background="@drawable/dialog_button_background"
-                android:text="OK"
-                android:textSize="12sp"
-                app:layout_constraintStart_toEndOf="@+id/cancel_Button"
-                app:layout_constraintTop_toTopOf="@+id/cancel_Button" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </layout>
