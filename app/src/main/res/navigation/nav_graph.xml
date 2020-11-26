@@ -32,6 +32,9 @@
         <action
             android:id="@+id/action_term_to_delete"
             app:destination="@id/confirmationDialog" />
+        <action
+            android:id="@+id/action_term_to_termDialog"
+            app:destination="@id/termDialog" />
     </fragment>
     <fragment
         android:id="@+id/courseFragment"
@@ -91,6 +94,11 @@
             app:argType="string" />
     </dialog>
     <dialog
+        android:id="@+id/termDialog"
+        android:name="sheridan.simeoni.gradetracker.ui.dialog.TermDialog"
+        android:label="TermDialog"
+        tools:layout="@layout/dialog_term"/>
+    <dialog
         android:id="@+id/courseDialog"
         android:name="sheridan.simeoni.gradetracker.ui.dialog.CourseDialog"
         android:label="CourseDialog"
@@ -98,7 +106,8 @@
     <dialog
         android:id="@+id/assignmentDialog"
         android:name="sheridan.simeoni.gradetracker.ui.dialog.AssignmentDialog"
-        android:label="AssignmentDialog" />
+        android:label="AssignmentDialog"
+        tools:layout="@layout/dialog_assignment"/>
     <fragment
         android:id="@+id/dataFragment"
         android:name="sheridan.simeoni.gradetracker.ui.DataFragment"

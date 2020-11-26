@@ -22,12 +22,12 @@
 
     <style name="Theme.GradeTracker.ToolBar" parent="Theme.AppCompat">
         <item name="android:textColorPrimary">#FFFFFF</item>
-        <item name="android:background">#A8D883</item>
+        <item name="android:background">#72AD55</item>
     </style>
 
     <style name="Theme.GradeTracker.PopupOverlay" parent="ThemeOverlay.AppCompat.Light">
         <item name="android:textColorPrimary">#FFFFFF</item>
-        <item name="android:background">#A8D883</item>
+        <item name="android:background">#72AD55</item>
     </style>
 
     <style name="Theme.GradeTracker.Dialog" parent="Theme.AppCompat.Light.Dialog.Alert">
@@ -47,8 +47,8 @@
     </style>
 
     <style name="Theme.GradeTracker.Text.Style2" parent="TextAppearance.AppCompat.Large">
-        <item name="android:textColor">#303030</item>
-        <item name="android:textColorPrimary">#303030</item>
+        <item name="android:textColor">#595858</item>
+        <item name="android:textColorPrimary">#595858</item>
     </style>
 
     <style name="Theme.GradeTracker.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
