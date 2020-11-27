@@ -1,18 +1,11 @@
 package sheridan.simeoni.gradetracker.ui.term
 
 import android.content.Context
-import android.graphics.Color
-import android.provider.Settings.Global.getString
-import android.provider.Settings.Secure.getString
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.MotionEventCompat
-import androidx.fragment.app.viewModels
+import androidx.core.view.get
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import sheridan.simeoni.gradetracker.R
 import sheridan.simeoni.gradetracker.database.Term
@@ -20,7 +13,10 @@ import sheridan.simeoni.gradetracker.databinding.FragmentTermItemBinding
 import sheridan.simeoni.gradetracker.model.*
 import sheridan.simeoni.gradetracker.helper.DragRecyclerView
 
-class TermRecyclerViewAdapter(private val context: Context, private val view: View) :
+class TermRecyclerViewAdapter(
+        private val context: Context,
+        private val view: View,
+        private val viewModel: TermViewModel) :
         RecyclerView.Adapter<TermRecyclerViewAdapter.ViewHolder>(),
         DragRecyclerView {
 
@@ -31,19 +27,23 @@ class TermRecyclerViewAdapter(private val context: Context, private val view: Vi
         }
 
     override fun swap(p1: Int, p2: Int) {
-        val temp = terms!![p1]
-        terms!!.remove(temp)
-        terms!!.add(p2, temp)
+        terms!![p1].position = p2
+        terms!![p2].position = p1
+
+        val term1 = terms!![p1]
+        terms!!.remove(term1)
+        terms!!.add(p2, term1)
         notifyItemMoved(p1, p2)
     }
 
-    override fun delete(index: Int) {
-        val term = terms!![index]
+    override fun delete(position: Int) {
+        val term = terms!![position]
         val action = TermFragmentDirections.actionTermToDelete(term.id, term.termName)
         view.findNavController().navigate(action)
     }
 
     override fun update() {
+        viewModel.update(terms!!)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

@@ -6,66 +6,78 @@
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingHorizontal="16dp"
-        android:paddingBottom="8dp">
+        android:layout_margin="10dp"
+        android:theme="@style/Theme.GradeTracker.CardView"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="10dp">
 
-        <TextView
-            android:id="@+id/term_item_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/baloo"
-            android:gravity="center_vertical"
-            android:textAppearance="@style/Theme.GradeTracker.Text.Style1"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="Term 1" />
-
-        <ProgressBar
-            android:id="@+id/term_progress_bar"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:progressTint="#47b27c"
-            android:scaleY="3"
-            app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/term_item_label"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <LinearLayout
-            android:id="@+id/linearLayout2"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/term_item_label">
+            android:layout_height="match_parent"
+            android:paddingHorizontal="16dp"
+            android:paddingBottom="8dp">
 
             <TextView
-                android:id="@+id/term_percent_label"
+                android:id="@+id/term_item_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:fontFamily="@font/patrickhand"
-                android:textAppearance="@style/Theme.GradeTracker.Text.Style2"
-                android:textSize="28sp"
-                tools:text="Average: 100%" />
+                android:fontFamily="@font/baloo"
+                android:gravity="center_vertical"
+                android:textAppearance="@style/Theme.GradeTracker.Text.Style1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Term 1" />
 
-            <TextView
-                android:id="@+id/term_progress_label"
-                android:layout_width="wrap_content"
+            <ProgressBar
+                android:id="@+id/term_progress_bar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:fontFamily="@font/patrickhand"
-                android:textAlignment="textEnd"
-                android:textAppearance="@style/Theme.GradeTracker.Text.Style2"
-                android:textSize="28sp"
-                tools:text="Progress: 100%" />
-        </LinearLayout>
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="16dp"
+                android:progressTint="#47b27c"
+                android:scaleY="3"
+                app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/term_item_label"
+                app:layout_constraintTop_toTopOf="@+id/term_item_label" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <LinearLayout
+                android:id="@+id/linearLayout2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/term_item_label">
+
+                <TextView
+                    android:id="@+id/term_percent_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/patrickhand"
+                    android:textAppearance="@style/Theme.GradeTracker.Text.Style2"
+                    android:textSize="28sp"
+                    tools:text="Average: 100%" />
+
+                <TextView
+                    android:id="@+id/term_progress_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/patrickhand"
+                    android:textAlignment="textEnd"
+                    android:textAppearance="@style/Theme.GradeTracker.Text.Style2"
+                    android:textSize="28sp"
+                    tools:text="Progress: 100%" />
+
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
 </layout>

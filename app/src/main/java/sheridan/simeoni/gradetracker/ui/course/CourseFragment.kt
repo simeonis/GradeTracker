@@ -41,7 +41,6 @@ class CourseFragment : Fragment() {
         val helper = ItemTouchHelper(callback)
 
         with(binding) {
-            courseRecycler.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
             courseRecycler.adapter = adapter
             courseRecycler.layoutManager = LinearLayoutManager(context)
             helper.attachToRecyclerView(courseRecycler)

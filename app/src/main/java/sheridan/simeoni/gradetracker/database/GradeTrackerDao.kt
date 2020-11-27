@@ -18,7 +18,7 @@ interface GradeTrackerDao {
     @Insert
     suspend fun insert(assignment: Assignment)
 
-    @Query("SELECT * FROM Term ORDER BY TermID")
+    @Query("SELECT * FROM Term ORDER BY Position")
     fun getAllTerms() : LiveData<List<Term>>
 
     @Query("SELECT * FROM Term WHERE TermID=:key")
@@ -28,7 +28,7 @@ interface GradeTrackerDao {
     fun getAllCourses(key: Long) : LiveData<List<Course>>
 
     @Query("SELECT * FROM Assignment WHERE CourseID=:key")
-    fun getAllAssignments(key: Long) : LiveData<List<Assignment>>
+    fun getAllAssignments(key : Long) : LiveData<List<Assignment>>
 
     @Query("DELETE FROM Term WHERE TermID=:key")
     suspend fun deleteTerm(key: Long)
@@ -43,6 +43,16 @@ interface GradeTrackerDao {
     suspend fun deleteAll()
 
     @Update(entity = Term::class)
+    suspend fun updateTerms(terms: List<Term>)
+
+    @Update(entity = Course::class)
+    suspend fun updateCourses(courses: List<Course>)
+
+    @Update(entity = Assignment::class)
+    suspend fun updateAssignments(assignments: List<Assignment>)
+
+    @Query("SELECT COUNT(TermID) FROM Term")
+    suspend fun getRowCount(): Int
     suspend fun updateAll(terms: List<Term>)
 
     @Query("SELECT * FROM Assignment WHERE CourseID=:key")

@@ -11,6 +11,9 @@ data class Term(
     @ColumnInfo(name = "TermID")
     var id: Long,
 
+    @ColumnInfo(name = "Position")
+    var position: Int,
+
     @ColumnInfo(name = "TermName")
     val termName: String,
 
