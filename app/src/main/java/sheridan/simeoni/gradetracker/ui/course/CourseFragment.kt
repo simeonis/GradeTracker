@@ -57,10 +57,12 @@ class CourseFragment : Fragment() {
         savedStateHandle?.getLiveData<CourseDialogData>(CourseDialog.CONFIRMATION_RESULT)?.observe(viewLifecycleOwner)
         {
             if (it != null) viewModel.add(it.name, it.targetGrade)
+            viewModel.updateTerm()
         }
         savedStateHandle?.getLiveData<Long>(ConfirmationDialog.CONFIRMATION_RESULT)?.observe(viewLifecycleOwner)
         {
             if (it >= 0) viewModel.delete(it) else adapter.notifyDataSetChanged()
+            viewModel.updateTerm()
         }
 
         return binding.root

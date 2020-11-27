@@ -13,7 +13,6 @@ class GradeCalculator {
             for (item in list){
                val weightedGrade =  item.grade * item.weight
                 totalGrade += weightedGrade
-                Log.d("Grade",item.grade.toString() + item.weight.toString()  )
             }
             return totalGrade
         }
@@ -23,7 +22,12 @@ class GradeCalculator {
             for(item in list){
                     total += item.grade // or times item.credit_weight
             }
-            return total / list.size
+            if(list.size != 0){
+                return total / list.size
+            }
+            else{
+                return -1
+            }
         }
 
         //Progress
@@ -35,7 +39,12 @@ class GradeCalculator {
                     completedCount += 1
                 }
             }
-            return completedCount / list.size
+            if(list.size != 0){
+                return completedCount / list.size
+            }
+            else{
+                return -1
+            }
         }
 
         //GPA

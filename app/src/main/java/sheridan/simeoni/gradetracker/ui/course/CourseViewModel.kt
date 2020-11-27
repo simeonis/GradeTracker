@@ -11,6 +11,7 @@ import sheridan.simeoni.gradetracker.database.Course
 import sheridan.simeoni.gradetracker.database.GradeTrackerDao
 import sheridan.simeoni.gradetracker.database.GradeTrackerDatabase
 import sheridan.simeoni.gradetracker.database.Term
+import sheridan.simeoni.gradetracker.model.GradeCalculator
 import sheridan.simeoni.gradetracker.model.KeyEnvelope
 import java.security.Key
 
@@ -29,6 +30,18 @@ class CourseViewModel(envelopeKey: Long, application: Application) : AndroidView
     fun delete (courseID: Long) {
         viewModelScope.launch {
             gradeTrackerDao.deleteCourse(courseID)
+        }
+    }
+
+    fun updateTerm(){
+        viewModelScope.launch {
+            val course = gradeTrackerDao.getCourseInfo(_envelopeKey)
+            var average = -1
+            if(course != null){
+                average = GradeCalculator.term_avg(course)
+            }
+            //val progress = GradeCalculator.course_progress(course)
+            gradeTrackerDao.updateTerm(_envelopeKey,average, 50)
         }
     }
 }
