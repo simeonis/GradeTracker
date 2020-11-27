@@ -4,16 +4,13 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import sheridan.simeoni.gradetracker.R
 import sheridan.simeoni.gradetracker.database.Course
 import sheridan.simeoni.gradetracker.databinding.FragmentCourseItemBinding
-import sheridan.simeoni.gradetracker.databinding.FragmentTermItemBinding
 import sheridan.simeoni.gradetracker.helper.DragRecyclerView
 import sheridan.simeoni.gradetracker.model.*
-import sheridan.simeoni.gradetracker.ui.term.TermFragmentDirections
 
 class CourseRecyclerViewAdapter(private val context: Context, private val view: View) :
         RecyclerView.Adapter<CourseRecyclerViewAdapter.ViewHolder>(),

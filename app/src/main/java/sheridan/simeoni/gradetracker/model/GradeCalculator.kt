@@ -1,5 +1,6 @@
 package sheridan.simeoni.gradetracker.model
 
+import android.util.Log
 import sheridan.simeoni.gradetracker.database.Assignment
 import sheridan.simeoni.gradetracker.database.Course
 
@@ -12,6 +13,7 @@ class GradeCalculator {
             for (item in list){
                val weightedGrade =  item.grade * item.weight
                 totalGrade += weightedGrade
+                Log.d("Grade",item.grade.toString() + item.weight.toString()  )
             }
             return totalGrade
         }

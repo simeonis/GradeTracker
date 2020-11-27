@@ -8,6 +8,7 @@ import kotlinx.coroutines.launch
 import sheridan.simeoni.gradetracker.database.Assignment
 import sheridan.simeoni.gradetracker.database.GradeTrackerDao
 import sheridan.simeoni.gradetracker.database.GradeTrackerDatabase
+import sheridan.simeoni.gradetracker.model.GradeCalculator
 
 class AssignmentViewModel(envelopeKey: Long, application: Application) : AndroidViewModel(application) {
     private val gradeTrackerDao : GradeTrackerDao = GradeTrackerDatabase.getInstance(application).gradeTrackerDao
@@ -18,12 +19,21 @@ class AssignmentViewModel(envelopeKey: Long, application: Application) : Android
     fun add (assignmentName: String, grade: Int, gradeTotal: Int, targetGrade: Int, weight: Float){
         viewModelScope.launch {
             gradeTrackerDao.insert(Assignment(0, _envelopeKey, assignmentName, grade, gradeTotal, targetGrade, weight))
+
         }
     }
 
     fun delete (assignmentID: Long) {
         viewModelScope.launch {
             gradeTrackerDao.deleteAssignment(assignmentID)
+        }
+    }
+
+    fun updateCourseGrade(){
+        viewModelScope.launch {
+            val allAssigments = gradeTrackerDao.getGradesInCourse(_envelopeKey)
+            val totalGrade = GradeCalculator.calcGrade(allAssigments)
+            gradeTrackerDao.updateCourseGrade(_envelopeKey, totalGrade.toInt())
         }
     }
 }

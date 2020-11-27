@@ -55,10 +55,12 @@ class AssignmentFragment : Fragment() {
         savedStateHandle?.getLiveData<AssignmentDialog.AssignmentDialogData>(AssignmentDialog.CONFIRMATION_ASSIGNMENT_RESULT)?.observe(viewLifecycleOwner)
         {
             if (it != null) viewModel.add(it.name,-1, it.assignmentGrade, -1, it.assignmentWeight)
+            viewModel.updateCourseGrade()
         }
         savedStateHandle?.getLiveData<Long>(ConfirmationDialog.CONFIRMATION_RESULT)?.observe(viewLifecycleOwner)
         {
             if (it >= 0) viewModel.delete(it) else adapter.notifyDataSetChanged()
+            viewModel.updateCourseGrade()
         }
 
         return binding.root

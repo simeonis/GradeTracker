@@ -1,7 +1,10 @@
 package sheridan.simeoni.gradetracker.database
 
 import androidx.lifecycle.LiveData
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.Query
+import androidx.room.Update
 
 @Dao
 interface GradeTrackerDao {
@@ -19,13 +22,13 @@ interface GradeTrackerDao {
     fun getAllTerms() : LiveData<List<Term>>
 
     @Query("SELECT * FROM Term WHERE TermID=:key")
-    fun get(key : Long) : LiveData<Term>
+    fun get(key: Long) : LiveData<Term>
 
     @Query("SELECT * FROM Course WHERE TermID=:key")
-    fun getAllCourses(key : Long) : LiveData<List<Course>>
+    fun getAllCourses(key: Long) : LiveData<List<Course>>
 
     @Query("SELECT * FROM Assignment WHERE CourseID=:key")
-    fun getAllAssignments(key : Long) : LiveData<List<Assignment>>
+    fun getAllAssignments(key: Long) : LiveData<List<Assignment>>
 
     @Query("DELETE FROM Term WHERE TermID=:key")
     suspend fun deleteTerm(key: Long)
@@ -41,4 +44,11 @@ interface GradeTrackerDao {
 
     @Update(entity = Term::class)
     suspend fun updateAll(terms: List<Term>)
+
+    @Query("SELECT * FROM Assignment WHERE CourseID=:key")
+    suspend fun getGradesInCourse(key: Long): List<Assignment>
+
+    @Query("UPDATE Course SET CourseGrade = :grade WHERE CourseID = :key")
+    suspend fun updateCourseGrade(key: Long, grade: Int): Int
+
 }
