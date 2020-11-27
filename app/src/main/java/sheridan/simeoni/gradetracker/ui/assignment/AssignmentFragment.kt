@@ -39,7 +39,6 @@ class AssignmentFragment : Fragment() {
         val helper = ItemTouchHelper(callback)
 
         with(binding) {
-            assignmentRecycler.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
             assignmentRecycler.adapter = adapter
             assignmentRecycler.layoutManager = LinearLayoutManager(context)
             helper.attachToRecyclerView(assignmentRecycler)

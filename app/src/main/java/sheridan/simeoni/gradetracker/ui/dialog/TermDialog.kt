@@ -7,8 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
-import sheridan.simeoni.gradetracker.ui.term.TermViewModel
 import sheridan.simeoni.gradetracker.databinding.DialogTermBinding
+import sheridan.simeoni.gradetracker.ui.term.TermViewModel
 
 class TermDialog : DialogFragment() {
 
@@ -29,7 +29,7 @@ class TermDialog : DialogFragment() {
         if(termName.isEmpty()){
             binding.dialogTermNameInput.error = "required"
         }
-        else{
+        else {
             termViewModel.add(termName)
             dismiss()
         }

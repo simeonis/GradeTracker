@@ -6,51 +6,63 @@
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingHorizontal="16dp"
-        android:paddingBottom="8dp">
+        android:layout_margin="10dp"
+        android:theme="@style/Theme.GradeTracker.CardView"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="10dp">
 
-        <TextView
-            android:id="@+id/course_item_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/baloo"
-            android:gravity="center_vertical"
-            android:textAppearance="@style/Theme.GradeTracker.Text.Style1"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="PROG20082" />
-
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/course_item_label">
+            android:layout_height="match_parent"
+            android:paddingHorizontal="16dp"
+            android:paddingBottom="8dp">
 
             <TextView
-                android:id="@+id/course_grade_label"
+                android:id="@+id/course_item_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:fontFamily="@font/patrickhand"
-                android:textAppearance="@style/Theme.GradeTracker.Text.Style2"
-                android:textSize="28sp"
-                tools:text="Grade: 100%" />
+                android:background="#FFFFFF"
+                android:fontFamily="@font/baloo"
+                android:gravity="center_vertical"
+                android:textAppearance="@style/Theme.GradeTracker.Text.Style1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="PROG20082" />
 
-            <TextView
-                android:id="@+id/course_grade_target_label"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:fontFamily="@font/patrickhand"
-                android:textAlignment="textEnd"
-                android:textAppearance="@style/Theme.GradeTracker.Text.Style2"
-                android:textSize="28sp"
-                tools:text="Target: 100%" />
-        </LinearLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/course_item_label">
+
+                <TextView
+                    android:id="@+id/course_grade_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="#FFFFFF"
+                    android:fontFamily="@font/patrickhand"
+                    android:textAppearance="@style/Theme.GradeTracker.Text.Style2"
+                    android:textSize="28sp"
+                    tools:text="Grade: 100%" />
+
+                <TextView
+                    android:id="@+id/course_grade_target_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="#FFFFFF"
+                    android:fontFamily="@font/patrickhand"
+                    android:textAlignment="textEnd"
+                    android:textAppearance="@style/Theme.GradeTracker.Text.Style2"
+                    android:textSize="28sp"
+                    tools:text="Target: 100%" />
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
 </layout>

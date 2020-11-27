@@ -10,6 +10,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/ic_sky_light"
         android:orientation="vertical"
         tools:context=".ui.StartFragment">
 
@@ -20,6 +21,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="128dp"
             android:autoSizeTextType="uniform"
+            android:background="@android:color/transparent"
             android:fontFamily="@font/baloo"
             android:gravity="center"
             android:text="@string/grade_tracker"
@@ -46,12 +48,14 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
-            android:backgroundTint="#FFFFFF"
+            android:backgroundTint="@color/white"
+            app:tint="@color/black"
             android:clickable="true"
             app:borderWidth="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:srcCompat="@android:drawable/ic_menu_send" />
+            app:srcCompat="@android:drawable/ic_menu_send"
+            android:contentDescription="@string/next" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

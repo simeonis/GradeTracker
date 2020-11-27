@@ -16,7 +16,6 @@ import sheridan.simeoni.gradetracker.database.Term
 import sheridan.simeoni.gradetracker.databinding.FragmentTermBinding
 import sheridan.simeoni.gradetracker.helper.DragManageAdapter
 import sheridan.simeoni.gradetracker.ui.dialog.ConfirmationDialog.Companion.CONFIRMATION_RESULT
-import sheridan.simeoni.gradetracker.ui.dialog.TermDialog
 
 class TermFragment : Fragment() {
 
@@ -27,7 +26,7 @@ class TermFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentTermBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = this
-        adapter = TermRecyclerViewAdapter(requireContext(), binding.root)
+        adapter = TermRecyclerViewAdapter(requireContext(), binding.root, viewModel)
         (activity as AppCompatActivity).supportActionBar?.show()
 
         val callback = DragManageAdapter(adapter, ItemTouchHelper.UP.or(ItemTouchHelper.DOWN),
@@ -35,7 +34,6 @@ class TermFragment : Fragment() {
         val helper = ItemTouchHelper(callback)
 
         with(binding) {
-            termRecycler.addItemDecoration(DividerItemDecoration(context,DividerItemDecoration.VERTICAL))
             termRecycler.adapter = adapter
             termRecycler.layoutManager = LinearLayoutManager(context)
             helper.attachToRecyclerView(termRecycler)
@@ -52,5 +50,9 @@ class TermFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    fun test() {
+
     }
 }
