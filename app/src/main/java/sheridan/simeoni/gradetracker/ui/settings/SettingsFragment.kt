@@ -1,5 +1,7 @@
 package sheridan.simeoni.gradetracker.ui.settings
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -21,16 +23,22 @@ class SettingsFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentSettingsBinding.inflate(inflater, container, false)
 
+        val sharedPreferences : SharedPreferences = requireActivity().getSharedPreferences("My_Prefs", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+
         binding.settingsNightmodeSwitch.setOnCheckedChangeListener {
                 _, isChecked ->
             if (isChecked) {
                 binding.settingsNightmodeIcon.setImageResource(R.drawable.ic_moon)
                 AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_YES)
+                editor.putInt("theme", 1)
             }
             else {
                 binding.settingsNightmodeIcon.setImageResource(R.drawable.ic_sun)
                 AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_NO)
+                editor.putInt("theme", 0)
             }
+            editor.apply()
         }
 
         binding.settingsResetButton.setOnClickListener { deleteAll() }
