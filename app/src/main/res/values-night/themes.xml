@@ -11,8 +11,7 @@
         <item name="colorOnSecondary">@color/white</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">#2D2E30</item>
-        <!-- Customize your theme here. -->
-        <item name="android:background">#042339</item>
+
     </style>
 
     <style name="Theme.GradeTracker.NoActionBar">
@@ -24,11 +23,13 @@
         <item name="android:textColorPrimary">#E8EDF1</item>
         <item name="android:textColorSecondary">#E8EDF1</item>
         <item name="android:fontFamily">@font/baloo</item>
+        <item name="android:background">#042339</item>
     </style>
 
     <style name="Theme.GradeTracker.PopupOverlay" parent="ThemeOverlay.AppCompat">
         <item name="android:textColorPrimary">#E8EDF1</item>
         <item name="android:fontFamily">@font/baloo</item>
+        <item name="android:background">#042339</item>
     </style>
 
     <style name="Theme.GradeTracker.Dialog" parent="Theme.AppCompat.Light.Dialog.Alert">
@@ -46,6 +47,15 @@
         <item name="android:backgroundTint">#3C3F49</item>
     </style>
 
+    <style name="Theme.GradeTracker.InnerCardView" parent="Widget.MaterialComponents.CardView">
+        <item name="android:backgroundTint">#FFFFFF</item>
+        <item name="android:textColor">#000000</item>
+    </style>
+
+    <style name="Theme.GradeTracker.input" parent="Widget.MaterialComponents.CardView">
+        <item name="android:textColorHint">#000000</item>
+    </style>
+
     <style name="Theme.GradeTracker.Text.Style1" parent="TextAppearance.AppCompat.Display1">
         <item name="android:textColor">#7289DA</item>
         <item name="android:textColorPrimary">#7289DA</item>
@@ -54,6 +64,10 @@
     <style name="Theme.GradeTracker.Text.Style2" parent="TextAppearance.AppCompat.Large">
         <item name="android:textColor">#E8EDF1</item>
         <item name="android:textColorPrimary">#E8EDF1</item>
+    </style>
+
+    <style name="Theme.GradeTracker.Background">
+        <item name="android:background">#042339</item>
     </style>
 
 </resources>

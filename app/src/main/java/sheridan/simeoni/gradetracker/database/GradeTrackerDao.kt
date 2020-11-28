@@ -53,7 +53,6 @@ interface GradeTrackerDao {
 
     @Query("SELECT COUNT(TermID) FROM Term")
     suspend fun getRowCount(): Int
-    suspend fun updateAll(terms: List<Term>)
 
     @Query("SELECT * FROM Assignment WHERE CourseID=:key")
     suspend fun getGradesInCourse(key: Long): List<Assignment>
