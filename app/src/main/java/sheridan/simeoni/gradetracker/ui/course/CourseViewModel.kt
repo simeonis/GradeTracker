@@ -33,15 +33,18 @@ class CourseViewModel(envelopeKey: Long, application: Application) : AndroidView
         }
     }
 
-    fun updateTerm(){
+
+    fun updateCourses(){
         viewModelScope.launch {
-            val course = gradeTrackerDao.getCourseInfo(_envelopeKey)
-            var average = -1
-            if(course != null){
-                average = GradeCalculator.term_avg(course)
+            val courses = gradeTrackerDao.getAllCoursesList()
+            for(course in courses) {
+                val allAssigments = gradeTrackerDao.getGradesInCourse(course.id)
+                val totalGrade = GradeCalculator.calcGrade(allAssigments)
+                gradeTrackerDao.updateCourseGrade(course.id, totalGrade.toInt())
             }
-            //val progress = GradeCalculator.course_progress(course)
-            gradeTrackerDao.updateTerm(_envelopeKey,average, 50)
         }
     }
+
+
+
 }

@@ -29,11 +29,5 @@ class AssignmentViewModel(envelopeKey: Long, application: Application) : Android
         }
     }
 
-    fun updateCourseGrade(){
-        viewModelScope.launch {
-            val allAssigments = gradeTrackerDao.getGradesInCourse(_envelopeKey)
-            val totalGrade = GradeCalculator.calcGrade(allAssigments)
-            gradeTrackerDao.updateCourseGrade(_envelopeKey, totalGrade.toInt())
-        }
-    }
+
 }

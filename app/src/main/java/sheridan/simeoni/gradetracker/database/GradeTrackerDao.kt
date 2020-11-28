@@ -66,4 +66,11 @@ interface GradeTrackerDao {
     @Query("UPDATE Term SET Average = :avg, Progress = :currentProgress WHERE TermID = :key")
     suspend fun updateTerm(key: Long, avg: Int, currentProgress: Int): Int
 
+    @Query("SELECT * FROM Term ORDER BY TermID")
+    suspend fun getAllTermsList() : List<Term>
+
+    @Query("SELECT * FROM Course ORDER BY CourseID")
+    suspend fun getAllCoursesList() : List<Course>
+
+
 }
