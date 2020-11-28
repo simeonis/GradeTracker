@@ -1,7 +1,224 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.grade.GradeFragment"/>
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:elevation="6dp"
+        tools:context=".ui.grade.GradeFragment">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:theme="@style/Theme.GradeTracker.CardView"
+            app:cardCornerRadius="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ProgressBar
+                    android:id="@+id/grade_total_progress"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@android:color/transparent"
+                    android:indeterminateOnly="false"
+                    android:progress="96"
+                    android:progressDrawable="@drawable/circular_progress"
+                    android:scaleX="1.5"
+                    android:scaleY="1.5"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.496"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/grade_due_label" />
+
+                <TextView
+                    android:id="@+id/grade_total_number_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:background="@android:color/transparent"
+                    android:fontFamily="@font/patrickhand"
+                    android:textAppearance="@style/Theme.GradeTracker.Text.Style2"
+                    android:textSize="60sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/grade_total_progress"
+                    app:layout_constraintEnd_toEndOf="@+id/grade_total_progress"
+                    app:layout_constraintStart_toStartOf="@+id/grade_total_progress"
+                    app:layout_constraintTop_toTopOf="@+id/grade_total_progress"
+                    tools:text="96.5%" />
+
+                <TextView
+                    android:id="@+id/grade_total_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:fontFamily="@font/patrickhand"
+                    android:text="@string/total_grade"
+                    android:textAppearance="@style/Theme.GradeTracker.Text.Style2"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toTopOf="@+id/grade_total_number_label"
+                    app:layout_constraintEnd_toEndOf="@+id/grade_total_progress"
+                    app:layout_constraintHorizontal_bias="0.502"
+                    app:layout_constraintStart_toStartOf="@+id/grade_total_progress" />
+
+                <TextView
+                    android:id="@+id/grade_due_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="8dp"
+                    android:background="@android:color/transparent"
+                    android:fontFamily="@font/baloo"
+                    android:text="@string/days_until_due"
+                    android:textAppearance="@style/Theme.GradeTracker.Text.Style1"
+                    android:textSize="30sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/grade_possible_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:background="@android:color/transparent"
+                    android:text="@string/possible_grades"
+                    android:textAppearance="@style/Theme.GradeTracker.Text.Style2"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/grade_seekBar"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/grade_total_progress" />
+
+                <SeekBar
+                    android:id="@+id/grade_seekBar"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:background="@android:color/transparent"
+                    android:max="100"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/guideline13"
+                    app:layout_constraintTop_toBottomOf="@+id/grade_total_progress" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline13"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_begin="189dp" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/grade_requirement_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/patrickhand"
+            android:gravity="center"
+            android:padding="16dp"
+            android:text="@string/minimum_requirement"
+            android:textAppearance="@style/Theme.GradeTracker.Text.Style1"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardView2" />
+
+        <TextView
+            android:id="@+id/grade_fraction_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/patrickhand"
+            android:textAppearance="@style/Theme.GradeTracker.Text.Style2"
+            android:textSize="40sp"
+            app:layout_constraintEnd_toStartOf="@+id/guideline11"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/grade_requirement_label"
+            tools:text="35/50" />
+
+        <TextView
+            android:id="@+id/grade_percentage_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/patrickhand"
+            android:textAppearance="@style/Theme.GradeTracker.Text.Style2"
+            android:textSize="40sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline11"
+            app:layout_constraintTop_toBottomOf="@+id/grade_requirement_label"
+            tools:text="70%" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="205dp" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="64dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/grade_fraction_label">
+
+            <TextView
+                android:id="@+id/grade_earned_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/patrickhand"
+                android:text="@string/grade_earned"
+                android:textAppearance="@style/Theme.GradeTracker.Text.Style1"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/grade_earned_input"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:ems="10"
+                android:fontFamily="@font/patrickhand"
+                android:gravity="center"
+                android:inputType="number"
+                android:textSize="26sp"
+                android:hint="@string/filler_grade_hint"
+                android:autofillHints="Grade Achieved" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/grade_update_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:backgroundTint="#EF6C6C"
+            android:text="@string/update"
+            app:layout_constraintEnd_toEndOf="@+id/linearLayout3"
+            app:layout_constraintStart_toStartOf="@+id/linearLayout3"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
