@@ -45,6 +45,4 @@ class CourseViewModel(envelopeKey: Long, application: Application) : AndroidView
         }
     }
 
-
-
 }

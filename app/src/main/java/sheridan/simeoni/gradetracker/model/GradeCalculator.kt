@@ -9,18 +9,22 @@ class GradeCalculator {
 
         //Course Grade
         fun calcGrade(list : List<Assignment>) : Float{
-            var totalGrade = 0.0f
+            var totalGrade = -1f
             for (item in list){
-               val weightedGrade =  item.grade * item.weight
-                totalGrade += weightedGrade
+                if(item.grade != -1){
+                    val weightedGrade =  item.grade * item.weight
+                    totalGrade += weightedGrade
+                }
             }
             return totalGrade
         }
         //Calculate AVG
         fun term_avg(list : List<Course>) : Int{
-            var total = 0
+            var total = -1
             for(item in list){
+                if(item.grade != -1) {
                     total += item.grade // or times item.credit_weight
+                }
             }
             if(list.size != 0){
                 return total / list.size
