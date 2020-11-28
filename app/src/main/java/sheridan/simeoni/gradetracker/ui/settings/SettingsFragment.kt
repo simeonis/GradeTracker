@@ -41,6 +41,7 @@ class SettingsFragment : Fragment() {
             editor.apply()
         }
 
+        binding.settingsNightmodeSwitch.isChecked = sharedPreferences.getInt("theme", 0) == 1
         binding.settingsResetButton.setOnClickListener { deleteAll() }
 
         return binding.root

@@ -9,13 +9,140 @@
         android:orientation="vertical"
         tools:context=".ui.assignment.AssignmentFragment">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/assignment_recycler"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:listitem="@layout/fragment_assignment_item">
+            android:layout_height="match_parent">
 
-        </androidx.recyclerview.widget.RecyclerView>
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:theme="@style/Theme.GradeTracker.CardView"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="6dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/guideline10"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_begin="197dp" />
+
+                    <TextView
+                        android:id="@+id/assignment_summary_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:fontFamily="@font/baloo"
+                        android:text="@string/summary"
+                        android:textAppearance="@style/Theme.GradeTracker.Text.Style1"
+                        android:textSize="38sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ProgressBar
+                        android:id="@+id/assignment_current_progress"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:layout_marginBottom="8dp"
+                        android:indeterminateOnly="false"
+                        android:progress="96"
+                        android:progressDrawable="@drawable/circular_progress"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/guideline10"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/assignment_current_label" />
+
+                    <ProgressBar
+                        android:id="@+id/assignment_goal_progress"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:layout_marginBottom="8dp"
+                        android:indeterminateOnly="false"
+                        android:progress="90"
+                        android:progressDrawable="@drawable/circular_progress"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/guideline10"
+                        app:layout_constraintTop_toBottomOf="@+id/assignment_goal_label" />
+
+                    <TextView
+                        android:id="@+id/assignment_current_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/patrickhand"
+                        android:text="@string/current"
+                        android:textAppearance="@style/Theme.GradeTracker.Text.Style2"
+                        android:textSize="26sp"
+                        app:layout_constraintEnd_toStartOf="@+id/guideline10"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/assignment_summary_label" />
+
+                    <TextView
+                        android:id="@+id/assignment_goal_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/patrickhand"
+                        android:text="@string/goal"
+                        android:textAppearance="@style/Theme.GradeTracker.Text.Style2"
+                        android:textSize="26sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/guideline10"
+                        app:layout_constraintTop_toBottomOf="@+id/assignment_summary_label" />
+
+                    <TextView
+                        android:id="@+id/assignment_current_number_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/patrickhand"
+                        android:textAppearance="@style/Theme.GradeTracker.Text.Style2"
+                        app:layout_constraintBottom_toBottomOf="@+id/assignment_current_progress"
+                        app:layout_constraintEnd_toEndOf="@+id/assignment_current_progress"
+                        app:layout_constraintStart_toStartOf="@+id/assignment_current_progress"
+                        app:layout_constraintTop_toTopOf="@+id/assignment_current_progress"
+                        tools:text="96.5%" />
+
+                    <TextView
+                        android:id="@+id/assignment_goal_number_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/patrickhand"
+                        android:textAppearance="@style/Theme.GradeTracker.Text.Style2"
+                        app:layout_constraintBottom_toBottomOf="@+id/assignment_goal_progress"
+                        app:layout_constraintEnd_toEndOf="@+id/assignment_goal_progress"
+                        app:layout_constraintStart_toStartOf="@+id/assignment_goal_progress"
+                        app:layout_constraintTop_toTopOf="@+id/assignment_goal_progress"
+                        tools:text="90.0%" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/assignment_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cardView"
+                tools:layout_editor_absoluteX="-16dp"
+                tools:listitem="@layout/fragment_assignment_item">
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/assignment_add_button"
