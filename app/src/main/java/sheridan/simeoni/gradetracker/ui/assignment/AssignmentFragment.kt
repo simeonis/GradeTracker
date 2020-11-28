@@ -48,6 +48,12 @@ class AssignmentFragment : Fragment() {
         viewModel.assignments.observe(viewLifecycleOwner) { adapter.assignments = it as MutableList<Assignment>? }
 
         binding.assignmentAddButton.setOnClickListener { findNavController().navigate(R.id.action_assignment_to_assignmentDialog) }
+        viewModel.course.observe(viewLifecycleOwner){
+            binding.assignmentCurrentProgress.setProgress(it.grade)
+        }
+        viewModel.course.observe(viewLifecycleOwner){
+            binding.assignmentGoalProgress.setProgress(it.targetGrade)
+        }
 
         val savedStateHandle = findNavController().currentBackStackEntry?.savedStateHandle
         savedStateHandle?.set(AssignmentDialog.CONFIRMATION_ASSIGNMENT_RESULT, null) // Dialog will override this

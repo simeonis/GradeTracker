@@ -27,6 +27,9 @@ interface GradeTrackerDao {
     @Query("SELECT * FROM Course WHERE TermID=:key")
     fun getAllCourses(key: Long) : LiveData<List<Course>>
 
+    @Query("SELECT * FROM Course WHERE CourseID=:key")
+    fun getCourse(key: Long) : LiveData<Course>
+
     @Query("SELECT * FROM Assignment WHERE CourseID=:key")
     fun getAllAssignments(key : Long) : LiveData<List<Assignment>>
 

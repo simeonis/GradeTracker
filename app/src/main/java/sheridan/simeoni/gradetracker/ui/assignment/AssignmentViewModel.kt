@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import sheridan.simeoni.gradetracker.database.Assignment
+import sheridan.simeoni.gradetracker.database.Course
 import sheridan.simeoni.gradetracker.database.GradeTrackerDao
 import sheridan.simeoni.gradetracker.database.GradeTrackerDatabase
 import sheridan.simeoni.gradetracker.model.GradeCalculator
@@ -15,6 +16,7 @@ class AssignmentViewModel(envelopeKey: Long, application: Application) : Android
     private val _envelopeKey : Long = envelopeKey
 
     val assignments : LiveData<List<Assignment>> = gradeTrackerDao.getAllAssignments(_envelopeKey)
+    val course : LiveData<Course> = gradeTrackerDao.getCourse(_envelopeKey)
 
     fun add (assignmentName: String, grade: Int, gradeTotal: Int, targetGrade: Int, weight: Float){
         viewModelScope.launch {
