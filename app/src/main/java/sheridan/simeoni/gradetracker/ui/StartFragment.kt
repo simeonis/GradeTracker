@@ -20,18 +20,17 @@ class StartFragment : Fragment() {
 
     private lateinit var binding: FragmentStartBinding
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentStartBinding.inflate(inflater, container, false)
         (activity as AppCompatActivity).supportActionBar?.hide()
         val sharedPreferences : SharedPreferences = requireActivity().getSharedPreferences("My_Prefs", Context.MODE_PRIVATE)
         if(!sharedPreferences.contains("filler_grade")){
-            Log.d("filler bool",sharedPreferences.contains("filler_grade").toString())
             val editor = sharedPreferences.edit()
-            editor.putInt("filler_grade", -1)
+            editor.putFloat("filler_grade", -1.0f)
             editor.apply()
         }
         binding.startBeginButton.setOnClickListener {
-            if(sharedPreferences.getInt("filler_grade", 1) == -1){
+            if(sharedPreferences.getFloat("filler_grade", 1.0f) == -1.0f){
                 findNavController().navigate(R.id.action_start_to_data)
             }else{
                 findNavController().navigate(R.id.action_start_to_term)

@@ -15,7 +15,7 @@ import sheridan.simeoni.gradetracker.databinding.FragmentDataBinding
 class DataFragment : Fragment() {
     private lateinit var binding : FragmentDataBinding
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+                              savedInstanceState: Bundle?): View {
 
         binding = FragmentDataBinding.inflate(inflater, container, false)
         binding.dataNextButton.setOnClickListener { next() }
@@ -43,7 +43,7 @@ class DataFragment : Fragment() {
         }
 
         if(!fillerGrade.isEmpty()){
-            editor.putInt("filler_grade", fillerGrade.toInt())
+            editor.putFloat("filler_grade", fillerGrade.toFloat())
         }
         else if(fillerGrade.isEmpty() && clickCount > 1){
             binding.fragmentDataFillerGrade.error = "required"

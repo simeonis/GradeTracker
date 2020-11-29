@@ -1,5 +1,7 @@
 package sheridan.simeoni.gradetracker.ui.course
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -46,7 +48,8 @@ class CourseFragment : Fragment() {
             helper.attachToRecyclerView(courseRecycler)
         }
 
-        viewModel.updateCourses()
+        val sharedPreferences : SharedPreferences = requireActivity().getSharedPreferences("My_Prefs", Context.MODE_PRIVATE)
+        viewModel.updateCourses(sharedPreferences.getFloat("filler_grade", 1f))
 
         activity?.title = safeArgs.keyEnveloppe.title
         viewModel.courses.observe(viewLifecycleOwner) { adapter.courses = it as MutableList<Course>? }

@@ -34,12 +34,12 @@ class CourseViewModel(envelopeKey: Long, application: Application) : AndroidView
     }
 
 
-    fun updateCourses(){
+    fun updateCourses(fillerGrade : Float){
         viewModelScope.launch {
             val courses = gradeTrackerDao.getAllCoursesList()
             for(course in courses) {
                 val allAssigments = gradeTrackerDao.getGradesInCourse(course.id)
-                val totalGrade = GradeCalculator.calcGrade(allAssigments)
+                val totalGrade = GradeCalculator.calcGrade(allAssigments, fillerGrade)
                 gradeTrackerDao.updateCourseGrade(course.id, totalGrade.toInt())
             }
         }

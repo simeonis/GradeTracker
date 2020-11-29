@@ -8,13 +8,22 @@ class GradeCalculator {
     companion object{
 
         //Course Grade
-        fun calcGrade(list : List<Assignment>) : Float{
+        fun calcGrade(list : List<Assignment>, fillerGrade : Float) : Float{
             var totalGrade = -1f
+            var weightedGrade = 0.0f
+            var fillerCounter = 0
             for (item in list){
                 if(item.grade != -1){
-                    val weightedGrade =  item.grade * item.weight
-                    totalGrade += weightedGrade
+                    weightedGrade =  (item.grade / item.gradeTotal) * item.weight
                 }
+                else{
+                    weightedGrade =  fillerGrade * item.weight
+                    fillerCounter ++
+                }
+                totalGrade += weightedGrade
+            }
+            if(fillerCounter == list.size){
+                 return -1f
             }
             return totalGrade
         }
