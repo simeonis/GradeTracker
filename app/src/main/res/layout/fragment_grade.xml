@@ -65,7 +65,7 @@
                     android:layout_height="wrap_content"
                     android:background="@android:color/transparent"
                     android:fontFamily="@font/patrickhand"
-                    android:text="@string/total_grade"
+                    android:text="@string/course_grade"
                     android:textAppearance="@style/Theme.GradeTracker.Text.Style2"
                     android:textSize="20sp"
                     app:layout_constraintBottom_toTopOf="@+id/grade_total_number_label"
@@ -204,7 +204,7 @@
                 android:gravity="center"
                 android:inputType="number"
                 android:textSize="26sp"
-                android:hint="@string/filler_grade_hint"
+                android:hint="@string/grade_hint"
                 android:autofillHints="Grade Achieved" />
 
         </LinearLayout>
