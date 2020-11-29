@@ -54,6 +54,4 @@
         <item name="android:textColor">#595858</item>
         <item name="android:textColorPrimary">#595858</item>
     </style>
-
-    <style name="Theme.GradeTracker.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 </resources>
