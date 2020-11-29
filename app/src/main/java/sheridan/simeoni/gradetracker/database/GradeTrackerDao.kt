@@ -57,26 +57,28 @@ interface GradeTrackerDao {
     @Query("SELECT COUNT(TermID) FROM Term")
     suspend fun getRowCount(): Int
 
-    @Query("SELECT * FROM Assignment WHERE CourseID=:key")
-    suspend fun getGradesInCourse(key: Long): List<Assignment>
+    @Query("SELECT * FROM Course WHERE TermID = :key")
+    suspend fun getAllCoursesList(key : Long) : List<Course>
+
+    @Query("SELECT * FROM Assignment WHERE CourseID = :key")
+    suspend fun getAllAssignmentsList(key : Long) : List<Assignment>
+
+    @Query("SELECT * FROM Term")
+    suspend fun getAllTermsGlobal() : List<Term>
+
+    @Query("UPDATE Term SET TermGrade = :grade WHERE TermID = :key")
+    suspend fun updateTermGrade(key: Long, grade: Float): Int
 
     @Query("UPDATE Course SET CourseGrade = :grade WHERE CourseID = :key")
-    suspend fun updateCourseGrade(key: Long, grade: Int): Int
+    suspend fun updateCourseGrade(key: Long, grade: Float): Int
 
-    @Query("SELECT * FROM Course WHERE TermID=:key")
-    suspend fun getCourseInfo(key: Long): List<Course>?
+    @Query("UPDATE Assignment SET Points = :points WHERE AssignmentID = :key")
+    suspend fun updateAssignmentGrade(key: Long, points: Int): Int
 
-    @Query("UPDATE Term SET Average = :avg, Progress = :currentProgress WHERE TermID = :key")
-    suspend fun updateTerm(key: Long, avg: Int, currentProgress: Int): Int
+    @Query("SELECT * FROM Course WHERE CourseID=:key")
+    suspend fun getCourseData(key: Long) : Course
 
-    @Query("SELECT * FROM Term ORDER BY TermID")
-    suspend fun getAllTermsList() : List<Term>
-
-    @Query("SELECT * FROM Course ORDER BY CourseID")
-    suspend fun getAllCoursesList() : List<Course>
-
-    @Query("UPDATE Assignment SET Grade = :grade WHERE AssignmentID = :key")
-    suspend fun updateAssignmentGrade(key: Long, grade: Int): Int
-
+    @Query("SELECT * FROM Assignment WHERE AssignmentID=:key")
+    suspend fun getAssignmentData(key: Long) : Assignment
 
 }

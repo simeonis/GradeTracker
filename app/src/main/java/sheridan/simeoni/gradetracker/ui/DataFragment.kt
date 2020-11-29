@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import sheridan.simeoni.gradetracker.databinding.FragmentDataBinding
+import sheridan.simeoni.gradetracker.model.GradeCalculator
 
 class DataFragment : Fragment() {
     private lateinit var binding : FragmentDataBinding
@@ -43,7 +44,8 @@ class DataFragment : Fragment() {
         }
 
         if(!fillerGrade.isEmpty()){
-            editor.putFloat("filler_grade", fillerGrade.toFloat())
+            editor.putFloat("filler_grade", (fillerGrade.toFloat()/ 100f))
+            GradeCalculator.fillerGrade = (fillerGrade.toFloat()/ 100f)
         }
         else if(fillerGrade.isEmpty() && clickCount > 1){
             binding.fragmentDataFillerGrade.error = "required"

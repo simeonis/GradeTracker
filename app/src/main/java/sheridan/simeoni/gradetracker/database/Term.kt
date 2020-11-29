@@ -17,8 +17,8 @@ data class Term(
     @ColumnInfo(name = "TermName")
     val termName: String,
 
-    @ColumnInfo(name = "Average")
-    val average: Int,
+    @ColumnInfo(name = "TermGrade")
+    val grade: Float,
 
     @ColumnInfo(name = "Progress")
     val progress: Int

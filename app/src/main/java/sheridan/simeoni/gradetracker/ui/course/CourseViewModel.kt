@@ -23,26 +23,18 @@ class CourseViewModel(envelopeKey: Long, application: Application) : AndroidView
 
     fun add (courseName : String, targetGrade: Int){
         viewModelScope.launch {
-            gradeTrackerDao.insert(Course(0, _envelopeKey, courseName, -1, targetGrade))
+            gradeTrackerDao.insert(Course(0, _envelopeKey, courseName, -1f, targetGrade.toFloat()))
         }
     }
 
     fun delete (courseID: Long) {
         viewModelScope.launch {
+            //Delete Course
             gradeTrackerDao.deleteCourse(courseID)
+
+            //Update Upper-level Table
+            val courses = gradeTrackerDao.getAllCoursesList(_envelopeKey)
+            gradeTrackerDao.updateTermGrade(_envelopeKey, GradeCalculator.termAverage(courses))
         }
     }
-
-
-    fun updateCourses(fillerGrade : Float){
-        viewModelScope.launch {
-            val courses = gradeTrackerDao.getAllCoursesList()
-            for(course in courses) {
-                val allAssigments = gradeTrackerDao.getGradesInCourse(course.id)
-                val totalGrade = GradeCalculator.calcGrade(allAssigments, fillerGrade)
-                gradeTrackerDao.updateCourseGrade(course.id, totalGrade.toInt())
-            }
-        }
-    }
-
 }

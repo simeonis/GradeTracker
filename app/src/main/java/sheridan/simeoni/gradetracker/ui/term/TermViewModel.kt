@@ -20,7 +20,7 @@ class TermViewModel(application: Application) : AndroidViewModel(application) {
     fun add (termName: String) {
         viewModelScope.launch {
             val position = gradeTrackerDao.getRowCount()
-            gradeTrackerDao.insert(Term(0, position, termName, -1, 0))
+            gradeTrackerDao.insert(Term(0, position, termName, -1.0f, 0))
         }
     }
 
@@ -33,22 +33,6 @@ class TermViewModel(application: Application) : AndroidViewModel(application) {
     fun delete (termID: Long) {
         viewModelScope.launch {
             gradeTrackerDao.deleteTerm(termID)
-        }
-    }
-
-    fun updateTerms(){
-        viewModelScope.launch {
-            val terms = gradeTrackerDao.getAllTermsList()
-            for(term in terms){
-                val course = gradeTrackerDao.getCourseInfo(term.id)
-                var average = -1
-                if(course != null){
-                    average = GradeCalculator.term_avg(course)
-                }
-                //val progress = GradeCalculator.course_progress(course)
-                gradeTrackerDao.updateTerm(term.id,average, 50)
-
-            }
         }
     }
 }

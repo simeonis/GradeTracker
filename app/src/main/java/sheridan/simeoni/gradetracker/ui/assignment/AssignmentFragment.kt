@@ -49,13 +49,13 @@ class AssignmentFragment : Fragment() {
 
         binding.assignmentAddButton.setOnClickListener { findNavController().navigate(R.id.action_assignment_to_assignmentDialog) }
         viewModel.course.observe(viewLifecycleOwner){
-            binding.assignmentCurrentProgress.setProgress(it.grade)
-            if(it.grade != -1) { binding.assignmentCurrentNumberLabel.text = it.grade.toString() }
+            binding.assignmentCurrentProgress.setProgress(it.grade.toInt())
+            if(it.grade != -1.0f) { binding.assignmentCurrentNumberLabel.text = String.format("%.1f%%", it.grade) }
             else{ binding.assignmentCurrentNumberLabel.text = getString(R.string.blank) }
         }
         viewModel.course.observe(viewLifecycleOwner){
-            binding.assignmentGoalProgress.setProgress(it.targetGrade)
-            if(it.targetGrade != -1){ binding.assignmentGoalNumberLabel.text = it.targetGrade.toString() }
+            binding.assignmentGoalProgress.setProgress(it.targetGrade.toInt())
+            if(it.targetGrade != -1.0f){ binding.assignmentGoalNumberLabel.text = String.format("%.1f%%", it.targetGrade) }
             else{ binding.assignmentGoalNumberLabel.text = getString(R.string.blank) }
         }
 
@@ -63,7 +63,7 @@ class AssignmentFragment : Fragment() {
         savedStateHandle?.set(AssignmentDialog.CONFIRMATION_ASSIGNMENT_RESULT, null) // Dialog will override this
         savedStateHandle?.getLiveData<AssignmentDialog.AssignmentDialogData>(AssignmentDialog.CONFIRMATION_ASSIGNMENT_RESULT)?.observe(viewLifecycleOwner)
         {
-            if (it != null) viewModel.add(it.name,-1, it.assignmentGrade, -1, it.assignmentWeight)
+            if (it != null) viewModel.add(it.name,-1, it.assignmentGrade, it.assignmentWeight)
         }
         savedStateHandle?.getLiveData<Long>(ConfirmationDialog.CONFIRMATION_RESULT)?.observe(viewLifecycleOwner)
         {

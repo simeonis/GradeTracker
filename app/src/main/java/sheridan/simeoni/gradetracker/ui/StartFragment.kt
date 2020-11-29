@@ -29,6 +29,9 @@ class StartFragment : Fragment() {
             editor.putFloat("filler_grade", -1.0f)
             editor.apply()
         }
+
+        GradeCalculator.fillerGrade = sharedPreferences.getFloat("filler_grade", 1f)
+
         binding.startBeginButton.setOnClickListener {
             if(sharedPreferences.getFloat("filler_grade", 1.0f) == -1.0f){
                 findNavController().navigate(R.id.action_start_to_data)

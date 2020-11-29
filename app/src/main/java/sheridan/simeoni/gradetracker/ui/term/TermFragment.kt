@@ -39,8 +39,6 @@ class TermFragment : Fragment() {
             helper.attachToRecyclerView(termRecycler)
         }
 
-        viewModel.updateTerms()
-
         viewModel.terms.observe(viewLifecycleOwner) { adapter.terms = it as MutableList<Term>? }
 
         binding.termAddButton.setOnClickListener { findNavController().navigate(R.id.action_term_to_termDialog) }
@@ -54,7 +52,4 @@ class TermFragment : Fragment() {
         return binding.root
     }
 
-    fun test() {
-
-    }
 }

@@ -54,11 +54,11 @@ class CourseRecyclerViewAdapter(private val context: Context, private val view: 
         fun bind(course: Course) {
             binding.courseItemLabel.text = course.courseName
             binding.courseGradeLabel.text =
-                    if(course.grade == -1)
+                    if(course.grade == -1.0f)
                         context.getString(R.string.grade).plus(context.getString(R.string.blank))
                     else
-                        context.getString(R.string.grade).plus(String.format("%d%%", course.grade))
-            binding.courseGradeTargetLabel.text = context.getString(R.string.course_target).plus(String.format("%d%%", course.targetGrade))
+                        context.getString(R.string.grade).plus(String.format("%.1f%%", course.grade))
+            binding.courseGradeTargetLabel.text = context.getString(R.string.course_target).plus(String.format("%.1f%%", course.targetGrade))
             binding.root.setOnClickListener {
                 val action = CourseFragmentDirections.actionCourseToAssignment(KeyEnvelope(course.courseName, course.id))
                 it.findNavController().navigate(action)

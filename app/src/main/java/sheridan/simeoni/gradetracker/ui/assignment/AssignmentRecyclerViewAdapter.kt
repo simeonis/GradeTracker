@@ -54,10 +54,10 @@ class AssignmentRecyclerViewAdapter(private val context: Context, private val vi
         fun bind(assignment: Assignment) {
             binding.assignmentItemNameLabel.text = assignment.assignmentName
             binding.assignmentItemGradeLabel.text =
-                    if (assignment.grade == -1)
+                    if (assignment.points == -1)
                         context.getString(R.string.grade).plus(context.getString(R.string.blank))
                     else
-                        context.getString(R.string.grade).plus(String.format("%d%%", assignment.grade/assignment.gradeTotal))
+                        context.getString(R.string.grade).plus(String.format("%.1f%%", (assignment.points/assignment.totalPoints.toFloat()) *100f))
             binding.assignmentItemWeightLabel.text = context.getString(R.string.assignment_weight).plus(String.format("%.1f%%", assignment.weight))
             binding.root.setOnClickListener {
                 val action = AssignmentFragmentDirections.actionAssignmentToGrade(KeyEnvelope(assignment.assignmentName, assignment.id))

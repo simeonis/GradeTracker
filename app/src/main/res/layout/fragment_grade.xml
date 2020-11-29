@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:elevation="6dp"
+        android:theme="@style/Theme.GradeTracker.Background"
         tools:context=".ui.grade.GradeFragment">
 
         <androidx.cardview.widget.CardView
@@ -199,13 +200,13 @@
                 android:layout_width="60dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
+                android:autofillHints="Grade Achieved"
                 android:ems="10"
                 android:fontFamily="@font/patrickhand"
                 android:gravity="center"
-                android:inputType="number"
-                android:textSize="26sp"
                 android:hint="@string/grade_hint"
-                android:autofillHints="Grade Achieved" />
+                android:inputType="number"
+                android:textSize="26sp" />
 
         </LinearLayout>
 

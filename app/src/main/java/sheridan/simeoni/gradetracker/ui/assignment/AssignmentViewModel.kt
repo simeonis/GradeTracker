@@ -18,21 +18,35 @@ class AssignmentViewModel(envelopeKey: Long, application: Application) : Android
     val assignments : LiveData<List<Assignment>> = gradeTrackerDao.getAllAssignments(_envelopeKey)
     val course : LiveData<Course> = gradeTrackerDao.getCourse(_envelopeKey)
 
-    fun add (assignmentName: String, grade: Int, gradeTotal: Int, targetGrade: Int, weight: Float){
+    fun add (assignmentName: String, points: Int, totalPoints: Int, weight: Float){
         viewModelScope.launch {
-            gradeTrackerDao.insert(Assignment(0, _envelopeKey, assignmentName, grade, gradeTotal, targetGrade, weight))
+            gradeTrackerDao.insert(Assignment(0, _envelopeKey, assignmentName, points, totalPoints, weight))
+
+            //Update Upper-level Table
+            val course = gradeTrackerDao.getCourseData(_envelopeKey)
+
+            val assignments = gradeTrackerDao.getAllAssignmentsList(course.id)
+            gradeTrackerDao.updateCourseGrade(course.id, GradeCalculator.calculateGrade(assignments))
+
+            val courses = gradeTrackerDao.getAllCoursesList(course.termID)
+            gradeTrackerDao.updateTermGrade(course.termID, GradeCalculator.termAverage(courses))
 
         }
     }
 
     fun delete (assignmentID: Long) {
         viewModelScope.launch {
+            //Delete Assignment
             gradeTrackerDao.deleteAssignment(assignmentID)
-        }
-    }
-    fun updateGrade(grade : Int){
-        viewModelScope.launch {
-            gradeTrackerDao.updateAssignmentGrade(_envelopeKey, grade)
+
+            //Update Upper-level Table
+            val course = gradeTrackerDao.getCourseData(_envelopeKey)
+
+            val assignments = gradeTrackerDao.getAllAssignmentsList(course.id)
+            gradeTrackerDao.updateCourseGrade(course.id, GradeCalculator.calculateGrade(assignments))
+
+            val courses = gradeTrackerDao.getAllCoursesList(course.termID)
+            gradeTrackerDao.updateTermGrade(course.termID, GradeCalculator.termAverage(courses))
         }
     }
 }

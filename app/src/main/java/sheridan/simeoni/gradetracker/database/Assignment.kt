@@ -20,14 +20,11 @@ data class Assignment(
     @ColumnInfo(name = "AssignmentName")
     val assignmentName: String,
 
-    @ColumnInfo(name = "Grade")
-    val grade: Int,
+    @ColumnInfo(name = "Points")
+    val points: Int,
 
-    @ColumnInfo(name = "GradeTotal")
-    val gradeTotal: Int,
-
-    @ColumnInfo(name = "GradeTarget")
-    val gradeTarget: Int,
+    @ColumnInfo(name = "TotalPoints")
+    val totalPoints: Int,
 
     @ColumnInfo(name = "Weight")
     val weight: Float,

@@ -62,10 +62,10 @@ class TermRecyclerViewAdapter(
         fun bind(term: Term) {
             binding.termItemLabel.text = term.termName
             binding.termPercentLabel.text =
-                    if(term.average == -1)
+                    if(term.grade == -1.0f)
                         context.getString(R.string.term_average).plus(context.getString(R.string.blank))
                     else
-                        context.getString(R.string.term_average).plus(String.format("%d%%", term.average))
+                        context.getString(R.string.term_average).plus(String.format("%.1f%%", term.grade))
             binding.termProgressLabel.text = context.getString(R.string.term_progress).plus(String.format("%d%%", term.progress))
             binding.termProgressBar.progress = term.progress
             binding.root.setOnClickListener {

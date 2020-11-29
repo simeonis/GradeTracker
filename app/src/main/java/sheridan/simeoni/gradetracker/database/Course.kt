@@ -24,8 +24,8 @@ data class Course(
     val courseName: String,
 
     @ColumnInfo(name = "CourseGrade")
-    val grade: Int,
+    val grade: Float,
 
     @ColumnInfo(name = "CourseTargetGrade")
-    val targetGrade: Int,
+    val targetGrade: Float,
     )
