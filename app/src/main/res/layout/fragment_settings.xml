@@ -7,7 +7,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleX="1"
-        android:scaleY="1">
+        android:scaleY="1"
+        android:theme="@style/Theme.GradeTracker.Background">
 
         <TextView
             android:id="@+id/settings_greeting_label"

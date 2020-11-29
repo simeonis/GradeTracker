@@ -58,7 +58,7 @@
                     android:layout_gravity="center"
                     android:layout_marginHorizontal="16dp"
                     android:layout_marginVertical="8dp"
-                    android:theme="@style/Theme.GradeTracker.InnerCardView"
+                    android:theme="@style/Theme.GradeTracker.CardView"
                     app:cardCornerRadius="8dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -89,7 +89,7 @@
                     android:layout_gravity="center"
                     android:layout_marginHorizontal="16dp"
                     android:layout_marginVertical="8dp"
-                    android:theme="@style/Theme.GradeTracker.InnerCardView"
+                    android:theme="@style/Theme.GradeTracker.CardView"
                     app:cardCornerRadius="8dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -104,8 +104,8 @@
                         android:autofillHints="Term "
                         android:fontFamily="@font/patrickhand"
                         android:gravity="center"
-                        android:hint="start date"
-                        android:inputType="text"
+                        android:hint="Start Date"
+                        android:inputType="date"
                         android:textAppearance="@style/Theme.GradeTracker.input"
                         android:textSize="16sp" />
                 </androidx.cardview.widget.CardView>
@@ -118,7 +118,7 @@
                     android:layout_gravity="center"
                     android:layout_marginHorizontal="16dp"
                     android:layout_marginVertical="8dp"
-                    android:theme="@style/Theme.GradeTracker.InnerCardView"
+                    android:theme="@style/Theme.GradeTracker.CardView"
                     app:cardCornerRadius="8dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -133,8 +133,8 @@
                         android:autofillHints="Term "
                         android:fontFamily="@font/patrickhand"
                         android:gravity="center"
-                        android:hint="end date"
-                        android:inputType="text"
+                        android:hint="End Date"
+                        android:inputType="date"
                         android:textAppearance="@style/Theme.GradeTracker.input"
                         android:textSize="16sp" />
                 </androidx.cardview.widget.CardView>
