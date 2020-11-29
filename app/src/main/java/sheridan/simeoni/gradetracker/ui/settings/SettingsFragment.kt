@@ -2,9 +2,8 @@ package sheridan.simeoni.gradetracker.ui.settings
 
 import android.content.Context
 import android.content.SharedPreferences
-import android.inputmethodservice.Keyboard
 import android.os.Bundle
-import android.view.KeyEvent
+import android.view.*
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,6 +26,12 @@ class SettingsFragment : Fragment() {
     private lateinit var editor : SharedPreferences.Editor
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentSettingsBinding.inflate(inflater, container, false)
 
         val sharedPreferences : SharedPreferences = requireActivity().getSharedPreferences("My_Prefs", Context.MODE_PRIVATE)
@@ -69,6 +74,21 @@ class SettingsFragment : Fragment() {
         binding.settingsResetButton.setOnClickListener { deleteAll() }
 
         return binding.root
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        menu.clear()
+        inflater.inflate(R.menu.menu_settings, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_about -> {
+                findNavController().navigate(R.id.action_global_to_about)
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
     private fun deleteAll() {
