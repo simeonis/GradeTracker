@@ -9,7 +9,6 @@
     <fragment
         android:id="@+id/StartFragment"
         android:name="sheridan.simeoni.gradetracker.ui.StartFragment"
-        android:label="@string/start_fragment_label"
         tools:layout="@layout/fragment_start">
 
         <action
@@ -91,8 +90,11 @@
     <fragment
         android:id="@+id/gradeFragment"
         android:name="sheridan.simeoni.gradetracker.ui.grade.GradeFragment"
-        android:label="@string/grade_fragment_label"
-        tools:layout="@layout/fragment_grade"/>
+        tools:layout="@layout/fragment_grade">
+        <argument
+            android:name="keyEnvelope"
+            app:argType="sheridan.simeoni.gradetracker.model.KeyEnvelope" />
+    </fragment>
     <dialog
         android:id="@+id/aboutDialog"
         android:name="sheridan.simeoni.gradetracker.ui.dialog.AboutDialog"

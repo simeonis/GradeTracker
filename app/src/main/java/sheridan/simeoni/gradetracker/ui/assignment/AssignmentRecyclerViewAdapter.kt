@@ -10,6 +10,7 @@ import sheridan.simeoni.gradetracker.R
 import sheridan.simeoni.gradetracker.database.Assignment
 import sheridan.simeoni.gradetracker.databinding.FragmentAssignmentItemBinding
 import sheridan.simeoni.gradetracker.helper.DragRecyclerView
+import sheridan.simeoni.gradetracker.model.KeyEnvelope
 
 class AssignmentRecyclerViewAdapter(private val context: Context, private val view: View) :
         RecyclerView.Adapter<AssignmentRecyclerViewAdapter.ViewHolder>(),
@@ -59,7 +60,8 @@ class AssignmentRecyclerViewAdapter(private val context: Context, private val vi
                         context.getString(R.string.grade).plus(String.format("%d%%", assignment.grade/assignment.gradeTotal))
             binding.assignmentItemWeightLabel.text = context.getString(R.string.assignment_weight).plus(String.format("%.1f%%", assignment.weight))
             binding.root.setOnClickListener {
-                it.findNavController().navigate(R.id.action_assignment_to_grade)
+                val action = AssignmentFragmentDirections.actionAssignmentToGrade(KeyEnvelope(assignment.assignmentName, assignment.id))
+                it.findNavController().navigate(action)
             }
             binding.executePendingBindings()
         }
