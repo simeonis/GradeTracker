@@ -1,5 +1,7 @@
 package sheridan.simeoni.gradetracker.ui.dialog
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -24,6 +26,8 @@ class CourseDialog : DialogFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DialogCourseBinding.inflate(inflater, container, false)
+
+        getDialog()?.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
 
         binding.doneButton.setOnClickListener { confirmed() }
         binding.cancelButton.setOnClickListener { dismiss() }
