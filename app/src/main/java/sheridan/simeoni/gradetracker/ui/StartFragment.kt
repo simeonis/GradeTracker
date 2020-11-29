@@ -24,16 +24,11 @@ class StartFragment : Fragment() {
         binding = FragmentStartBinding.inflate(inflater, container, false)
         (activity as AppCompatActivity).supportActionBar?.hide()
         val sharedPreferences : SharedPreferences = requireActivity().getSharedPreferences("My_Prefs", Context.MODE_PRIVATE)
-        if(!sharedPreferences.contains("filler_grade")){
-            val editor = sharedPreferences.edit()
-            editor.putFloat("filler_grade", -1.0f)
-            editor.apply()
-        }
-
-        GradeCalculator.fillerGrade = sharedPreferences.getFloat("filler_grade", 1f)
+        if (!sharedPreferences.contains("filler_grade"))
+            GradeCalculator.fillerGrade = sharedPreferences.getFloat("filler_grade", 1f)
 
         binding.startBeginButton.setOnClickListener {
-            if(sharedPreferences.getFloat("filler_grade", 1.0f) == -1.0f){
+            if(!sharedPreferences.contains("filler_grade")){
                 findNavController().navigate(R.id.action_start_to_data)
             }else{
                 findNavController().navigate(R.id.action_start_to_term)
