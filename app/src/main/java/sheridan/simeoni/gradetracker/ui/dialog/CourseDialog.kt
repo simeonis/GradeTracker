@@ -24,10 +24,10 @@ class CourseDialog : DialogFragment() {
 
     private lateinit var binding: DialogCourseBinding
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = DialogCourseBinding.inflate(inflater, container, false)
 
-        getDialog()?.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
+        dialog?.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
 
         binding.doneButton.setOnClickListener { confirmed() }
         binding.cancelButton.setOnClickListener { dismiss() }

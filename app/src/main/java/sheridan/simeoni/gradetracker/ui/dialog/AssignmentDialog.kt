@@ -1,23 +1,16 @@
 package sheridan.simeoni.gradetracker.ui.dialog
 
-import android.app.Dialog
+
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import sheridan.simeoni.gradetracker.R
 import sheridan.simeoni.gradetracker.databinding.DialogAssignmentBinding
-import sheridan.simeoni.gradetracker.databinding.DialogTermBinding
-import sheridan.simeoni.gradetracker.ui.assignment.AssignmentViewModel
-import sheridan.simeoni.gradetracker.ui.term.TermViewModel
 import java.io.Serializable
-import java.lang.IllegalStateException
 
 class AssignmentDialog : DialogFragment() {
 
@@ -27,11 +20,11 @@ class AssignmentDialog : DialogFragment() {
         const val CONFIRMATION_ASSIGNMENT_RESULT = "confirmation_assignment_result"
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
 
         binding = DialogAssignmentBinding.inflate(inflater, container, false)
 
-        getDialog()?.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
+        dialog?.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
 
         binding.doneButton.setOnClickListener { confirmed() }
         binding.cancelButton.setOnClickListener { dismiss() }

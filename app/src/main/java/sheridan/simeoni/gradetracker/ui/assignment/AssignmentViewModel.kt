@@ -30,6 +30,9 @@ class AssignmentViewModel(envelopeKey: Long, application: Application) : Android
             gradeTrackerDao.deleteAssignment(assignmentID)
         }
     }
-
-
+    fun updateGrade(grade : Int){
+        viewModelScope.launch {
+            gradeTrackerDao.updateAssignmentGrade(_envelopeKey, grade)
+        }
+    }
 }

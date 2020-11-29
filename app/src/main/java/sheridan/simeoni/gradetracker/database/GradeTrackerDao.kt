@@ -75,5 +75,8 @@ interface GradeTrackerDao {
     @Query("SELECT * FROM Course ORDER BY CourseID")
     suspend fun getAllCoursesList() : List<Course>
 
+    @Query("UPDATE Assignment SET Grade = :grade WHERE AssignmentID = :key")
+    suspend fun updateAssignmentGrade(key: Long, grade: Int): Int
+
 
 }

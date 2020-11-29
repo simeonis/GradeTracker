@@ -19,14 +19,11 @@ class TermDialog : DialogFragment() {
     private val termViewModel: TermViewModel by viewModels()
     private lateinit var binding: DialogTermBinding
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
 
         binding = DialogTermBinding.inflate(inflater, container, false)
 
-        getDialog()?.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getDialog()?.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
-        getDialog()?.getWindow()?.setDimAmount(0.5f);
-
+        dialog?.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
 
         binding.doneButton.setOnClickListener { submit() }
         binding.cancelButton.setOnClickListener { dismiss() }
