@@ -77,10 +77,11 @@
                 android:layout_height="wrap_content"
                 android:autofillHints="70%"
                 android:fontFamily="@font/asap"
+                android:gravity="center"
                 android:hint="@string/filler_grade_hint"
                 android:inputType="number"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textColor="#000000" />
+                android:maxLength="3"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
         </LinearLayout>
 
         <Button

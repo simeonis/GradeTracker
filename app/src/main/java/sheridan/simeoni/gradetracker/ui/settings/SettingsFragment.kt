@@ -36,7 +36,7 @@ class SettingsFragment : Fragment() {
         val sharedPreferences : SharedPreferences = requireActivity().getSharedPreferences("My_Prefs", Context.MODE_PRIVATE)
         editor = sharedPreferences.edit()
 
-        binding.settingsFillerGradeInput.setHint(String.format("%.0f%%", sharedPreferences.getFloat("filler_grade", 1f) * 100f))
+        binding.settingsFillerGradeInput.hint = String.format("%.0f%%", sharedPreferences.getFloat("filler_grade", 1f) * 100f)
 
         binding.settingsNightmodeSwitch.setOnCheckedChangeListener {
                 _, isChecked ->
@@ -54,20 +54,11 @@ class SettingsFragment : Fragment() {
         }
 
         binding.settingsFillerGradeInput.setOnEditorActionListener {
-            textView, i, _ ->
-            if(i == EditorInfo.IME_ACTION_DONE && textView.text.toString().isNotEmpty()){
-                val fillerEntered = textView.text.toString().toFloat()
-                editor.putFloat("filler_grade", fillerEntered / 100f)
-                GradeCalculator.fillerGrade = fillerEntered / 100f
-                editor.apply()
-                textView.setText("")
-                textView.setHint(String.format("%.0f%%", fillerEntered))
-                viewModel.updateAll()
+            _, event, _ ->
+            if(event == EditorInfo.IME_ACTION_DONE) {
+                updateAll()
                 true
-            }
-            else{
-                false
-            }
+            } else{ false }
         }
         binding.settingsNightmodeSwitch.isChecked = sharedPreferences.getInt("theme", 0) == 1
         binding.settingsResetButton.setOnClickListener { deleteAll() }
@@ -95,4 +86,18 @@ class SettingsFragment : Fragment() {
         findNavController().popBackStack(R.id.TermFragment, false)
     }
 
+    private fun updateAll() {
+        val fillerInput = binding.settingsFillerGradeInput
+        if (fillerInput.text.isEmpty()) {
+            fillerInput.error = "required"
+        } else {
+            val fillerEntered = fillerInput.text.toString().toFloat()
+            editor.putFloat("filler_grade", fillerEntered / 100f)
+            GradeCalculator.fillerGrade = fillerEntered / 100f
+            editor.apply()
+            fillerInput.setText("")
+            fillerInput.hint = String.format("%.0f%%", fillerEntered)
+            viewModel.updateAll()
+        }
+    }
 }

@@ -5,13 +5,18 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
+import sheridan.simeoni.gradetracker.database.Assignment
 import sheridan.simeoni.gradetracker.database.Course
 import sheridan.simeoni.gradetracker.database.GradeTrackerDao
 import sheridan.simeoni.gradetracker.database.GradeTrackerDatabase
 import sheridan.simeoni.gradetracker.model.GradeCalculator
 
-class GradeViewModel(application: Application) : AndroidViewModel(application) {
+class GradeViewModel(envelopeKey: Long, application: Application) : AndroidViewModel(application) {
     private val gradeTrackerDao : GradeTrackerDao = GradeTrackerDatabase.getInstance(application).gradeTrackerDao
+    private val _envelopeKey : Long = envelopeKey
+
+    val assignment : LiveData<Assignment> = gradeTrackerDao.getAssignment(_envelopeKey)
+    val course : LiveData<Course> = gradeTrackerDao.getCourseFromGrade(_envelopeKey)
 
     fun updateGrade(assignmentId : Long, points : Int){
         viewModelScope.launch {
@@ -26,7 +31,6 @@ class GradeViewModel(application: Application) : AndroidViewModel(application) {
 
             val courses = gradeTrackerDao.getAllCoursesList(course.termID)
             gradeTrackerDao.updateTermGrade(course.termID, GradeCalculator.termAverage(courses))
-
         }
     }
 }

@@ -30,8 +30,14 @@ interface GradeTrackerDao {
     @Query("SELECT * FROM Course WHERE CourseID=:key")
     fun getCourse(key: Long) : LiveData<Course>
 
+    @Query("SELECT * FROM Course WHERE CourseID=(SELECT CourseID FROM Assignment WHERE AssignmentID=:key)")
+    fun getCourseFromGrade(key: Long) : LiveData<Course>
+
     @Query("SELECT * FROM Assignment WHERE CourseID=:key")
     fun getAllAssignments(key : Long) : LiveData<List<Assignment>>
+
+    @Query("SELECT * FROM Assignment WHERE AssignmentID=:key")
+    fun getAssignment(key: Long) : LiveData<Assignment>
 
     @Query("DELETE FROM Term WHERE TermID=:key")
     suspend fun deleteTerm(key: Long)
