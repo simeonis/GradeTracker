@@ -19,7 +19,6 @@ class SettingsViewModel(application: Application) : AndroidViewModel(application
 
     fun updateAll(){
         viewModelScope.launch {
-
             val terms = gradeTrackerDao.getAllTermsGlobal()
 
             for(t in terms){

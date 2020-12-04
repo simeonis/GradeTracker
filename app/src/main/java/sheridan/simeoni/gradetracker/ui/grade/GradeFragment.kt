@@ -1,7 +1,5 @@
 package sheridan.simeoni.gradetracker.ui.grade
 
-import android.content.Context
-import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,12 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.widget.SeekBar
-import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import sheridan.simeoni.gradetracker.databinding.FragmentGradeBinding
-import sheridan.simeoni.gradetracker.ui.course.CourseViewModel
-import sheridan.simeoni.gradetracker.ui.course.CourseViewModelFactory
+import sheridan.simeoni.gradetracker.model.GradeCalculator
 
 class GradeFragment : Fragment() {
 
@@ -32,12 +28,26 @@ class GradeFragment : Fragment() {
         activity?.title = safeArgs.keyEnvelope.title
 
         viewModel.assignment.observe(viewLifecycleOwner) {
-            binding.gradeEarnedInput.hint = String.format("%s/%s", if (it.points == -1) "-" else it.points, it.totalPoints)
-            binding.gradeSeekBar.progress = if (it.points == -1) 0 else (it.points/it.totalPoints.toFloat()*100).toInt()
+            if (it.points < 0) {
+                binding.gradeSeekBar.progress = (GradeCalculator.fillerGrade * it.totalPoints).toInt()
+                binding.gradeEarnedInput.hint = String.format("%s/%s", "-", it.totalPoints)
+            } else {
+                binding.gradeSeekBar.progress = (it.points / it.totalPoints.toFloat() * 100).toInt()
+                binding.gradeEarnedInput.hint = String.format("%s/%s", it.points, it.totalPoints)
+            }
         }
         viewModel.course.observe(viewLifecycleOwner) {
-            binding.gradeTotalNumberLabel.text = String.format("%.1f%%", it.grade)
-            binding.gradeTotalProgress.progress = if (it.grade == -1f) 0 else it.grade.toInt()
+            if (it.grade < 0) {
+                binding.gradeTotalNumberLabel.text = String.format("%s", "-")
+                binding.gradeTotalProgress.progress = 0
+            } else {
+                binding.gradeTotalNumberLabel.text = String.format("%.1f%%", it.grade)
+                binding.gradeTotalProgress.progress = it.grade.toInt()
+            }
+        }
+        viewModel.requiredGrade.observe(viewLifecycleOwner) {
+            binding.gradeFractionLabel.text = String.format("%s/%s", it.first, it.second)
+            binding.gradePercentageLabel.text = String.format("%.1f%%", (it.first / it.second.toFloat()*100))
         }
         binding.gradeEarnedInput.setOnEditorActionListener {
             _, event, _ ->
@@ -45,11 +55,10 @@ class GradeFragment : Fragment() {
                 updateGrade()
                 true
             }
-            else { false }
+            else {false}
         }
         binding.gradeSeekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
-                // TODO: Create business method to see possible grades based on seekBar
                 possibleGrade(progress)
             }
             override fun onStartTrackingTouch(seekBar: SeekBar) {}
@@ -63,7 +72,7 @@ class GradeFragment : Fragment() {
         if (gradeEarned.text.isEmpty()) {
             gradeEarned.error = "required"
         } else {
-            viewModel.updateGrade(safeArgs.keyEnvelope.key, gradeEarned.text.toString().toInt())
+            viewModel.updateGrade(gradeEarned.text.toString().toInt())
             gradeEarned.hint = String.format("%d/50", gradeEarned.text.toString().toInt())
             gradeEarned.setText("")
         }
@@ -72,7 +81,10 @@ class GradeFragment : Fragment() {
     private fun possibleGrade(progress: Int) {
         val assignment = viewModel.assignment.value
         binding.gradeEarnedInput.hint =
-                String.format("%s/%s", assignment?.totalPoints?.times(progress/100f)?.toInt(),
+                String.format("%d/%d", assignment?.totalPoints?.times(progress / 100f)?.toInt(),
                         assignment?.totalPoints)
+        val result = viewModel.getPotential(progress) ?: 0f
+        binding.gradeTotalNumberLabel.text = String.format("%.1f%%", result)
+        binding.gradeTotalProgress.progress = result.toInt()
     }
 }

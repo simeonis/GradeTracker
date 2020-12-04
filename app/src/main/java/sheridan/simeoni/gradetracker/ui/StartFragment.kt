@@ -24,7 +24,7 @@ class StartFragment : Fragment() {
         binding = FragmentStartBinding.inflate(inflater, container, false)
         (activity as AppCompatActivity).supportActionBar?.hide()
         val sharedPreferences : SharedPreferences = requireActivity().getSharedPreferences("My_Prefs", Context.MODE_PRIVATE)
-        if (!sharedPreferences.contains("filler_grade"))
+        if (sharedPreferences.contains("filler_grade"))
             GradeCalculator.fillerGrade = sharedPreferences.getFloat("filler_grade", 1f)
 
         binding.startBeginButton.setOnClickListener {

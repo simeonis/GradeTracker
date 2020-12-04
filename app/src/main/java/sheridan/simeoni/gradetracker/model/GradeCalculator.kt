@@ -3,88 +3,66 @@ package sheridan.simeoni.gradetracker.model
 import android.util.Log
 import sheridan.simeoni.gradetracker.database.Assignment
 import sheridan.simeoni.gradetracker.database.Course
+import kotlin.math.ceil
 
 class GradeCalculator {
     companion object{
-        var fillerGrade = .7f
+        var fillerGrade = .7f // Dynamically changed by savedPreferences
 
-        //Course Grade
-        fun calculateGrade(list : List<Assignment>) : Float{
+        // Course Grade
+        fun calculateGrade(list : List<Assignment>) : Float {
             var totalGrade = 0.0f
 
             var fillerCounter = 0
             for (item in list){
                 var weightedGrade : Float
-                if(item.points != -1){
+                if(item.points != -1)
                     weightedGrade =  (item.points / item.totalPoints.toFloat()) * (item.weight / 100f)
-                }
-                else{
+                else {
                     weightedGrade =  fillerGrade * (item.weight / 100f)
                     fillerCounter++
                 }
                 totalGrade += weightedGrade
             }
-            if(fillerCounter == list.size){
-                 return -1f
-            }
+            if(fillerCounter == list.size) return -1f
             return totalGrade * 100f
         }
-        //Calculate Average
+
+        // Calculate Average
         fun termAverage(list : List<Course>) : Float{
             var total = 0.0f
             for(item in list){
-                if(item.grade != -1f) {
-                    total += item.grade.toFloat() // or times item.credit_weight
-                }
+                if(item.grade != -1f)
+                    total += item.grade
             }
-            if(list.isNotEmpty()){
-                return total / list.size.toFloat()
-            }
-            else{
-                return -1.0f
-            }
+            return if (list.isNotEmpty())
+                total / list.size.toFloat()
+            else -1.0f
         }
 
-        //GPA
-//        fun getGPA(list : List<Course>) : Float{
-//            var totalPoints = 0.0f
-//            var creditsAttempted = 0.0f
-//            val credits = 3 // we don't have this info
-//            for(item in list){
-//                val coursePt = getPointsGrade(item.grade)
-//                totalPoints += coursePt * credits
-//                creditsAttempted += credits // should be item.credit
-//            }
-//            return totalPoints / creditsAttempted
-//        }
+        // Calculate minimum grade required by assignment passed in to hit target grade
+        fun minimumRequirement(assignment: Assignment, course: Course) : Int {
+            val grade = removeAssignmentFromAverageGrade(assignment, course)
+            return ceil((((course.targetGrade - grade) / assignment.weight) * assignment.totalPoints)).toInt()
+        }
 
-        //Letter Grade
-//        fun getLetterGrade(grade: Float){
-//            when (grade) {
-//                in 90.0f..100.0f -> print("A")
-//                in 80.0f..89.9f-> print("B")
-//                in 70.0f..79.9f -> print("C")
-//                in 50.0f..69.9f -> print("D")
-//                in 0.0f..49.9f -> print("F")
-//                else -> { // Note the block
-//                    print("Error")
-//                }
-//            }
-//        }
-        // get points
-//        fun getPointsGrade(grade: Float) : Int{
-//            var points = 0
-//            when (grade) {
-//                in 90..100 -> points += 4
-//                in 80..89-> points += 3
-//                in 70..79 -> points += 2
-//                in 50..69 -> points += 1
-//                in 0..49 -> points += 0
-//                else -> { // Note the block
-//                    print("Error")
-//                }
-//            }
-//            return points
-//        }
+        // Calculate potential course grade base on potentialGrade
+        fun calculatePotential(assignment: Assignment, course: Course, potentialGrade: Int) : Float {
+            val grade = removeAssignmentFromAverageGrade(assignment, course)
+            return grade + ((potentialGrade * assignment.totalPoints / 100) / assignment.totalPoints.toFloat() * assignment.weight)
+        }
+
+        // Removes assignment grade from average course grade
+        private fun removeAssignmentFromAverageGrade(assignment: Assignment, course: Course) : Float {
+            val assignmentGrade =
+                    // Course Average: Non blank | Assignment Grade: blank ---> Filler grade was used
+                    if (course.grade >= 0 && assignment.points < 0) this.fillerGrade * (100f - assignment.weight)
+                    // Course Average: blank | Assignment Grade: blank ---> No grade i.e. -1
+                    else if (course.grade < 0 && assignment.points < 0) -1f
+                    // Otherwise ...
+                    else (assignment.points / assignment.totalPoints.toFloat() * assignment.weight)
+            // Remove old Assignment Grade from Course Average
+            return course.grade - assignmentGrade
+        }
     }
 }
