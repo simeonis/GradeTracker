@@ -1,14 +1,16 @@
 package sheridan.simeoni.gradetracker.ui.term
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import sheridan.simeoni.gradetracker.R
@@ -23,7 +25,7 @@ class TermFragment : Fragment() {
     private lateinit var adapter: TermRecyclerViewAdapter
     private val viewModel : TermViewModel by viewModels()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentTermBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = this
         adapter = TermRecyclerViewAdapter(requireContext(), binding.root, viewModel)
@@ -39,6 +41,8 @@ class TermFragment : Fragment() {
             helper.attachToRecyclerView(termRecycler)
         }
 
+        hideKeyboard()
+
         viewModel.terms.observe(viewLifecycleOwner) { adapter.terms = it as MutableList<Term>? }
 
         binding.termAddButton.setOnClickListener { findNavController().navigate(R.id.action_term_to_termDialog) }
@@ -52,4 +56,9 @@ class TermFragment : Fragment() {
         return binding.root
     }
 
+    fun hideKeyboard() {
+        val inputMethodManager = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(
+                requireActivity().currentFocus?.getWindowToken(), 0)
+    }
 }

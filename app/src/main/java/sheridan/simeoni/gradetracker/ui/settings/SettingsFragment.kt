@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_NO
 import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES
@@ -58,6 +59,7 @@ class SettingsFragment : Fragment() {
                 editor.apply()
                 textView.setText("")
                 textView.setHint(String.format("%.0f%%", fillerEntered))
+                hideKeyboard()
                 viewModel.updateAll()
                 true
             }
@@ -74,6 +76,12 @@ class SettingsFragment : Fragment() {
     private fun deleteAll() {
         viewModel.deleteAll()
         findNavController().popBackStack(R.id.TermFragment, false)
+    }
+
+    fun hideKeyboard() {
+        val inputMethodManager = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(
+                requireActivity().currentFocus?.getWindowToken(), 0)
     }
 
 }

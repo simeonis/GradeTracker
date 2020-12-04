@@ -1,6 +1,5 @@
 package sheridan.simeoni.gradetracker.model
 
-import android.util.Log
 import sheridan.simeoni.gradetracker.database.Assignment
 import sheridan.simeoni.gradetracker.database.Course
 

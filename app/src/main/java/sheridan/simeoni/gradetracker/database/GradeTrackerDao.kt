@@ -1,10 +1,7 @@
 package sheridan.simeoni.gradetracker.database
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
-import androidx.room.Update
+import androidx.room.*
 
 @Dao
 interface GradeTrackerDao {
@@ -80,5 +77,6 @@ interface GradeTrackerDao {
 
     @Query("SELECT * FROM Assignment WHERE AssignmentID=:key")
     suspend fun getAssignmentData(key: Long) : Assignment
+
 
 }
