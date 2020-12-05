@@ -1,14 +1,19 @@
 package sheridan.simeoni.gradetracker.model
 
+import android.util.Log
 import sheridan.simeoni.gradetracker.database.Assignment
 import sheridan.simeoni.gradetracker.database.Course
+import java.sql.Timestamp
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.util.*
 
 class GradeCalculator {
     companion object{
         var fillerGrade = .7f
 
         //Course Grade
-        fun calculateGrade(list : List<Assignment>) : Float{
+        fun calculateGrade(list: List<Assignment>) : Float{
             var totalGrade = 0.0f
 
             var fillerCounter = 0
@@ -29,7 +34,7 @@ class GradeCalculator {
             return totalGrade * 100f
         }
         //Calculate Average
-        fun termAverage(list : List<Course>) : Float{
+        fun termAverage(list: List<Course>) : Float{
             var total = 0.0f
             for(item in list){
                 if(item.grade != -1f) {
@@ -42,6 +47,13 @@ class GradeCalculator {
             else{
                 return -1.0f
             }
+        }
+
+        fun getTermProgress(start: Long, end: Long, now : Long) : Int{
+            val dem = (end.toFloat() - start.toFloat())
+            val num = (now.toFloat() - start.toFloat())
+            val progress = num / dem * 100f
+            return progress.toInt()
         }
 
         //GPA

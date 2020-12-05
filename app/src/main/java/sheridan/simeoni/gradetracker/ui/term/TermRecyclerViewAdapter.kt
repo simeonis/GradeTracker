@@ -12,6 +12,7 @@ import sheridan.simeoni.gradetracker.database.Term
 import sheridan.simeoni.gradetracker.databinding.FragmentTermItemBinding
 import sheridan.simeoni.gradetracker.model.*
 import sheridan.simeoni.gradetracker.helper.DragRecyclerView
+import java.util.*
 
 class TermRecyclerViewAdapter(
         private val context: Context,
@@ -66,8 +67,8 @@ class TermRecyclerViewAdapter(
                         context.getString(R.string.term_average).plus(context.getString(R.string.blank))
                     else
                         context.getString(R.string.term_average).plus(String.format("%.1f%%", term.grade))
-            binding.termProgressLabel.text = context.getString(R.string.term_progress).plus(String.format("%d%%", term.progress))
-            binding.termProgressBar.progress = term.progress
+            //binding.termProgressLabel.text = context.getString(R.string.term_progress).plus(String.format("%d%%", term.progress))
+            binding.termProgressBar.progress = GradeCalculator.getTermProgress(term.start, term.end, Calendar.getInstance().time.getTime())
             binding.root.setOnClickListener {
                 val action = TermFragmentDirections.actionTermToCourse(KeyEnvelope(term.termName, term.id))
                 it.findNavController().navigate(action)

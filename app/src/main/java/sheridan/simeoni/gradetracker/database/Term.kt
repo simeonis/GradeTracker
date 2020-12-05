@@ -20,6 +20,9 @@ data class Term(
     @ColumnInfo(name = "TermGrade")
     val grade: Float,
 
-    @ColumnInfo(name = "Progress")
-    val progress: Int
+    @ColumnInfo(name = "Start")
+    val start: Long,
+
+    @ColumnInfo(name = "End")
+    val end: Long
     )
