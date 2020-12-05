@@ -21,17 +21,32 @@
                 android:id="@+id/assignment_item_name_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/baloo"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/asap"
                 android:gravity="center_vertical"
                 android:textAppearance="@style/Theme.GradeTracker.Text.Style1"
+                android:textSize="20sp"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="Midterm" />
 
+            <ImageView
+                android:id="@+id/assignment_edit_button"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_edit"
+                android:contentDescription="@string/edit" />
+
             <LinearLayout
+                android:id="@+id/linearLayout3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/assignment_item_name_label">
@@ -43,7 +58,7 @@
                     android:layout_weight="1"
                     android:fontFamily="@font/patrickhand"
                     android:textAppearance="@style/Theme.GradeTracker.Text.Style2"
-                    android:textSize="28sp"
+                    android:textSize="20sp"
                     tools:text="Grade: 85%" />
 
                 <TextView
@@ -54,7 +69,7 @@
                     android:fontFamily="@font/patrickhand"
                     android:textAlignment="textEnd"
                     android:textAppearance="@style/Theme.GradeTracker.Text.Style2"
-                    android:textSize="28sp"
+                    android:textSize="20sp"
                     tools:text="Weight: 25%" />
             </LinearLayout>
 

@@ -8,6 +8,7 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import sheridan.simeoni.gradetracker.R
 import sheridan.simeoni.gradetracker.database.Assignment
+import sheridan.simeoni.gradetracker.database.AssignmentStatus
 import sheridan.simeoni.gradetracker.databinding.FragmentAssignmentItemBinding
 import sheridan.simeoni.gradetracker.helper.DragRecyclerView
 import sheridan.simeoni.gradetracker.model.KeyEnvelope
@@ -22,15 +23,15 @@ class AssignmentRecyclerViewAdapter(private val context: Context, private val vi
             notifyDataSetChanged()
         }
 
-    override fun swap(p1: Int, p2: Int) {
-        val temp = assignments!![p1]
+    override fun swap(position1: Int, position2: Int) {
+        val temp = assignments!![position1]
         assignments!!.remove(temp)
-        assignments!!.add(p2, temp)
-        notifyItemMoved(p1, p2)
+        assignments!!.add(position2, temp)
+        notifyItemMoved(position1, position2)
     }
 
-    override fun delete(index: Int) {
-        val assignment = assignments!![index]
+    override fun delete(position: Int) {
+        val assignment = assignments!![position]
         val action = AssignmentFragmentDirections.actionAssignmentToDelete(assignment.id, assignment.assignmentName)
         view.findNavController().navigate(action)
     }
@@ -59,6 +60,10 @@ class AssignmentRecyclerViewAdapter(private val context: Context, private val vi
                     else
                         context.getString(R.string.grade).plus(String.format("%.1f%%", (assignment.points/assignment.totalPoints.toFloat()) *100f))
             binding.assignmentItemWeightLabel.text = context.getString(R.string.assignment_weight).plus(String.format("%.1f%%", assignment.weight))
+            binding.assignmentEditButton.setOnClickListener {
+                val action = AssignmentFragmentDirections.actionAssignmentToAssignmentDialog(AssignmentStatus(true, assignment.toData()))
+                it.findNavController().navigate(action)
+            }
             binding.root.setOnClickListener {
                 val action = AssignmentFragmentDirections.actionAssignmentToGrade(KeyEnvelope(assignment.assignmentName, assignment.id))
                 it.findNavController().navigate(action)

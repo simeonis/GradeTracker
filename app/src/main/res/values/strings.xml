@@ -22,6 +22,7 @@
     <string name="blank">-</string>
     <string name="cancel">Cancel</string>
     <string name="ok">OK</string>
+    <string name="edit">Edit</string>
 
     <!-- Settings Fragment -->
     <string name="settings_image_content">Sun/Moon</string>
@@ -44,6 +45,8 @@
     <string name="add_term">Add Term</string>
     <string name="term_average">Average:\u0020</string>
     <string name="term_progress">Progress:\u0020</string>
+    <string name="start_date">Start Date</string>
+    <string name="end_date">End Date</string>
 
     <!-- Course Fragment -->
     <string name="add_course">Add Course</string>
@@ -60,9 +63,10 @@
     <string name="enter_assignment">Assignment</string>
     <string name="weight">Weight</string>
     <string name="assignment_name_hint">Assignment Name</string>
-    <string name="grade_points_hint">Maximum Grade</string>
+    <string name="grade_points_hint">Total Points</string>
     <string name="grade_weight_hint">Grade Weight (%)</string>
     <string name="add_assignment">Add Assignment</string>
+    <string name="edit_assignment">Edit Assignment</string>
     <string name="assignment_weight">Weight:\u0020</string>
     <string name="summary">Summary</string>
     <string name="current">Current</string>

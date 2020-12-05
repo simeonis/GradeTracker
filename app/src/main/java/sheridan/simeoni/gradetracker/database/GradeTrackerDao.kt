@@ -57,11 +57,20 @@ interface GradeTrackerDao {
     @Update(entity = Term::class)
     suspend fun updateTerms(terms: List<Term>)
 
+    @Update(entity = Term::class)
+    suspend fun updateTerm(terms: Term)
+
     @Update(entity = Course::class)
     suspend fun updateCourses(courses: List<Course>)
 
+    @Update(entity = Course::class)
+    suspend fun updateCourse(courses: Course)
+
     @Update(entity = Assignment::class)
     suspend fun updateAssignments(assignments: List<Assignment>)
+
+    @Update(entity = Assignment::class)
+    suspend fun updateAssignment(assignments: Assignment)
 
     @Query("SELECT COUNT(TermID) FROM Term")
     suspend fun getRowCount(): Int

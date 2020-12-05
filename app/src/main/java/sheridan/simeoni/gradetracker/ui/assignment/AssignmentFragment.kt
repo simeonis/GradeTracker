@@ -13,8 +13,10 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import sheridan.simeoni.gradetracker.R
 import sheridan.simeoni.gradetracker.database.Assignment
+import sheridan.simeoni.gradetracker.database.AssignmentStatus
 import sheridan.simeoni.gradetracker.databinding.FragmentAssignmentBinding
 import sheridan.simeoni.gradetracker.helper.DragManageAdapter
+import sheridan.simeoni.gradetracker.model.KeyEnvelope
 import sheridan.simeoni.gradetracker.ui.course.CourseViewModel
 import sheridan.simeoni.gradetracker.ui.course.CourseViewModelFactory
 import sheridan.simeoni.gradetracker.ui.dialog.AssignmentDialog
@@ -47,13 +49,16 @@ class AssignmentFragment : Fragment() {
         activity?.title = safeArgs.keyEnvelope.title
         viewModel.assignments.observe(viewLifecycleOwner) { adapter.assignments = it as MutableList<Assignment>? }
 
-        binding.assignmentAddButton.setOnClickListener { findNavController().navigate(R.id.action_assignment_to_assignmentDialog) }
+        binding.assignmentAddButton.setOnClickListener {
+            val action = AssignmentFragmentDirections.actionAssignmentToAssignmentDialog(AssignmentStatus(false, null))
+            findNavController().navigate(action)
+        }
+
         viewModel.course.observe(viewLifecycleOwner){
             binding.assignmentCurrentProgress.setProgress(it.grade.toInt())
             if(it.grade != -1.0f) { binding.assignmentCurrentNumberLabel.text = String.format("%.1f%%", it.grade) }
             else{ binding.assignmentCurrentNumberLabel.text = getString(R.string.blank) }
-        }
-        viewModel.course.observe(viewLifecycleOwner){
+
             binding.assignmentGoalProgress.setProgress(it.targetGrade.toInt())
             if(it.targetGrade != -1.0f){ binding.assignmentGoalNumberLabel.text = String.format("%.1f%%", it.targetGrade) }
             else{ binding.assignmentGoalNumberLabel.text = getString(R.string.blank) }
@@ -63,7 +68,10 @@ class AssignmentFragment : Fragment() {
         savedStateHandle?.set(AssignmentDialog.CONFIRMATION_ASSIGNMENT_RESULT, null) // Dialog will override this
         savedStateHandle?.getLiveData<AssignmentDialog.AssignmentDialogData>(AssignmentDialog.CONFIRMATION_ASSIGNMENT_RESULT)?.observe(viewLifecycleOwner)
         {
-            if (it != null) viewModel.add(it.name,-1, it.assignmentGrade, it.assignmentWeight)
+            if (it != null) {
+                if (it.edit) viewModel.edit(it.id, it.name, -1, it.assignmentGrade, it.assignmentWeight)
+                else viewModel.add(it.name,-1, it.assignmentGrade, it.assignmentWeight)
+            }
         }
         savedStateHandle?.getLiveData<Long>(ConfirmationDialog.CONFIRMATION_RESULT)?.observe(viewLifecycleOwner)
         {

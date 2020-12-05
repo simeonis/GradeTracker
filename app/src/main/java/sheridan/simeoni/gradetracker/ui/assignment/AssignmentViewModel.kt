@@ -30,7 +30,21 @@ class AssignmentViewModel(envelopeKey: Long, application: Application) : Android
 
             val courses = gradeTrackerDao.getAllCoursesList(course.termID)
             gradeTrackerDao.updateTermGrade(course.termID, GradeCalculator.termAverage(courses))
+        }
+    }
 
+    fun edit (id: Long, assignmentName: String, points: Int, totalPoints: Int, weight: Float) {
+        viewModelScope.launch {
+            gradeTrackerDao.updateAssignment(Assignment(id, _envelopeKey, assignmentName, points, totalPoints, weight))
+
+            //Update Upper-level Table
+            val course = gradeTrackerDao.getCourseData(_envelopeKey)
+
+            val assignments = gradeTrackerDao.getAllAssignmentsList(course.id)
+            gradeTrackerDao.updateCourseGrade(course.id, GradeCalculator.calculateGrade(assignments))
+
+            val courses = gradeTrackerDao.getAllCoursesList(course.termID)
+            gradeTrackerDao.updateTermGrade(course.termID, GradeCalculator.termAverage(courses))
         }
     }
 

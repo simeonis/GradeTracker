@@ -2,6 +2,21 @@ package sheridan.simeoni.gradetracker.database
 
 import androidx.room.*
 import androidx.room.ForeignKey.CASCADE
+import java.io.Serializable
+
+data class AssignmentStatus(
+       val edit: Boolean,
+       val assignment: AssignmentData?
+): Serializable
+
+data class AssignmentData(
+        val id: Long,
+        val courseID: Long,
+        val assignmentName: String,
+        val points: Int,
+        val totalPoints: Int,
+        val weight: Float
+)
 
 @Entity(tableName = "Assignment", foreignKeys = [ForeignKey(
         entity = Course::class,
@@ -28,4 +43,13 @@ data class Assignment(
 
     @ColumnInfo(name = "Weight")
     val weight: Float,
-)
+) {
+   companion object {
+       fun from(a: AssignmentData) : Assignment {
+           return Assignment(a.id, a.courseID, a.assignmentName, a.points, a.totalPoints, a.weight)
+       }
+   }
+    fun toData(): AssignmentData {
+        return AssignmentData(id, courseID, assignmentName, points, totalPoints, weight)
+    }
+}

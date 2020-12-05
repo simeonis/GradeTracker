@@ -125,7 +125,11 @@
         android:id="@+id/assignmentDialog"
         android:name="sheridan.simeoni.gradetracker.ui.dialog.AssignmentDialog"
         android:label="AssignmentDialog"
-        tools:layout="@layout/dialog_assignment"/>
+        tools:layout="@layout/dialog_assignment">
+        <argument
+            android:name="status"
+            app:argType="sheridan.simeoni.gradetracker.database.AssignmentStatus" />
+    </dialog>
     <fragment
         android:id="@+id/dataFragment"
         android:name="sheridan.simeoni.gradetracker.ui.DataFragment"
