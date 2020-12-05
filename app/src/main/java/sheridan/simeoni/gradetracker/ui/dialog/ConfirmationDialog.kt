@@ -1,14 +1,19 @@
 package sheridan.simeoni.gradetracker.ui.dialog
 
-import android.app.Dialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import androidx.appcompat.app.AlertDialog
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import sheridan.simeoni.gradetracker.R
+import sheridan.simeoni.gradetracker.databinding.DialogConfirmationBinding
 
+private lateinit var binding: DialogConfirmationBinding
 class ConfirmationDialog : DialogFragment() {
 
     companion object {
@@ -18,15 +23,20 @@ class ConfirmationDialog : DialogFragment() {
     private val safeArgs: ConfirmationDialogArgs by navArgs()
     private lateinit var navController: NavController
 
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+
+        binding = DialogConfirmationBinding.inflate(inflater, container, false)
+
+        dialog?.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
+
         navController = findNavController()
 
-        return AlertDialog.Builder(requireActivity(), R.style.Theme_GradeTracker_Dialog).apply {
-            setTitle("Delete Confirmation")
-            setMessage(String.format("Are you sure you want to delete %s?", safeArgs.message))
-            setPositiveButton(android.R.string.ok) { _, _ -> confirmed() }
-            setNegativeButton(android.R.string.cancel) {_, _ -> declined() }
-        }.create()
+        binding.doneButton.setOnClickListener { confirmed() }
+        binding.cancelButton.setOnClickListener { declined() }
+
+        binding.dialogConfirmationTitleLabel.text = getString(R.string.delete_confirmation)
+        binding.dialogConfirmationMsg.text = String.format("Are you sure you want to delete %s?", safeArgs.message)
+        return binding.root
     }
 
     private fun confirmed() {
