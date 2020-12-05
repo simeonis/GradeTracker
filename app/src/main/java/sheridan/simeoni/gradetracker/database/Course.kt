@@ -5,6 +5,20 @@ import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.ForeignKey.CASCADE
 import androidx.room.PrimaryKey
+import java.io.Serializable
+
+data class CourseStatus(
+        val edit: Boolean,
+        val course: CourseData?
+): Serializable
+
+data class CourseData(
+        val id: Long,
+        val termID: Long,
+        val courseName: String,
+        val grade: Float,
+        val targetGrade: Float
+)
 
 @Entity(tableName = "Course", foreignKeys = [ForeignKey(
         entity = Term::class,
@@ -28,4 +42,13 @@ data class Course(
 
     @ColumnInfo(name = "CourseTargetGrade")
     val targetGrade: Float,
-    )
+) {
+    companion object {
+        fun from(c: CourseData) : Course {
+            return Course(c.id, c.termID, c.courseName, c.grade, c.targetGrade)
+        }
+    }
+    fun toData(): CourseData {
+        return CourseData(id, termID, courseName, grade, targetGrade)
+    }
+}

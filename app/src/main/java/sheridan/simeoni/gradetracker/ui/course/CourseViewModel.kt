@@ -21,9 +21,15 @@ class CourseViewModel(envelopeKey: Long, application: Application) : AndroidView
 
     val courses : LiveData<List<Course>> = gradeTrackerDao.getAllCourses(_envelopeKey)
 
-    fun add (courseName : String, targetGrade: Int){
+    fun add (courseName : String, grade: Float, targetGrade: Float) {
         viewModelScope.launch {
-            gradeTrackerDao.insert(Course(0, _envelopeKey, courseName, -1f, targetGrade.toFloat()))
+            gradeTrackerDao.insert(Course(0, _envelopeKey, courseName, grade, targetGrade))
+        }
+    }
+
+    fun edit (id : Long, courseName : String, grade: Float, targetGrade: Float) {
+        viewModelScope.launch {
+            gradeTrackerDao.updateCourse(Course(id, _envelopeKey, courseName, grade, targetGrade))
         }
     }
 

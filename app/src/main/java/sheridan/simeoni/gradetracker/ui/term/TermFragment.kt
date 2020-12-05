@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import sheridan.simeoni.gradetracker.R
 import sheridan.simeoni.gradetracker.database.Term
+import sheridan.simeoni.gradetracker.database.TermStatus
 import sheridan.simeoni.gradetracker.databinding.FragmentTermBinding
 import sheridan.simeoni.gradetracker.helper.DragManageAdapter
 import sheridan.simeoni.gradetracker.ui.dialog.ConfirmationDialog.Companion.CONFIRMATION_RESULT
@@ -41,7 +42,10 @@ class TermFragment : Fragment() {
 
         viewModel.terms.observe(viewLifecycleOwner) { adapter.terms = it as MutableList<Term>? }
 
-        binding.termAddButton.setOnClickListener { findNavController().navigate(R.id.action_term_to_termDialog) }
+        binding.termAddButton.setOnClickListener {
+            val action = TermFragmentDirections.actionTermToTermDialog(TermStatus(false, null))
+            findNavController().navigate(action)
+        }
 
         val savedStateHandle = findNavController().currentBackStackEntry?.savedStateHandle
         savedStateHandle?.getLiveData<Long>(CONFIRMATION_RESULT)?.observe(viewLifecycleOwner)

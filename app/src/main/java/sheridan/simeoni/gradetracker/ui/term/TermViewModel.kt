@@ -1,6 +1,7 @@
 package sheridan.simeoni.gradetracker.ui.term
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
@@ -21,6 +22,12 @@ class TermViewModel(application: Application) : AndroidViewModel(application) {
         viewModelScope.launch {
             val position = gradeTrackerDao.getRowCount()
             gradeTrackerDao.insert(Term(0, position, termName, -1.0f, 0))
+        }
+    }
+
+    fun edit (id: Long, position: Int, name: String, grade: Float, progress: Int) {
+        viewModelScope.launch {
+            gradeTrackerDao.updateTerm(Term(id, position, name, grade, progress))
         }
     }
 

@@ -20,19 +20,33 @@
             android:paddingHorizontal="16dp"
             android:paddingBottom="8dp">
 
+            <ImageView
+                android:id="@+id/course_edit_button"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:contentDescription="@string/edit"
+                app:layout_constraintBottom_toTopOf="@+id/linearLayout4"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_edit" />
+
             <TextView
                 android:id="@+id/course_item_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
                 android:background="#FFFFFF"
-                android:fontFamily="@font/baloo"
+                android:fontFamily="@font/asap"
                 android:gravity="center_vertical"
                 android:textAppearance="@style/Theme.GradeTracker.Text.Style1"
+                android:textSize="20sp"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="PROG20082" />
 
             <LinearLayout
+                android:id="@+id/linearLayout4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -48,7 +62,7 @@
                     android:background="#FFFFFF"
                     android:fontFamily="@font/patrickhand"
                     android:textAppearance="@style/Theme.GradeTracker.Text.Style2"
-                    android:textSize="28sp"
+                    android:textSize="20sp"
                     tools:text="Grade: 100%" />
 
                 <TextView
@@ -60,7 +74,7 @@
                     android:fontFamily="@font/patrickhand"
                     android:textAlignment="textEnd"
                     android:textAppearance="@style/Theme.GradeTracker.Text.Style2"
-                    android:textSize="28sp"
+                    android:textSize="20sp"
                     tools:text="Target: 100%" />
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>

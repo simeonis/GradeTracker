@@ -43,6 +43,7 @@
     <string name="term_name_hint">Term Name</string>
     <string name="enter_term">Enter Term</string>
     <string name="add_term">Add Term</string>
+    <string name="edit_term">Edit Term</string>
     <string name="term_average">Average:\u0020</string>
     <string name="term_progress">Progress:\u0020</string>
     <string name="start_date">Start Date</string>
@@ -50,6 +51,7 @@
 
     <!-- Course Fragment -->
     <string name="add_course">Add Course</string>
+    <string name="edit_course">Edit Course</string>
     <string name="enter_course">Enter Course</string>
     <string name="enter_course_hint">Enter Course</string>
     <string name="enter_course_code">Enter Course Code</string>

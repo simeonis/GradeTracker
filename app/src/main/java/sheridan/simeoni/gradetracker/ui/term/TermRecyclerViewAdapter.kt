@@ -4,11 +4,11 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.get
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import sheridan.simeoni.gradetracker.R
 import sheridan.simeoni.gradetracker.database.Term
+import sheridan.simeoni.gradetracker.database.TermStatus
 import sheridan.simeoni.gradetracker.databinding.FragmentTermItemBinding
 import sheridan.simeoni.gradetracker.model.*
 import sheridan.simeoni.gradetracker.helper.DragRecyclerView
@@ -26,14 +26,14 @@ class TermRecyclerViewAdapter(
             notifyDataSetChanged()
         }
 
-    override fun swap(p1: Int, p2: Int) {
-        terms!![p1].position = p2
-        terms!![p2].position = p1
+    override fun swap(position1: Int, position2: Int) {
+        terms!![position1].position = position2
+        terms!![position2].position = position1
 
-        val term1 = terms!![p1]
+        val term1 = terms!![position1]
         terms!!.remove(term1)
-        terms!!.add(p2, term1)
-        notifyItemMoved(p1, p2)
+        terms!!.add(position2, term1)
+        notifyItemMoved(position1, position2)
     }
 
     override fun delete(position: Int) {
@@ -68,6 +68,10 @@ class TermRecyclerViewAdapter(
                         context.getString(R.string.term_average).plus(String.format("%.1f%%", term.grade))
             binding.termProgressLabel.text = context.getString(R.string.term_progress).plus(String.format("%d%%", term.progress))
             binding.termProgressBar.progress = term.progress
+            binding.termEditButton.setOnClickListener {
+                val action = TermFragmentDirections.actionTermToTermDialog(TermStatus(true, term.toData()))
+                it.findNavController().navigate(action)
+            }
             binding.root.setOnClickListener {
                 val action = TermFragmentDirections.actionTermToCourse(KeyEnvelope(term.termName, term.id))
                 it.findNavController().navigate(action)

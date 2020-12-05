@@ -8,6 +8,7 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import sheridan.simeoni.gradetracker.R
 import sheridan.simeoni.gradetracker.database.Course
+import sheridan.simeoni.gradetracker.database.CourseStatus
 import sheridan.simeoni.gradetracker.databinding.FragmentCourseItemBinding
 import sheridan.simeoni.gradetracker.helper.DragRecyclerView
 import sheridan.simeoni.gradetracker.model.*
@@ -22,15 +23,15 @@ class CourseRecyclerViewAdapter(private val context: Context, private val view: 
             notifyDataSetChanged()
         }
 
-    override fun swap(p1: Int, p2: Int) {
-        val temp = courses!![p1]
+    override fun swap(position1: Int, position2: Int) {
+        val temp = courses!![position1]
         courses!!.remove(temp)
-        courses!!.add(p2, temp)
-        notifyItemMoved(p1, p2)
+        courses!!.add(position2, temp)
+        notifyItemMoved(position1, position2)
     }
 
-    override fun delete(index: Int) {
-        val course = courses!![index]
+    override fun delete(position: Int) {
+        val course = courses!![position]
         val action = CourseFragmentDirections.actionCourseToDelete(course.id, course.courseName)
         view.findNavController().navigate(action)
     }
@@ -59,6 +60,10 @@ class CourseRecyclerViewAdapter(private val context: Context, private val view: 
                     else
                         context.getString(R.string.grade).plus(String.format("%.1f%%", course.grade))
             binding.courseGradeTargetLabel.text = context.getString(R.string.course_target).plus(String.format("%.1f%%", course.targetGrade))
+            binding.courseEditButton.setOnClickListener {
+                val action = CourseFragmentDirections.actionCourseToCourseDialog(CourseStatus(true, course.toData()))
+                it.findNavController().navigate(action)
+            }
             binding.root.setOnClickListener {
                 val action = CourseFragmentDirections.actionCourseToAssignment(KeyEnvelope(course.courseName, course.id))
                 it.findNavController().navigate(action)

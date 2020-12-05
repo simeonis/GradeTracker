@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.findFragment
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import sheridan.simeoni.gradetracker.R
 import sheridan.simeoni.gradetracker.databinding.DialogCourseBinding
 import sheridan.simeoni.gradetracker.ui.course.CourseFragment
@@ -23,37 +24,56 @@ class CourseDialog : DialogFragment() {
     }
 
     private lateinit var binding: DialogCourseBinding
+    private val safeArgs: CourseDialogArgs by navArgs()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = DialogCourseBinding.inflate(inflater, container, false)
 
-        dialog?.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
+        dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+        if (safeArgs.status.edit) { initEdit() }
 
         binding.doneButton.setOnClickListener { confirmed() }
         binding.cancelButton.setOnClickListener { dismiss() }
         return binding.root
     }
 
+    private fun initEdit() {
+        val course = safeArgs.status.course!!
+        binding.dialogCourseTitleLabel.text = getString(R.string.edit_course)
+        binding.dialogCourseNameInput.hint = course.courseName
+        binding.dialogCourseCodeInput.hint = "TODO"
+        binding.dialogCourseTargetInput.hint = course.targetGrade.toString()
+    }
+
     private fun confirmed(){
-        val courseName = binding.dialogCourseNameInput.text.toString()
-        val courseCode = binding.dialogCourseCodeInput.text.toString()
-        val courseTarget = binding.dialogCourseTargetInput.text.toString()
+        val status = safeArgs.status.edit
+        val course = safeArgs.status.course
+        var courseName = binding.dialogCourseNameInput.text.toString()
+        var courseCode = binding.dialogCourseCodeInput.text.toString()
+        var courseTarget = binding.dialogCourseTargetInput.text.toString()
 
         if(courseName.isEmpty()){
-            binding.dialogCourseNameInput.error = "required"
+            if (status) courseName = course!!.courseName
+            else binding.dialogCourseNameInput.error = "required"
         }
-        if(courseCode.isEmpty()){
-            binding.dialogCourseCodeInput.error = "required"
+        if(courseCode.isEmpty()) {
+            if (status) courseCode = "TODO"
+            else binding.dialogCourseCodeInput.error = "required"
         }
-        if(courseTarget.isEmpty()){
-            binding.dialogCourseTargetInput.error = "required"
+        if(courseTarget.isEmpty()) {
+            if (status) courseTarget = course!!.targetGrade.toString()
+            else binding.dialogCourseTargetInput.error = "required"
         }
-        else if (courseName.isNotEmpty() && courseCode.isNotEmpty()){
+        if ((courseName.isNotEmpty() && courseCode.isNotEmpty()) || status){
             val savedStateHandle = findNavController().previousBackStackEntry?.savedStateHandle
-            savedStateHandle?.set(CONFIRMATION_RESULT, CourseDialogData(courseName, courseCode, courseTarget.toInt()))
+            savedStateHandle?.set(CONFIRMATION_RESULT,
+                    CourseDialogData(status, course?.id ?: 0,
+                            courseName, courseCode,course?.grade ?: -1f, courseTarget.toFloat()))
             dismiss()
         }
-
     }
-    data class CourseDialogData(val name : String, val courseCode : String, val targetGrade : Int) : Serializable
+    data class CourseDialogData(val status: Boolean, val id: Long,
+                                val name : String, val courseCode : String,
+                                val grade : Float, val targetGrade : Float) : Serializable
 }

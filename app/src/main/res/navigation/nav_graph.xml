@@ -115,12 +115,20 @@
         android:id="@+id/termDialog"
         android:name="sheridan.simeoni.gradetracker.ui.dialog.TermDialog"
         android:label="TermDialog"
-        tools:layout="@layout/dialog_term"/>
+        tools:layout="@layout/dialog_term">
+        <argument
+            android:name="status"
+            app:argType="sheridan.simeoni.gradetracker.database.TermStatus" />
+    </dialog>
     <dialog
         android:id="@+id/courseDialog"
         android:name="sheridan.simeoni.gradetracker.ui.dialog.CourseDialog"
         android:label="CourseDialog"
-        tools:layout="@layout/dialog_course"/>
+        tools:layout="@layout/dialog_course">
+        <argument
+            android:name="status"
+            app:argType="sheridan.simeoni.gradetracker.database.CourseStatus" />
+    </dialog>
     <dialog
         android:id="@+id/assignmentDialog"
         android:name="sheridan.simeoni.gradetracker.ui.dialog.AssignmentDialog"

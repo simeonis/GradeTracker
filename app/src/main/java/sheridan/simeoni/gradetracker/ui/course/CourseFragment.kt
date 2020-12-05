@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import sheridan.simeoni.gradetracker.R
 import sheridan.simeoni.gradetracker.database.Course
+import sheridan.simeoni.gradetracker.database.CourseStatus
 import sheridan.simeoni.gradetracker.databinding.FragmentCourseBinding
 import sheridan.simeoni.gradetracker.helper.DragManageAdapter
 import sheridan.simeoni.gradetracker.ui.dialog.ConfirmationDialog
@@ -51,13 +52,19 @@ class CourseFragment : Fragment() {
         activity?.title = safeArgs.keyEnveloppe.title
         viewModel.courses.observe(viewLifecycleOwner) { adapter.courses = it as MutableList<Course>? }
 
-        binding.courseAddButton.setOnClickListener { findNavController().navigate(R.id.action_course_to_courseDialog) }
+        binding.courseAddButton.setOnClickListener {
+            val action = CourseFragmentDirections.actionCourseToCourseDialog(CourseStatus(false, null))
+            findNavController().navigate(action)
+        }
 
         val savedStateHandle: SavedStateHandle? = findNavController().currentBackStackEntry?.savedStateHandle
         savedStateHandle?.set(CourseDialog.CONFIRMATION_RESULT, null) // Dialog will override this
         savedStateHandle?.getLiveData<CourseDialogData>(CourseDialog.CONFIRMATION_RESULT)?.observe(viewLifecycleOwner)
         {
-            if (it != null) viewModel.add(it.name, it.targetGrade)
+            if (it != null) {
+                if (it.status) viewModel.edit(it.id, it.name, it.grade, it.targetGrade)
+                else viewModel.add(it.name, it.grade, it.targetGrade)
+            }
         }
         savedStateHandle?.getLiveData<Long>(ConfirmationDialog.CONFIRMATION_RESULT)?.observe(viewLifecycleOwner)
         {
