@@ -15,10 +15,12 @@ import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_NO
 import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import sheridan.simeoni.gradetracker.R
 import sheridan.simeoni.gradetracker.databinding.FragmentSettingsBinding
 import sheridan.simeoni.gradetracker.model.GradeCalculator
+import sheridan.simeoni.gradetracker.ui.course.CourseFragmentDirections
 
 class SettingsFragment : Fragment() {
 
@@ -68,7 +70,11 @@ class SettingsFragment : Fragment() {
             }
         }
         binding.settingsNightmodeSwitch.isChecked = sharedPreferences.getInt("theme", 0) == 1
-        binding.settingsResetButton.setOnClickListener { deleteAll() }
+        binding.settingsResetButton.setOnClickListener {
+//           val action = SettingsFragmentDirections.actionSettingsToConfirmationDialog(1,"Reset All Grades?")
+//            it.findNavController().navigate(action)
+            deleteAll()
+        }
 
         return binding.root
     }

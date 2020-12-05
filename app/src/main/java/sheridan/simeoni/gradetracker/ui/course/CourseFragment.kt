@@ -57,7 +57,7 @@ class CourseFragment : Fragment() {
         savedStateHandle?.set(CourseDialog.CONFIRMATION_RESULT, null) // Dialog will override this
         savedStateHandle?.getLiveData<CourseDialogData>(CourseDialog.CONFIRMATION_RESULT)?.observe(viewLifecycleOwner)
         {
-            if (it != null) viewModel.add(it.name, it.targetGrade)
+            if (it != null) viewModel.add(it.name, it.courseCode, it.targetGrade)
         }
         savedStateHandle?.getLiveData<Long>(ConfirmationDialog.CONFIRMATION_RESULT)?.observe(viewLifecycleOwner)
         {

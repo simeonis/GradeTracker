@@ -23,6 +23,9 @@ data class Course(
     @ColumnInfo(name = "CourseName")
     val courseName: String,
 
+    @ColumnInfo(name = "CourseCode")
+    val courseCode: String,
+
     @ColumnInfo(name = "CourseGrade")
     val grade: Float,
 

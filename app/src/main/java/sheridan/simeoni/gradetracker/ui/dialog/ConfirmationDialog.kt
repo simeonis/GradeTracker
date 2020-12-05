@@ -42,10 +42,12 @@ class ConfirmationDialog : DialogFragment() {
     private fun confirmed() {
         val savedStateHandle = navController.previousBackStackEntry?.savedStateHandle
         savedStateHandle?.set(CONFIRMATION_RESULT, safeArgs.requestCode)
+        dismiss()
     }
 
     private fun declined() {
         val savedStateHandle = navController.previousBackStackEntry?.savedStateHandle
         savedStateHandle?.set(CONFIRMATION_RESULT, -1L)
+        dismiss()
     }
 }

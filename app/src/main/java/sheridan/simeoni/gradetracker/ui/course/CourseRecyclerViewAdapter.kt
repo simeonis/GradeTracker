@@ -52,7 +52,7 @@ class CourseRecyclerViewAdapter(private val context: Context, private val view: 
             private val binding: FragmentCourseItemBinding, private val context: Context): RecyclerView.ViewHolder(binding.root) {
 
         fun bind(course: Course) {
-            binding.courseItemLabel.text = course.courseName
+            binding.courseItemLabel.text = course.courseCode
             binding.courseGradeLabel.text =
                     if(course.grade == -1.0f)
                         context.getString(R.string.grade).plus(context.getString(R.string.blank))
