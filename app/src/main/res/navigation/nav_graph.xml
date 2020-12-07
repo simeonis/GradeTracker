@@ -37,9 +37,6 @@
             app:popExitAnim="@anim/exit_left_to_right"
             app:popUpTo="@id/TermFragment" />
         <action
-            android:id="@+id/action_term_to_delete"
-            app:destination="@id/confirmationDialog" />
-        <action
             android:id="@+id/action_term_to_termDialog"
             app:destination="@id/termDialog" />
     </fragment>
@@ -59,9 +56,6 @@
             android:name="keyEnveloppe"
             app:argType="sheridan.simeoni.gradetracker.model.KeyEnvelope" />
         <action
-            android:id="@+id/action_course_to_delete"
-            app:destination="@id/confirmationDialog" />
-        <action
             android:id="@+id/action_course_to_courseDialog"
             app:destination="@id/courseDialog" />
     </fragment>
@@ -80,9 +74,6 @@
         <argument
             android:name="keyEnvelope"
             app:argType="sheridan.simeoni.gradetracker.model.KeyEnvelope" />
-        <action
-            android:id="@+id/action_assignment_to_delete"
-            app:destination="@id/confirmationDialog" />
         <action
             android:id="@+id/action_assignment_to_assignmentDialog"
             app:destination="@id/assignmentDialog" />
@@ -160,4 +151,5 @@
         app:exitAnim="@anim/exit_bottom_to_top"
         app:popEnterAnim="@anim/enter_bottom_to_top"
         app:popExitAnim="@anim/exit_top_to_bottom" />
+    <action android:id="@+id/action_global_to_confirmation" app:destination="@id/confirmationDialog" />
 </navigation>

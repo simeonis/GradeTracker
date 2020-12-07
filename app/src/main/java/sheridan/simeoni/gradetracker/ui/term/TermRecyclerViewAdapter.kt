@@ -38,7 +38,7 @@ class TermRecyclerViewAdapter(
 
     override fun delete(position: Int) {
         val term = terms!![position]
-        val action = TermFragmentDirections.actionTermToDelete(term.id, term.termName)
+        val action = TermFragmentDirections.actionGlobalToConfirmation(term.id, term.termName)
         view.findNavController().navigate(action)
     }
 

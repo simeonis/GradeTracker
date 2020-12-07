@@ -32,7 +32,7 @@ class CourseRecyclerViewAdapter(private val context: Context, private val view: 
 
     override fun delete(position: Int) {
         val course = courses!![position]
-        val action = CourseFragmentDirections.actionCourseToDelete(course.id, course.courseName)
+        val action = CourseFragmentDirections.actionGlobalToConfirmation(course.id, course.courseName)
         view.findNavController().navigate(action)
     }
 

@@ -32,7 +32,7 @@ class AssignmentRecyclerViewAdapter(private val context: Context, private val vi
 
     override fun delete(position: Int) {
         val assignment = assignments!![position]
-        val action = AssignmentFragmentDirections.actionAssignmentToDelete(assignment.id, assignment.assignmentName)
+        val action = AssignmentFragmentDirections.actionGlobalToConfirmation(assignment.id, assignment.assignmentName)
         view.findNavController().navigate(action)
     }
 
