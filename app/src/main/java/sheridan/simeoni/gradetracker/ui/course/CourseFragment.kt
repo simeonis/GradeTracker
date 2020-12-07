@@ -11,10 +11,8 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.SavedStateHandle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
-import sheridan.simeoni.gradetracker.R
 import sheridan.simeoni.gradetracker.database.Course
 import sheridan.simeoni.gradetracker.database.CourseStatus
 import sheridan.simeoni.gradetracker.databinding.FragmentCourseBinding
@@ -62,8 +60,8 @@ class CourseFragment : Fragment() {
         savedStateHandle?.getLiveData<CourseDialogData>(CourseDialog.CONFIRMATION_RESULT)?.observe(viewLifecycleOwner)
         {
             if (it != null) {
-                if (it.status) viewModel.edit(it.id, it.name, it.grade, it.targetGrade)
-                else viewModel.add(it.name, it.grade, it.targetGrade)
+                if (it.status) viewModel.edit(it.id, it.name,it.courseCode, it.grade, it.targetGrade)
+                else viewModel.add(it.name,it.courseCode, it.grade, it.targetGrade)
             }
         }
         savedStateHandle?.getLiveData<Long>(ConfirmationDialog.CONFIRMATION_RESULT)?.observe(viewLifecycleOwner)

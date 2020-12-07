@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.get
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import sheridan.simeoni.gradetracker.R
@@ -12,6 +13,7 @@ import sheridan.simeoni.gradetracker.database.TermStatus
 import sheridan.simeoni.gradetracker.databinding.FragmentTermItemBinding
 import sheridan.simeoni.gradetracker.model.*
 import sheridan.simeoni.gradetracker.helper.DragRecyclerView
+import java.util.*
 
 class TermRecyclerViewAdapter(
         private val context: Context,
@@ -63,7 +65,7 @@ class TermRecyclerViewAdapter(
                     else
                         context.getString(R.string.term_average).plus(String.format("%.1f%%", term.grade))
             binding.termProgressLabel.text = context.getString(R.string.term_progress).plus(String.format("%d%%", term.progress))
-            binding.termProgressBar.progress = term.progress
+            binding.termProgressBar.progress = GradeCalculator.getTermProgress(term.start, term.end, Calendar.getInstance().time.getTime())
             binding.termEditButton.setOnClickListener {
                 val action = TermFragmentDirections.actionTermToTermDialog(TermStatus(true, term.toData()))
                 it.findNavController().navigate(action)

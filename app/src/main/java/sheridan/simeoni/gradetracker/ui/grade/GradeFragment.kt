@@ -1,11 +1,14 @@
 package sheridan.simeoni.gradetracker.ui.grade
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
 import android.widget.SeekBar
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
@@ -68,6 +71,7 @@ class GradeFragment : Fragment() {
     }
 
     private fun updateGrade() {
+
         val gradeEarned = binding.gradeEarnedInput
         if (gradeEarned.text.isEmpty()) {
             gradeEarned.error = "required"
@@ -75,6 +79,7 @@ class GradeFragment : Fragment() {
             viewModel.updateGrade(gradeEarned.text.toString().toInt())
             gradeEarned.hint = String.format("%d/50", gradeEarned.text.toString().toInt())
             gradeEarned.setText("")
+            hideKeyboard()
         }
     }
 
@@ -86,5 +91,10 @@ class GradeFragment : Fragment() {
         val result = viewModel.getPotential(progress) ?: 0f
         binding.gradeTotalNumberLabel.text = String.format("%.1f%%", result)
         binding.gradeTotalProgress.progress = result.toInt()
+    }
+    fun hideKeyboard() {
+        val inputMethodManager = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(
+                requireActivity().currentFocus?.getWindowToken(), 0)
     }
 }

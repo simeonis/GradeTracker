@@ -4,17 +4,22 @@ package sheridan.simeoni.gradetracker.ui.dialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.Window
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import sheridan.simeoni.gradetracker.R
 import sheridan.simeoni.gradetracker.ui.term.TermViewModel
 import sheridan.simeoni.gradetracker.databinding.DialogTermBinding
+import sheridan.simeoni.gradetracker.model.GradeCalculator
+
+
+import java.text.SimpleDateFormat
+import java.util.*
+
 
 class TermDialog : DialogFragment() {
 
@@ -26,12 +31,36 @@ class TermDialog : DialogFragment() {
 
         binding = DialogTermBinding.inflate(inflater, container, false)
 
-        dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-
-        if (safeArgs.status.edit) { initEdit() }
+        dialog?.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
 
         binding.doneButton.setOnClickListener { submit() }
         binding.cancelButton.setOnClickListener { dismiss() }
+        binding.dialogTermNameInput.setOnClickListener {
+            binding.dialogTermNameWrapper.error = null
+            binding.dialogTermNameWrapper.isErrorEnabled = false
+        }
+        binding.dialogTermNameInput.addTextChangedListener {
+            binding.dialogTermNameWrapper.error = null
+            binding.dialogTermNameWrapper.isErrorEnabled = false
+        }
+        binding.dialogTermStartInput.setOnClickListener {
+            binding.dialogTermStartWrapper.error = null
+            binding.dialogTermStartWrapper.isErrorEnabled = false
+        }
+
+        binding.dialogTermStartInput.addTextChangedListener {
+            binding.dialogTermStartWrapper.error = null
+            binding.dialogTermStartWrapper.isErrorEnabled = false
+        }
+        binding.dialogTermEndInput.setOnClickListener {
+            binding.dialogTermEndWrapper.error = null
+            binding.dialogTermEndWrapper.isErrorEnabled = false
+        }
+
+        binding.dialogTermEndInput.addTextChangedListener {
+            binding.dialogTermEndWrapper.error = null
+            binding.dialogTermEndWrapper.isErrorEnabled = false
+        }
         return binding.root
     }
 
@@ -48,13 +77,38 @@ class TermDialog : DialogFragment() {
         val term = safeArgs.status.term
         var termName = binding.dialogTermNameInput.text.toString()
 
+        val termStart = binding.dialogTermStartInput.text.toString()
+        val termEnd = binding.dialogTermEndInput.text.toString()
+
         if(termName.isEmpty()) {
             if (status) termName = term!!.termName
             else binding.dialogTermNameInput.error = "required"
         }
-        if (termName.isNotEmpty() || status){
-            if (status) termViewModel.edit(term!!.id, term.position, termName, term.grade, term.progress)
-            else termViewModel.add(termName)
+        if(termStart.isEmpty()){
+            if (status) termStart = "TODO"
+            else{
+                binding.dialogTermStartWrapper.isErrorEnabled = true
+                binding.dialogTermStartWrapper.error = "Required"
+            }
+        }
+        if(termEnd.isEmpty()){
+            if (status) termEnd = "TODO"
+            else {
+                binding.dialogTermEndWrapper.isErrorEnabled = true
+                binding.dialogTermEndWrapper.error = "Required"
+            }
+        }
+
+        if ((termName.isNotEmpty() && termStart.isNotEmpty() && termEnd.isNotEmpty()) || status){
+            if (status) termViewModel.edit(term!!.id, term.position, termName, term.grade, term.progress, term.start, term.end)
+            else{
+                val sDate = SimpleDateFormat("dd/MM/yyyy", Locale.CANADA).parse(termStart);
+                val eDate = SimpleDateFormat("dd/MM/yyyy", Locale.CANADA).parse(termEnd);
+                val start = sDate!!.getTime()
+                val end = eDate!!.getTime()
+                termViewModel.add(termName, start, end)
+                binding.dialogTermNameWrapper.error = null
+            }
             dismiss()
         }
     }

@@ -18,10 +18,10 @@ class TermViewModel(application: Application) : AndroidViewModel(application) {
 
     val terms : LiveData<List<Term>> = gradeTrackerDao.getAllTerms()
 
-    fun add (termName: String) {
+    fun add (termName: String, start : Long, end : Long) {
         viewModelScope.launch {
             val position = gradeTrackerDao.getRowCount()
-            gradeTrackerDao.insert(Term(0, position, termName, -1.0f, 0))
+            gradeTrackerDao.insert(Term(0, position, termName, -1.0f, start, end))
         }
     }
 
