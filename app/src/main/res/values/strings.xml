@@ -25,6 +25,7 @@
     <string name="edit">Edit</string>
 
     <!-- Settings Fragment -->
+    <string name="greeting">Welcome back %1$s!</string>
     <string name="settings_image_content">Sun/Moon</string>
     <string name="filler_grade">Filler Grade</string>
     <string name="filler_grade_hint">70%</string>

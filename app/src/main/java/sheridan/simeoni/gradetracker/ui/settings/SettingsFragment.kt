@@ -39,6 +39,7 @@ class SettingsFragment : Fragment() {
         val sharedPreferences : SharedPreferences = requireActivity().getSharedPreferences("My_Prefs", Context.MODE_PRIVATE)
         editor = sharedPreferences.edit()
 
+        binding.settingsGreetingLabel.text = getString(R.string.greeting, sharedPreferences.getString("Name", " "))
         binding.settingsFillerGradeInput.hint = String.format("%.0f%%", sharedPreferences.getFloat("filler_grade", 1f) * 100f)
 
         binding.settingsNightmodeSwitch.setOnCheckedChangeListener {
