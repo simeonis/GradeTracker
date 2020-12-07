@@ -11,6 +11,7 @@ import sheridan.simeoni.gradetracker.database.Assignment
 import sheridan.simeoni.gradetracker.database.AssignmentStatus
 import sheridan.simeoni.gradetracker.databinding.FragmentAssignmentItemBinding
 import sheridan.simeoni.gradetracker.helper.DragRecyclerView
+import sheridan.simeoni.gradetracker.model.GradeCalculator
 import sheridan.simeoni.gradetracker.model.KeyEnvelope
 
 class AssignmentRecyclerViewAdapter(private val context: Context, private val view: View) :
@@ -36,9 +37,6 @@ class AssignmentRecyclerViewAdapter(private val context: Context, private val vi
         view.findNavController().navigate(action)
     }
 
-    override fun update() {
-    }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder.from(parent, context)
     }
@@ -54,11 +52,17 @@ class AssignmentRecyclerViewAdapter(private val context: Context, private val vi
 
         fun bind(assignment: Assignment) {
             binding.assignmentItemNameLabel.text = assignment.assignmentName
-            binding.assignmentItemGradeLabel.text =
-                    if (assignment.points == -1)
-                        context.getString(R.string.grade).plus(context.getString(R.string.blank))
-                    else
-                        context.getString(R.string.grade).plus(String.format("%.1f%%", (assignment.points/assignment.totalPoints.toFloat()) *100f))
+            binding.assignmentItemGradeLabel.apply {
+                var message = context.getString(R.string.grade)
+                if (assignment.points == -1) {
+                    message += (GradeCalculator.fillerGrade * 100).toString().plus("%")
+                    this.alpha = 0.25f
+                } else {
+                    message += (String.format("%.1f%%", (assignment.points / assignment.totalPoints.toFloat()) * 100f))
+                    this.alpha = 1f
+                }
+                this.text = message
+            }
             binding.assignmentItemWeightLabel.text = context.getString(R.string.assignment_weight).plus(String.format("%.1f%%", assignment.weight))
             binding.assignmentEditButton.setOnClickListener {
                 val action = AssignmentFragmentDirections.actionAssignmentToAssignmentDialog(AssignmentStatus(true, assignment.toData()))

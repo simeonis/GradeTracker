@@ -42,10 +42,6 @@ class TermRecyclerViewAdapter(
         view.findNavController().navigate(action)
     }
 
-    override fun update() {
-        viewModel.update(terms!!)
-    }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder.from(parent, context)
     }

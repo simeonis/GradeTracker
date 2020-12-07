@@ -16,9 +16,4 @@ class DragManageAdapter(adapter: DragRecyclerView, dragDirections: Int, swipeDir
     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
         myAdapter.delete(viewHolder.adapterPosition)
     }
-
-    override fun clearView(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder) {
-        super.clearView(recyclerView, viewHolder)
-        myAdapter.update()
-    }
 }

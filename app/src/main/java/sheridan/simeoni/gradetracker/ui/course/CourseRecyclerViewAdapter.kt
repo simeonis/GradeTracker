@@ -36,9 +36,6 @@ class CourseRecyclerViewAdapter(private val context: Context, private val view: 
         view.findNavController().navigate(action)
     }
 
-    override fun update() {
-    }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder.from(parent, context)
     }
