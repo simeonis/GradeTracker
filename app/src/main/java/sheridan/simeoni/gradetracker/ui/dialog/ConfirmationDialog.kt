@@ -26,6 +26,7 @@ class ConfirmationDialog : DialogFragment() {
             setMessage(String.format("Are you sure you want to delete %s?", safeArgs.message))
             setPositiveButton(android.R.string.ok) { _, _ -> confirmed() }
             setNegativeButton(android.R.string.cancel) {_, _ -> declined() }
+            isCancelable = false
         }.create()
     }
 
