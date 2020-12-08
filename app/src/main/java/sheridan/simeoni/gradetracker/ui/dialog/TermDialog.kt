@@ -1,6 +1,5 @@
 package sheridan.simeoni.gradetracker.ui.dialog
 
-
 import android.app.DatePickerDialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -15,10 +14,10 @@ import androidx.navigation.fragment.navArgs
 import com.google.android.material.textfield.TextInputEditText
 import sheridan.simeoni.gradetracker.R
 import sheridan.simeoni.gradetracker.databinding.DialogTermBinding
+import sheridan.simeoni.gradetracker.helper.DateConverters
 import sheridan.simeoni.gradetracker.ui.term.TermViewModel
 import java.text.SimpleDateFormat
 import java.util.*
-
 
 class TermDialog : DialogFragment() {
 
@@ -38,22 +37,30 @@ class TermDialog : DialogFragment() {
         binding.doneButton.setOnClickListener { submit() }
         binding.cancelButton.setOnClickListener { dismiss() }
         binding.dialogTermNameInput.setOnClickListener {
-            binding.dialogTermNameWrapper.error = null
-            binding.dialogTermNameWrapper.isErrorEnabled = false
+            binding.dialogTermNameWrapper.apply{
+                error = null
+                isErrorEnabled = false
+            }
         }
         binding.dialogTermNameInput.addTextChangedListener {
-            binding.dialogTermNameWrapper.error = null
-            binding.dialogTermNameWrapper.isErrorEnabled = false
+            binding.dialogTermNameWrapper.apply{
+                error = null
+                isErrorEnabled = false
+            }
         }
         binding.dialogTermStartDate.setOnClickListener {
-            binding.dialogTermStartWrapper.error = null
-            binding.dialogTermStartWrapper.isErrorEnabled = false
+            binding.dialogTermStartWrapper.apply{
+                error = null
+                isErrorEnabled = false
+            }
             datePicker(binding.dialogTermStartDate)
         }
 
         binding.dialogTermEndDate.setOnClickListener {
-            binding.dialogTermEndWrapper.error = null
-            binding.dialogTermEndWrapper.isErrorEnabled = false
+            binding.dialogTermEndWrapper.apply{
+                error = null
+                isErrorEnabled = false
+            }
             datePicker(binding.dialogTermEndDate)
         }
 
@@ -64,8 +71,8 @@ class TermDialog : DialogFragment() {
         val term = safeArgs.status.term!!
         binding.dialogTermTitleLabel.text = getString(R.string.edit_term)
         binding.dialogTermNameInput.hint = term.termName
-        binding.dialogTermStartDate.hint = "TODO"
-        binding.dialogTermEndDate.hint = "TODO"
+        binding.dialogTermStartDate.hint = getDate(term.start)
+        binding.dialogTermEndDate.hint = getDate(term.end)
     }
 
     private fun submit(){
@@ -81,20 +88,23 @@ class TermDialog : DialogFragment() {
             else binding.dialogTermNameWrapper.error = "required"
         }
         if(termStart.isEmpty()){
-            if (status) termStart = "TODO"
+            if (status) termStart = getDate(term!!.start)
             else{
-                binding.dialogTermStartWrapper.isErrorEnabled = true
-                binding.dialogTermStartWrapper.error = "Required"
+                binding.dialogTermEndWrapper.apply{
+                    isErrorEnabled = true
+                    error = "Required"
+                }
             }
         }
         if(termEnd.isEmpty()){
-            if (status) termEnd = "TODO"
+            if (status) termEnd = getDate(term!!.end)
             else {
-                binding.dialogTermEndWrapper.isErrorEnabled = true
-                binding.dialogTermEndWrapper.error = "Required"
+                binding.dialogTermEndWrapper.apply{
+                    isErrorEnabled = true
+                    error = "Required"
+                }
             }
         }
-
 
         if ((termName.isNotEmpty() && termStart.isNotEmpty() && termEnd.isNotEmpty()) || status  ){
 
@@ -104,8 +114,10 @@ class TermDialog : DialogFragment() {
             val end = eDate!!.getTime()
 
             if((end - start) < 0){
-               binding.dialogTermEndWrapper.isErrorEnabled = true
-               binding.dialogTermEndWrapper.error = "Invalid date range"
+               binding.dialogTermEndWrapper.apply{
+                   isErrorEnabled = true
+                   error = "Invalid date range"
+               }
             }
             else{
                 if (status) {
@@ -129,8 +141,13 @@ class TermDialog : DialogFragment() {
         // date picker dialog
         val picker = DatePickerDialog(this.binding.root.context,
                 { view, year, monthOfYear, dayOfMonth ->
-                    text.setText("$dayOfMonth" + "/" + (monthOfYear + 1) + "/" + year)
+                    text.setText(getString(R.string.date_picker_string, dayOfMonth, monthOfYear + 1, year))
                 }, _year, _month, _day)
         picker.show()
+    }
+
+    private fun getDate(time : Long): String{
+        val tempDate = DateConverters.fromTimestamp(time)
+        return DateConverters.formatDate(tempDate)
     }
 }
