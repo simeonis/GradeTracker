@@ -4,7 +4,6 @@ package sheridan.simeoni.gradetracker.ui.dialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +12,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import sheridan.simeoni.gradetracker.R
 import sheridan.simeoni.gradetracker.databinding.DialogAssignmentBinding
-import sheridan.simeoni.gradetracker.ui.assignment.AssignmentFragmentArgs
 import java.io.Serializable
 
 class AssignmentDialog : DialogFragment() {
@@ -30,6 +28,27 @@ class AssignmentDialog : DialogFragment() {
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
         if (safeArgs.status.edit) initEdit()
+
+        binding.dialogAssignmentNameInput.setOnClickListener {
+            binding.dialogAssignmentNameWrapper.apply{
+                error = null
+                isErrorEnabled = false
+            }
+        }
+        binding.dialogAssignmentGradeInput.setOnClickListener {
+            binding.dialogAssignmentGradeWrapper.apply{
+                error = null
+                isErrorEnabled = false
+            }
+        }
+
+        binding.dialogAssignmentWeightInput.setOnClickListener {
+            binding.dialogAssignmentWeightWrapper.apply{
+                error = null
+                isErrorEnabled = false
+            }
+        }
+
         binding.doneButton.setOnClickListener { confirmed() }
         binding.cancelButton.setOnClickListener { dismiss() }
         return binding.root
@@ -55,15 +74,15 @@ class AssignmentDialog : DialogFragment() {
 
         if(name.isEmpty()){
             if (status) name = assignment!!.assignmentName
-            else { binding.dialogAssignmentNameInput.error = "required"; validated = false }
+            else { binding.dialogAssignmentNameWrapper.error = "required"; validated = false }
         }
         if(grade.isEmpty()){
             if (status) grade = assignment!!.totalPoints.toString()
-            else { binding.dialogAssignmentGradeInput.error = "required"; validated = false }
+            else { binding.dialogAssignmentGradeWrapper.error = "required"; validated = false }
         }
         if(weight.isEmpty()){
             if (status) weight = assignment!!.weight.toString()
-            else { binding.dialogAssignmentWeightInput.error = "required"; validated = false }
+            else { binding.dialogAssignmentWeightWrapper.error = "required"; validated = false }
         }
         if (validated) {
             val savedStateHandle = findNavController().previousBackStackEntry?.savedStateHandle

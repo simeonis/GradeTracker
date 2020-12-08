@@ -86,6 +86,12 @@
     <style name="Theme.GradeTracker.dialogButtons" >
         <item name="android:background">@drawable/dialog_button_background</item>
     </style>
+    <style name="Theme.GradeTracker.dialog_text_edit_top" parent="Widget.AppCompat.EditText" >
+        <item name="android:background">@drawable/edit_bk</item>
+    </style>
+    <style name="Theme.GradeTracker.dialog_text_edit" parent="Widget.AppCompat.EditText" >
+        <item name="android:background">#FFFFFF</item>
+    </style>
 
     <style name="Theme.GradeTracker.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 </resources>

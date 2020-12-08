@@ -70,4 +70,12 @@
         <item name="android:background">#042339</item>
     </style>
 
+    <style name="Theme.GradeTracker.dialog_text_edit_top" parent="Widget.AppCompat.EditText" >
+        <item name="android:background">@drawable/edit_bk_nightmode</item>
+    </style>
+
+    <style name="Theme.GradeTracker.dialog_text_edit" parent="Widget.AppCompat.EditText" >
+        <item name="android:background">#3C3F49</item>
+    </style>
+
 </resources>
