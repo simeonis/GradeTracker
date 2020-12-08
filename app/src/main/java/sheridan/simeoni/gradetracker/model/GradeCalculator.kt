@@ -35,7 +35,7 @@ class GradeCalculator {
                 if (item.grade != -1f)
                     total += item.grade
             }
-            return if (list.isNotEmpty())
+            return if (list.isNotEmpty() && total > 0)
                 total / list.size.toFloat()
             else -1.0f
         }
@@ -49,7 +49,7 @@ class GradeCalculator {
         // Calculate potential course grade base on potentialGrade
         fun calculatePotential(assignment: Assignment, course: Course, potentialGrade: Int): Float {
             val grade = removeAssignmentFromAverageGrade(assignment, course)
-            return grade + ((potentialGrade * assignment.totalPoints / 100) / assignment.totalPoints.toFloat() * assignment.weight)
+            return abs(grade + ((potentialGrade * assignment.totalPoints / 100) / assignment.totalPoints.toFloat() * assignment.weight))
         }
 
         // Removes assignment grade from average course grade

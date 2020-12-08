@@ -30,11 +30,13 @@ class AssignmentFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentAssignmentBinding.inflate(inflater, container, false)
-        adapter = AssignmentRecyclerViewAdapter(requireContext(), binding.root)
+        binding.lifecycleOwner = this
+        adapter = AssignmentRecyclerViewAdapter(requireContext(), binding.root, viewModel)
         activity?.title = safeArgs.keyEnvelope.title // Set fragment title
 
         // Enabling Drag and Swipe Support
-        val callback = DragManageAdapter(adapter, ItemTouchHelper.UP.or(ItemTouchHelper.DOWN), ItemTouchHelper.RIGHT)
+        val callback = DragManageAdapter(adapter, ItemTouchHelper.UP.or(ItemTouchHelper.DOWN),
+                ItemTouchHelper.RIGHT)
         val helper = ItemTouchHelper(callback)
 
         // Connect RecyclerView adapter

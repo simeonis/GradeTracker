@@ -1,6 +1,7 @@
 package sheridan.simeoni.gradetracker.ui.course
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,8 +13,12 @@ import sheridan.simeoni.gradetracker.database.CourseStatus
 import sheridan.simeoni.gradetracker.databinding.FragmentCourseItemBinding
 import sheridan.simeoni.gradetracker.helper.DragRecyclerView
 import sheridan.simeoni.gradetracker.model.*
+import sheridan.simeoni.gradetracker.ui.term.TermViewModel
 
-class CourseRecyclerViewAdapter(private val context: Context, private val view: View) :
+class CourseRecyclerViewAdapter(
+        private val context: Context,
+        private val view: View,
+        private val viewModel: CourseViewModel) :
         RecyclerView.Adapter<CourseRecyclerViewAdapter.ViewHolder>(),
         DragRecyclerView {
 
@@ -34,9 +39,12 @@ class CourseRecyclerViewAdapter(private val context: Context, private val view: 
     override fun getItemCount(): Int = courses?.size ?: 0
 
     override fun swap(position1: Int, position2: Int) {
-        val temp = courses!![position1]
-        courses!!.remove(temp)
-        courses!!.add(position2, temp)
+        courses!![position1].position = position2
+        courses!![position2].position = position1
+
+        val course1 = courses!![position1]
+        courses!!.remove(course1)
+        courses!!.add(position2, course1)
         notifyItemMoved(position1, position2)
     }
 
@@ -44,6 +52,10 @@ class CourseRecyclerViewAdapter(private val context: Context, private val view: 
         val course = courses!![position]
         val action = CourseFragmentDirections.actionGlobalToConfirmation(course.id, course.courseName)
         view.findNavController().navigate(action)
+    }
+
+    override fun update() {
+        viewModel.update(courses!!)
     }
 
     class ViewHolder private constructor(
@@ -62,6 +74,10 @@ class CourseRecyclerViewAdapter(private val context: Context, private val view: 
             binding.root.setOnClickListener {
                 val action = CourseFragmentDirections.actionCourseToAssignment(KeyEnvelope(course.courseName, course.id))
                 it.findNavController().navigate(action)
+            }
+            binding.root.setOnLongClickListener {
+                it.isSelected = true
+                true
             }
             binding.executePendingBindings()
         }

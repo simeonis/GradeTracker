@@ -12,6 +12,7 @@ import androidx.navigation.fragment.navArgs
 import sheridan.simeoni.gradetracker.R
 import sheridan.simeoni.gradetracker.databinding.DialogAssignmentBinding
 import java.io.Serializable
+import java.text.FieldPosition
 
 class AssignmentDialog : DialogFragment() {
 
@@ -86,12 +87,12 @@ class AssignmentDialog : DialogFragment() {
         if (validated) {
             val savedStateHandle = findNavController().previousBackStackEntry?.savedStateHandle
             savedStateHandle?.set(CONFIRMATION_ASSIGNMENT_RESULT, AssignmentDialogData(
-                    status, assignment?.id ?: 0, name, grade.toInt(), weight.toFloat()))
+                    status, assignment?.id ?: 0,assignment?.position ?: -1,name, grade.toInt(), weight.toFloat()))
             dismiss()
         }
     }
 
-    data class AssignmentDialogData(val edit: Boolean, val id: Long,
+    data class AssignmentDialogData(val edit: Boolean, val id: Long, val position: Int,
                                     val name : String, val totalPoints : Int,
                                     val weight : Float) : Serializable
 }

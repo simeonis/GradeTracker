@@ -79,8 +79,8 @@
     <string name="course_grade">Course Grade</string>
     <string name="days_until_due">Days Until Due:</string>
     <string name="possible_grades">Possible Grades</string>
-    <string name="minimum_requirement">Minimum Requirement:</string>
-    <string name="grade_earned">Grade Earned:</string>
+    <string name="minimum_requirement">Minimum Requirement</string>
+    <string name="grade_earned">Grade Earned</string>
     <string name="update">Update</string>
     <string name="grade_hint">-/70</string>
     <string name="delete_confirmation">Delete Confirmation</string>

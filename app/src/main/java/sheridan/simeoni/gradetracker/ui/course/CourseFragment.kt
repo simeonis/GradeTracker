@@ -31,7 +31,8 @@ class CourseFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentCourseBinding.inflate(inflater, container, false)
-        adapter = CourseRecyclerViewAdapter(requireContext(), binding.root)
+        binding.lifecycleOwner = this
+        adapter = CourseRecyclerViewAdapter(requireContext(), binding.root, viewModel)
         activity?.title = safeArgs.keyEnveloppe.title
 
         // Enabling Drag and Swipe Support

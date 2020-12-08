@@ -16,6 +16,7 @@ data class CourseStatus(
 data class CourseData(
         val id: Long,
         val termID: Long,
+        val position: Int,
         val courseName: String,
         val courseCode: String,
         val grade: Float,
@@ -36,6 +37,9 @@ data class Course(
     @ColumnInfo(name = "TermID")
     val termID: Long,
 
+    @ColumnInfo(name = "Position")
+    var position: Int,
+
     @ColumnInfo(name = "CourseName")
     val courseName: String,
 
@@ -50,13 +54,16 @@ data class Course(
 ) {
     companion object {
         fun from(c: CourseData) : Course {
-            return Course(c.id, c.termID, c.courseName,c.courseCode, c.grade, c.targetGrade)
+            return Course(c.id, c.termID, c.position, c.courseName,c.courseCode, c.grade, c.targetGrade)
         }
         fun from(c: CourseDialogData, termID: Long) : Course {
-            return Course(c.id, termID, c.name, c.courseCode, c.grade, c.targetGrade)
+            return Course(c.id, termID, c.position, c.name, c.courseCode, c.grade, c.targetGrade)
+        }
+        fun from(c: CourseDialogData, termID: Long, position: Int) : Course {
+            return Course(c.id, termID, position, c.name, c.courseCode, c.grade, c.targetGrade)
         }
     }
     fun toData(): CourseData {
-        return CourseData(id, termID, courseName,courseCode, grade, targetGrade)
+        return CourseData(id, termID, position, courseName, courseCode, grade, targetGrade)
     }
 }

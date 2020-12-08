@@ -14,7 +14,10 @@ import sheridan.simeoni.gradetracker.helper.DragRecyclerView
 import sheridan.simeoni.gradetracker.model.GradeCalculator
 import sheridan.simeoni.gradetracker.model.KeyEnvelope
 
-class AssignmentRecyclerViewAdapter(private val context: Context, private val view: View) :
+class AssignmentRecyclerViewAdapter(
+        private val context: Context,
+        private val view: View,
+        private val viewModel: AssignmentViewModel) :
         RecyclerView.Adapter<AssignmentRecyclerViewAdapter.ViewHolder>(),
         DragRecyclerView {
 
@@ -35,9 +38,12 @@ class AssignmentRecyclerViewAdapter(private val context: Context, private val vi
     override fun getItemCount(): Int = assignments?.size ?: 0
 
     override fun swap(position1: Int, position2: Int) {
-        val temp = assignments!![position1]
-        assignments!!.remove(temp)
-        assignments!!.add(position2, temp)
+        assignments!![position1].position = position2
+        assignments!![position2].position = position1
+
+        val term1 = assignments!![position1]
+        assignments!!.remove(term1)
+        assignments!!.add(position2, term1)
         notifyItemMoved(position1, position2)
     }
 
@@ -45,6 +51,10 @@ class AssignmentRecyclerViewAdapter(private val context: Context, private val vi
         val assignment = assignments!![position]
         val action = AssignmentFragmentDirections.actionGlobalToConfirmation(assignment.id, assignment.assignmentName)
         view.findNavController().navigate(action)
+    }
+
+    override fun update() {
+        viewModel.update(assignments!!)
     }
 
     class ViewHolder private constructor(
@@ -71,6 +81,10 @@ class AssignmentRecyclerViewAdapter(private val context: Context, private val vi
             binding.root.setOnClickListener {
                 val action = AssignmentFragmentDirections.actionAssignmentToGrade(KeyEnvelope(assignment.assignmentName, assignment.id))
                 it.findNavController().navigate(action)
+            }
+            binding.root.setOnLongClickListener {
+                it.isSelected = true
+                true
             }
             binding.executePendingBindings()
         }

@@ -17,7 +17,7 @@ class TermViewModel(application: Application) : AndroidViewModel(application) {
 
     fun add (termName: String, start : Long, end : Long) {
         viewModelScope.launch {
-            val position = gradeTrackerDao.getRowCount()
+            val position = gradeTrackerDao.getTermRowCount()
             gradeTrackerDao.insert(Term(0, position, termName, -1.0f, start, end))
         }
     }
@@ -25,6 +25,12 @@ class TermViewModel(application: Application) : AndroidViewModel(application) {
     fun edit (id: Long, position: Int, name: String, grade: Float, start: Long, end : Long) {
         viewModelScope.launch {
             gradeTrackerDao.updateTerm(Term(id, position, name, grade, start, end))
+        }
+    }
+
+    fun update(newTerm: List<Term>) {
+        viewModelScope.launch {
+            gradeTrackerDao.updateTerms(newTerm)
         }
     }
 

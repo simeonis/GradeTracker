@@ -1,6 +1,7 @@
 package sheridan.simeoni.gradetracker.ui.term
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -30,6 +31,16 @@ class TermRecyclerViewAdapter(
             notifyDataSetChanged()
         }
 
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        return ViewHolder.from(parent, context)
+    }
+
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.bind(terms!![position])
+    }
+
+    override fun getItemCount(): Int = terms?.size ?: 0
+
     override fun swap(position1: Int, position2: Int) {
         terms!![position1].position = position2
         terms!![position2].position = position1
@@ -46,15 +57,9 @@ class TermRecyclerViewAdapter(
         view.findNavController().navigate(action)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder.from(parent, context)
+    override fun update() {
+        viewModel.update(terms!!)
     }
-
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(terms!![position])
-    }
-
-    override fun getItemCount(): Int = terms?.size ?: 0
 
     class ViewHolder private constructor(
             private val binding: FragmentTermItemBinding, private val context: Context): RecyclerView.ViewHolder(binding.root) {
@@ -62,15 +67,12 @@ class TermRecyclerViewAdapter(
         fun bind(term: Term) {
             binding.termItemLabel.text = term.termName
             binding.termPercentLabel.text =
-                    if(term.grade == -1.0f)
+                    if(term.grade < 0)
                         context.getString(R.string.term_average).plus(context.getString(R.string.blank))
                     else
                         context.getString(R.string.term_average).plus(String.format("%.1f%%", term.grade))
 
             val cal =  Calendar.getInstance().time
-            cal.seconds = 0
-            cal.hours = 0
-            cal.minutes = 0
 
 
 
