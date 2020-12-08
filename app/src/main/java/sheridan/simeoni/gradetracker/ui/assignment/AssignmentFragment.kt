@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import sheridan.simeoni.gradetracker.R
@@ -16,12 +15,9 @@ import sheridan.simeoni.gradetracker.database.Assignment
 import sheridan.simeoni.gradetracker.database.AssignmentStatus
 import sheridan.simeoni.gradetracker.databinding.FragmentAssignmentBinding
 import sheridan.simeoni.gradetracker.helper.DragManageAdapter
-import sheridan.simeoni.gradetracker.model.KeyEnvelope
-import sheridan.simeoni.gradetracker.ui.course.CourseViewModel
-import sheridan.simeoni.gradetracker.ui.course.CourseViewModelFactory
-import sheridan.simeoni.gradetracker.ui.dialog.AssignmentDialog
-import sheridan.simeoni.gradetracker.ui.dialog.ConfirmationDialog
-import sheridan.simeoni.gradetracker.ui.dialog.CourseDialog
+import sheridan.simeoni.gradetracker.ui.dialog.AssignmentDialog.AssignmentDialogData
+import sheridan.simeoni.gradetracker.ui.dialog.AssignmentDialog.Companion.CONFIRMATION_ASSIGNMENT_RESULT
+import sheridan.simeoni.gradetracker.ui.dialog.ConfirmationDialog.Companion.CONFIRMATION_RESULT
 
 class AssignmentFragment : Fragment() {
 
@@ -35,46 +31,51 @@ class AssignmentFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentAssignmentBinding.inflate(inflater, container, false)
         adapter = AssignmentRecyclerViewAdapter(requireContext(), binding.root)
+        activity?.title = safeArgs.keyEnvelope.title // Set fragment title
 
-        val callback = DragManageAdapter(adapter, ItemTouchHelper.UP.or(ItemTouchHelper.DOWN),
-                ItemTouchHelper.RIGHT)
+        // Enabling Drag and Swipe Support
+        val callback = DragManageAdapter(adapter, ItemTouchHelper.UP.or(ItemTouchHelper.DOWN), ItemTouchHelper.RIGHT)
         val helper = ItemTouchHelper(callback)
 
+        // Connect RecyclerView adapter
         with(binding) {
             assignmentRecycler.adapter = adapter
             assignmentRecycler.layoutManager = LinearLayoutManager(context)
             helper.attachToRecyclerView(assignmentRecycler)
         }
 
-        activity?.title = safeArgs.keyEnvelope.title
+        // Update RecyclerView on Assignment LiveData change
         viewModel.assignments.observe(viewLifecycleOwner) { adapter.assignments = it as MutableList<Assignment>? }
 
+        // Navigate to AssignmentDialog
         binding.assignmentAddButton.setOnClickListener {
             val action = AssignmentFragmentDirections.actionAssignmentToAssignmentDialog(AssignmentStatus(false, null))
             findNavController().navigate(action)
         }
 
+        // Update "Summary" on Course LiveData changes
         viewModel.course.observe(viewLifecycleOwner){
-            binding.assignmentCurrentProgress.setProgress(it.grade.toInt())
+            // Current Grade
+            binding.assignmentCurrentProgress.progress = it.grade.toInt()
             if(it.grade != -1.0f) { binding.assignmentCurrentNumberLabel.text = String.format("%.1f%%", it.grade) }
             else{ binding.assignmentCurrentNumberLabel.text = getString(R.string.blank) }
-
-            binding.assignmentGoalProgress.setProgress(it.targetGrade.toInt())
+            // Target Grade
+            binding.assignmentGoalProgress.progress = it.targetGrade.toInt()
             if(it.targetGrade != -1.0f){ binding.assignmentGoalNumberLabel.text = String.format("%.1f%%", it.targetGrade) }
             else{ binding.assignmentGoalNumberLabel.text = getString(R.string.blank) }
         }
 
+        // Prepare to listen for data from previous BackStack
         val savedStateHandle = findNavController().currentBackStackEntry?.savedStateHandle
-        savedStateHandle?.set(AssignmentDialog.CONFIRMATION_ASSIGNMENT_RESULT, null) // Dialog will override this
-        savedStateHandle?.getLiveData<AssignmentDialog.AssignmentDialogData>(AssignmentDialog.CONFIRMATION_ASSIGNMENT_RESULT)?.observe(viewLifecycleOwner)
+        savedStateHandle?.set(CONFIRMATION_ASSIGNMENT_RESULT, null) // Dialog will override this
+
+        // Listen for data coming from AssignmentDialog
+        savedStateHandle?.getLiveData<AssignmentDialogData>(CONFIRMATION_ASSIGNMENT_RESULT)?.observe(viewLifecycleOwner)
         {
-            if (it != null) {
-                if (it.edit) viewModel.edit(it.id, it.name, -1, it.assignmentGrade, it.assignmentWeight)
-                else viewModel.add(it.name,-1, it.assignmentGrade, it.assignmentWeight)
-            }
+            it?.apply { if (it.edit) viewModel.edit(it) else viewModel.add(it) }
         }
-        savedStateHandle?.getLiveData<Long>(ConfirmationDialog.CONFIRMATION_RESULT)?.observe(viewLifecycleOwner)
-        {
+        // Listen for data coming from ConfirmationDialog
+        savedStateHandle?.getLiveData<Long>(CONFIRMATION_RESULT)?.observe(viewLifecycleOwner) {
             if (it >= 0) viewModel.delete(it) else adapter.notifyDataSetChanged()
         }
 

@@ -10,7 +10,6 @@ import sheridan.simeoni.gradetracker.database.GradeTrackerDao
 import sheridan.simeoni.gradetracker.database.GradeTrackerDatabase
 import sheridan.simeoni.gradetracker.model.GradeCalculator
 
-
 class CourseViewModel(envelopeKey: Long, application: Application) : AndroidViewModel(application) {
     private val gradeTrackerDao : GradeTrackerDao = GradeTrackerDatabase.getInstance(application).gradeTrackerDao
     private val _envelopeKey : Long = envelopeKey
@@ -31,10 +30,7 @@ class CourseViewModel(envelopeKey: Long, application: Application) : AndroidView
 
     fun delete (courseID: Long) {
         viewModelScope.launch {
-            //Delete Course
             gradeTrackerDao.deleteCourse(courseID)
-
-            //Update Upper-level Table
             val courses = gradeTrackerDao.getAllCoursesList(_envelopeKey)
             gradeTrackerDao.updateTermGrade(_envelopeKey, GradeCalculator.termAverage(courses))
         }

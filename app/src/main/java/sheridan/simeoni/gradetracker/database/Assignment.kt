@@ -2,6 +2,7 @@ package sheridan.simeoni.gradetracker.database
 
 import androidx.room.*
 import androidx.room.ForeignKey.CASCADE
+import sheridan.simeoni.gradetracker.ui.dialog.AssignmentDialog.AssignmentDialogData
 import java.io.Serializable
 
 data class AssignmentStatus(
@@ -47,6 +48,9 @@ data class Assignment(
    companion object {
        fun from(a: AssignmentData) : Assignment {
            return Assignment(a.id, a.courseID, a.assignmentName, a.points, a.totalPoints, a.weight)
+       }
+       fun from(a: AssignmentDialogData, courseID: Long) : Assignment {
+           return Assignment(a.id, courseID, a.name, -1, a.totalPoints, a.weight)
        }
    }
     fun toData(): AssignmentData {

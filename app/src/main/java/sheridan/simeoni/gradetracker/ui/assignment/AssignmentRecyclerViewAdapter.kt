@@ -24,6 +24,16 @@ class AssignmentRecyclerViewAdapter(private val context: Context, private val vi
             notifyDataSetChanged()
         }
 
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        return ViewHolder.from(parent, context)
+    }
+
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.bind(assignments!![position])
+    }
+
+    override fun getItemCount(): Int = assignments?.size ?: 0
+
     override fun swap(position1: Int, position2: Int) {
         val temp = assignments!![position1]
         assignments!!.remove(temp)
@@ -36,16 +46,6 @@ class AssignmentRecyclerViewAdapter(private val context: Context, private val vi
         val action = AssignmentFragmentDirections.actionGlobalToConfirmation(assignment.id, assignment.assignmentName)
         view.findNavController().navigate(action)
     }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder.from(parent, context)
-    }
-
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(assignments!![position])
-    }
-
-    override fun getItemCount(): Int = assignments?.size ?: 0
 
     class ViewHolder private constructor(
         private val binding: FragmentAssignmentItemBinding, private val context: Context): RecyclerView.ViewHolder(binding.root) {

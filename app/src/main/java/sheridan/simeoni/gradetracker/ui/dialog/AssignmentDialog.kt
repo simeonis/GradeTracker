@@ -27,11 +27,9 @@ class AssignmentDialog : DialogFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = DialogAssignmentBinding.inflate(inflater, container, false)
-
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
-        if (safeArgs.status.edit) { initEdit() }
-
+        if (safeArgs.status.edit) initEdit()
         binding.doneButton.setOnClickListener { confirmed() }
         binding.cancelButton.setOnClickListener { dismiss() }
         return binding.root
@@ -50,33 +48,32 @@ class AssignmentDialog : DialogFragment() {
     private fun confirmed(){
         val status = safeArgs.status.edit
         val assignment = safeArgs.status.assignment
-        var assignmentName = binding.dialogAssignmentNameInput.text.toString()
-        var assignmentGrade = binding.dialogAssignmentGradeInput.text.toString()
-        var assignmentWeight = binding.dialogAssignmentWeightInput.text.toString()
+        var name = binding.dialogAssignmentNameInput.text.toString()
+        var grade = binding.dialogAssignmentGradeInput.text.toString()
+        var weight = binding.dialogAssignmentWeightInput.text.toString()
+        var validated = true
 
-        if(assignmentName.isEmpty()){
-            if (status) assignmentName = assignment!!.assignmentName
-            else binding.dialogAssignmentNameInput.error = "required"
+        if(name.isEmpty()){
+            if (status) name = assignment!!.assignmentName
+            else { binding.dialogAssignmentNameInput.error = "required"; validated = false }
         }
-        if(assignmentGrade.isEmpty()){
-            if (status) assignmentGrade = assignment!!.totalPoints.toString()
-            else binding.dialogAssignmentGradeInput.error = "required"
+        if(grade.isEmpty()){
+            if (status) grade = assignment!!.totalPoints.toString()
+            else { binding.dialogAssignmentGradeInput.error = "required"; validated = false }
         }
-        if(assignmentWeight.isEmpty()){
-            if (status) assignmentWeight = assignment!!.weight.toString()
-            else binding.dialogAssignmentWeightInput.error = "required"
+        if(weight.isEmpty()){
+            if (status) weight = assignment!!.weight.toString()
+            else { binding.dialogAssignmentWeightInput.error = "required"; validated = false }
         }
-        if ((assignmentName.isNotEmpty() && assignmentGrade.isNotEmpty()) || status){
+        if (validated) {
             val savedStateHandle = findNavController().previousBackStackEntry?.savedStateHandle
-            savedStateHandle?.set(CONFIRMATION_ASSIGNMENT_RESULT,
-                    AssignmentDialogData(status, assignment?.id ?: 0,
-                            assignmentName, assignmentGrade.toInt(), assignmentWeight.toFloat()))
+            savedStateHandle?.set(CONFIRMATION_ASSIGNMENT_RESULT, AssignmentDialogData(
+                    status, assignment?.id ?: 0, name, grade.toInt(), weight.toFloat()))
             dismiss()
         }
-
     }
 
     data class AssignmentDialogData(val edit: Boolean, val id: Long,
-                                    val name : String, val assignmentGrade : Int,
-                                    val assignmentWeight : Float) : Serializable
+                                    val name : String, val totalPoints : Int,
+                                    val weight : Float) : Serializable
 }
