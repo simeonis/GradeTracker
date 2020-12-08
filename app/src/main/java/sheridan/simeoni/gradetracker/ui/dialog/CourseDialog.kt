@@ -7,14 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.findFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import sheridan.simeoni.gradetracker.R
 import sheridan.simeoni.gradetracker.databinding.DialogCourseBinding
-import sheridan.simeoni.gradetracker.ui.course.CourseFragment
 import java.io.Serializable
 
 class CourseDialog : DialogFragment() {
@@ -32,6 +28,26 @@ class CourseDialog : DialogFragment() {
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
         if (safeArgs.status.edit) { initEdit() }
+
+        binding.dialogCourseNameWrapper.setOnClickListener {
+            binding.dialogCourseNameWrapper.apply{
+                error = null
+                isErrorEnabled = false
+            }
+        }
+        binding.dialogCourseCodeWrapper.setOnClickListener {
+            binding.dialogCourseCodeWrapper.apply{
+                error = null
+                isErrorEnabled = false
+            }
+        }
+
+        binding.dialogCourseTargetWrapper.setOnClickListener {
+            binding.dialogCourseTargetWrapper.apply{
+                error = null
+                isErrorEnabled = false
+            }
+        }
 
         binding.doneButton.setOnClickListener { confirmed() }
         binding.cancelButton.setOnClickListener { dismiss() }
@@ -55,15 +71,15 @@ class CourseDialog : DialogFragment() {
 
         if(courseName.isEmpty()){
             if (status) courseName = course!!.courseName
-            else binding.dialogCourseNameInput.error = "required"
+            else binding.dialogCourseNameWrapper.error = "required"
         }
         if(courseCode.isEmpty()) {
             if (status) courseCode = course!!.courseCode
-            else binding.dialogCourseCodeInput.error = "required"
+            else binding.dialogCourseCodeWrapper.error = "required"
         }
         if(courseTarget.isEmpty()) {
             if (status) courseTarget = course!!.targetGrade.toString()
-            else binding.dialogCourseTargetInput.error = "required"
+            else binding.dialogCourseTargetWrapper.error = "required"
         }
         if ((courseName.isNotEmpty() && courseCode.isNotEmpty()) || status){
             val savedStateHandle = findNavController().previousBackStackEntry?.savedStateHandle
