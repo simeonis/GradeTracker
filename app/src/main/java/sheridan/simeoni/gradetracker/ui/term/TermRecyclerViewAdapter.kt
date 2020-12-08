@@ -13,6 +13,7 @@ import sheridan.simeoni.gradetracker.database.TermStatus
 import sheridan.simeoni.gradetracker.databinding.FragmentTermItemBinding
 import sheridan.simeoni.gradetracker.model.*
 import sheridan.simeoni.gradetracker.helper.DragRecyclerView
+import java.time.LocalDate
 import java.util.*
 import kotlin.time.days
 
@@ -70,6 +71,8 @@ class TermRecyclerViewAdapter(
             cal.seconds = 0
             cal.hours = 0
             cal.minutes = 0
+
+
 
             val progress = GradeCalculator.getTermProgress(term.start, term.end, cal.time)
             binding.termProgressLabel.text = context.getString(R.string.term_progress).plus(String.format("%d%%", progress))
