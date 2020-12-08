@@ -30,7 +30,7 @@ class AssignmentFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentAssignmentBinding.inflate(inflater, container, false)
-        adapter = AssignmentRecyclerViewAdapter(requireContext(), binding.root)
+        adapter = AssignmentRecyclerViewAdapter(requireContext(), binding.root, viewModel)
         activity?.title = safeArgs.keyEnvelope.title // Set fragment title
 
         // Enabling Drag and Swipe Support

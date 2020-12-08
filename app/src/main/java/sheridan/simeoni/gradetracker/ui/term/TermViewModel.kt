@@ -28,6 +28,12 @@ class TermViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
+    fun update(newTerm: List<Term>) {
+        viewModelScope.launch {
+            gradeTrackerDao.updateTerms(newTerm)
+        }
+    }
+
     fun delete (termID: Long) {
         viewModelScope.launch {
             gradeTrackerDao.deleteTerm(termID)

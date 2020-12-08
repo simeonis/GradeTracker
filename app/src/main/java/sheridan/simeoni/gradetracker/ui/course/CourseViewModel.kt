@@ -8,6 +8,7 @@ import kotlinx.coroutines.launch
 import sheridan.simeoni.gradetracker.database.Course
 import sheridan.simeoni.gradetracker.database.GradeTrackerDao
 import sheridan.simeoni.gradetracker.database.GradeTrackerDatabase
+import sheridan.simeoni.gradetracker.database.Term
 import sheridan.simeoni.gradetracker.model.GradeCalculator
 import sheridan.simeoni.gradetracker.ui.dialog.CourseDialog.CourseDialogData
 
@@ -26,6 +27,12 @@ class CourseViewModel(envelopeKey: Long, application: Application) : AndroidView
     fun edit (c : CourseDialogData) {
         viewModelScope.launch {
             gradeTrackerDao.updateCourse(Course.from(c, _envelopeKey))
+        }
+    }
+
+    fun update(newCourses: List<Course>) {
+        viewModelScope.launch {
+            gradeTrackerDao.updateCourses(newCourses)
         }
     }
 

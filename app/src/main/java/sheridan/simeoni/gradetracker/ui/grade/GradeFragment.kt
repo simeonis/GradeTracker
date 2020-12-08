@@ -1,15 +1,12 @@
 package sheridan.simeoni.gradetracker.ui.grade
 
-import android.content.Context
-import android.content.SharedPreferences
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
-import android.view.inputmethod.InputMethodManager
 import android.widget.SeekBar
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import sheridan.simeoni.gradetracker.databinding.FragmentGradeBinding
@@ -28,6 +25,7 @@ class GradeFragment : Fragment() {
         binding = FragmentGradeBinding.inflate(inflater, container, false)
         activity?.title = safeArgs.keyEnvelope.title
 
+        // Update UI on Assignment LiveData change
         viewModel.assignment.observe(viewLifecycleOwner) {
             if (it.points < 0) {
                 binding.gradeSeekBar.progress = (GradeCalculator.fillerGrade * it.totalPoints).toInt()
@@ -37,6 +35,8 @@ class GradeFragment : Fragment() {
                 binding.gradeEarnedInput.hint = String.format("%s/%s", it.points, it.totalPoints)
             }
         }
+
+        // Update UI on Course LiveData change
         viewModel.course.observe(viewLifecycleOwner) {
             if (it.grade < 0) {
                 binding.gradeTotalNumberLabel.text = String.format("%s", "-")
@@ -46,10 +46,11 @@ class GradeFragment : Fragment() {
                 binding.gradeTotalProgress.progress = it.grade.toInt()
             }
         }
-        viewModel.requiredGrade.observe(viewLifecycleOwner) {
-            binding.gradeFractionLabel.text = String.format("%s/%s", it.first, it.second)
-            binding.gradePercentageLabel.text = String.format("%.1f%%", (it.first / it.second.toFloat()*100))
-        }
+
+        // Update Minimum Grade Requirement
+        viewModel.setRequired(binding.gradeFractionLabel, binding.gradePercentageLabel, binding.gradeRequirementTip)
+
+        // OnSubmit Listener for Input Text
         binding.gradeEarnedInput.setOnEditorActionListener {
             _, event, _ ->
             if(event == EditorInfo.IME_ACTION_DONE) {
@@ -58,6 +59,8 @@ class GradeFragment : Fragment() {
             }
             else {false}
         }
+
+        // SeekBar Listener
         binding.gradeSeekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
                 possibleGrade(progress)
@@ -65,15 +68,14 @@ class GradeFragment : Fragment() {
             override fun onStartTrackingTouch(seekBar: SeekBar) {}
             override fun onStopTrackingTouch(seekBar: SeekBar) {}
         })
+
         return binding.root
     }
 
     private fun updateGrade() {
-
         val gradeEarned = binding.gradeEarnedInput
-        if (gradeEarned.text.isEmpty()) {
-            gradeEarned.error = "required"
-        } else {
+        if (gradeEarned.text.isEmpty()) gradeEarned.error = "required"
+        else {
             viewModel.updateGrade(gradeEarned.text.toString().toInt())
             gradeEarned.hint = String.format("%d/50", gradeEarned.text.toString().toInt())
             gradeEarned.setText("")

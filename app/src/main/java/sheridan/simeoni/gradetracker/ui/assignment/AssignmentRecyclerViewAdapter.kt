@@ -14,7 +14,10 @@ import sheridan.simeoni.gradetracker.helper.DragRecyclerView
 import sheridan.simeoni.gradetracker.model.GradeCalculator
 import sheridan.simeoni.gradetracker.model.KeyEnvelope
 
-class AssignmentRecyclerViewAdapter(private val context: Context, private val view: View) :
+class AssignmentRecyclerViewAdapter(
+        private val context: Context,
+        private val view: View,
+        private val viewModel: AssignmentViewModel) :
         RecyclerView.Adapter<AssignmentRecyclerViewAdapter.ViewHolder>(),
         DragRecyclerView {
 
@@ -45,6 +48,10 @@ class AssignmentRecyclerViewAdapter(private val context: Context, private val vi
         val assignment = assignments!![position]
         val action = AssignmentFragmentDirections.actionGlobalToConfirmation(assignment.id, assignment.assignmentName)
         view.findNavController().navigate(action)
+    }
+
+    override fun update() {
+        viewModel.update(assignments!!)
     }
 
     class ViewHolder private constructor(

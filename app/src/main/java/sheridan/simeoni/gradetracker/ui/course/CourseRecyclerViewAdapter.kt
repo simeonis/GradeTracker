@@ -12,8 +12,12 @@ import sheridan.simeoni.gradetracker.database.CourseStatus
 import sheridan.simeoni.gradetracker.databinding.FragmentCourseItemBinding
 import sheridan.simeoni.gradetracker.helper.DragRecyclerView
 import sheridan.simeoni.gradetracker.model.*
+import sheridan.simeoni.gradetracker.ui.term.TermViewModel
 
-class CourseRecyclerViewAdapter(private val context: Context, private val view: View) :
+class CourseRecyclerViewAdapter(
+        private val context: Context,
+        private val view: View,
+        private val viewModel: CourseViewModel) :
         RecyclerView.Adapter<CourseRecyclerViewAdapter.ViewHolder>(),
         DragRecyclerView {
 
@@ -44,6 +48,10 @@ class CourseRecyclerViewAdapter(private val context: Context, private val view: 
         val course = courses!![position]
         val action = CourseFragmentDirections.actionGlobalToConfirmation(course.id, course.courseName)
         view.findNavController().navigate(action)
+    }
+
+    override fun update() {
+        viewModel.update(courses!!)
     }
 
     class ViewHolder private constructor(

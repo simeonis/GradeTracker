@@ -1,9 +1,10 @@
 package sheridan.simeoni.gradetracker.ui.grade
 
 import android.app.Application
+import android.content.Context
+import android.widget.TextView
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import sheridan.simeoni.gradetracker.database.Assignment
@@ -18,7 +19,6 @@ class GradeViewModel(envelopeKey: Long, application: Application) : AndroidViewM
 
     val assignment : LiveData<Assignment> = gradeTrackerDao.getAssignment(_envelopeKey)
     val course : LiveData<Course> = gradeTrackerDao.getCourseFromGrade(_envelopeKey)
-    val requiredGrade : LiveData<Pair<Int, Int>> = getRequired()
 
     fun updateGrade(points : Int){
         viewModelScope.launch {
@@ -35,22 +35,22 @@ class GradeViewModel(envelopeKey: Long, application: Application) : AndroidViewM
         }
     }
 
-    private fun getRequired() : LiveData<Pair<Int, Int>> {
-        val result = MutableLiveData<Pair<Int, Int>>()
-        viewModelScope.launch {
-            val assignment = gradeTrackerDao.getAssignmentData(_envelopeKey)
-            val course = gradeTrackerDao.getCourseData(assignment.courseID)
-            val points = GradeCalculator.minimumRequirement(assignment, course)
-            result.postValue(Pair(points, assignment.totalPoints))
-        }
-        return result
-    }
-
     fun getPotential(progress: Int): Float? {
         return assignment.value?.let {
             course.value?.let {
                 itCourse -> GradeCalculator.calculatePotential(it, itCourse, progress)
             }
+        }
+    }
+
+    fun setRequired(gradeFractionLabel: TextView, gradePercentageLabel: TextView, gradeRequirementTip: TextView) {
+        viewModelScope.launch {
+            val assignment = gradeTrackerDao.getAssignmentData(_envelopeKey)
+            val course = gradeTrackerDao.getCourseData(assignment.courseID)
+            val points = GradeCalculator.minimumRequirement(assignment, course)
+            gradeFractionLabel.text = String.format("%s/%s", points, assignment.totalPoints)
+            gradePercentageLabel.text = String.format("%.1f%%", (points / assignment.totalPoints.toFloat()*100))
+            gradeRequirementTip.text = String.format("(Course Grade: %.1f%%)", if (course.grade < 0) 0.0f else course.grade)
         }
     }
 }
