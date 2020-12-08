@@ -14,13 +14,6 @@
         android:elevation="6dp"
         tools:context=".ui.grade.GradeFragment">
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline11"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_begin="205dp" />
-
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView2"
             android:layout_width="0dp"
@@ -54,23 +47,18 @@
 
                 <TextView
                     android:id="@+id/grade_total_number_label"
-                    android:layout_width="125dp"
-                    android:layout_height="75dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="32dp"
-                    android:autoSizeMaxTextSize="56dp"
-                    android:autoSizeMinTextSize="16dp"
-                    android:autoSizeStepGranularity="2dp"
-                    android:autoSizeTextType="uniform"
                     android:background="@android:color/transparent"
                     android:fontFamily="@font/patrickhand"
-                    android:gravity="center"
                     android:textAppearance="@style/Theme.GradeTracker.Text.Style2"
-                    android:textSize="56sp"
+                    android:textSize="60sp"
                     app:layout_constraintBottom_toBottomOf="@+id/grade_total_progress"
                     app:layout_constraintEnd_toEndOf="@+id/grade_total_progress"
                     app:layout_constraintStart_toStartOf="@+id/grade_total_progress"
                     app:layout_constraintTop_toTopOf="@+id/grade_total_progress"
-                    tools:text="99.9%" />
+                    tools:text="96.5%" />
 
                 <TextView
                     android:id="@+id/grade_total_label"
@@ -140,124 +128,98 @@
 
         </androidx.cardview.widget.CardView>
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardView6"
-            android:layout_width="0dp"
+        <TextView
+            android:id="@+id/grade_requirement_label"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:theme="@style/Theme.GradeTracker.CardView"
-            app:cardCornerRadius="8dp"
+            android:fontFamily="@font/patrickhand"
+            android:gravity="center"
+            android:padding="16dp"
+            android:text="@string/minimum_requirement"
+            android:textAppearance="@style/Theme.GradeTracker.Text.Style1"
+            android:textSize="30sp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardView2">
+            app:layout_constraintTop_toBottomOf="@+id/cardView2" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
+        <TextView
+            android:id="@+id/grade_fraction_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/patrickhand"
+            android:textAppearance="@style/Theme.GradeTracker.Text.Style2"
+            android:textSize="40sp"
+            app:layout_constraintEnd_toStartOf="@+id/guideline11"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/grade_requirement_label"
+            tools:text="35/50" />
 
-                <TextView
-                    android:id="@+id/grade_earned_label"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/patrickhand"
-                    android:gravity="center"
-                    android:text="@string/grade_earned"
-                    android:textAppearance="@style/Theme.GradeTracker.Text.Style1"
-                    android:textSize="30sp"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/grade_percentage_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/patrickhand"
+            android:textAppearance="@style/Theme.GradeTracker.Text.Style2"
+            android:textSize="40sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline11"
+            app:layout_constraintTop_toBottomOf="@+id/grade_requirement_label"
+            tools:text="70%" />
 
-                <EditText
-                    android:id="@+id/grade_earned_input"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:layout_weight="1"
-                    android:autofillHints="Grade Achieved"
-                    android:fontFamily="@font/patrickhand"
-                    android:gravity="center"
-                    android:hint="@string/grade_hint"
-                    android:inputType="number"
-                    android:maxLength="3"
-                    android:textSize="36sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/grade_earned_label" />
-            </LinearLayout>
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="205dp" />
 
-        </androidx.cardview.widget.CardView>
+        <LinearLayout
+            android:id="@+id/linearLayout3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="64dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/grade_fraction_label">
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardView5"
+            <TextView
+                android:id="@+id/grade_earned_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/patrickhand"
+                android:text="@string/grade_earned"
+                android:textAppearance="@style/Theme.GradeTracker.Text.Style1"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/grade_earned_input"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:autofillHints="Grade Achieved"
+                android:ems="10"
+                android:fontFamily="@font/patrickhand"
+                android:gravity="center"
+                android:hint="@string/grade_hint"
+                android:inputType="number"
+                android:textSize="26sp" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/grade_update_button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:theme="@style/Theme.GradeTracker.CardView"
-            app:cardCornerRadius="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#EF6C6C"
-                android:backgroundTint="#EF6C6C">
-
-                <TextView
-                    android:id="@+id/grade_percentage_label"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="32dp"
-                    android:background="@android:color/transparent"
-                    android:fontFamily="@font/patrickhand"
-                    android:textAppearance="@style/Theme.GradeTracker.Text.Style2"
-                    android:textColor="#E6DBDB"
-                    android:textSize="30sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/grade_requirement_label"
-                    tools:text="70%" />
-
-                <TextView
-                    android:id="@+id/grade_requirement_label"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@android:color/transparent"
-                    android:fontFamily="@font/patrickhand"
-                    android:gravity="center"
-                    android:padding="8dp"
-                    android:text="@string/minimum_requirement"
-                    android:textAppearance="@style/Theme.GradeTracker.Text.Style1"
-                    android:textColor="#FFFFFF"
-                    android:textSize="24sp"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/grade_fraction_label"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="32dp"
-                    android:layout_marginBottom="8dp"
-                    android:background="@android:color/transparent"
-                    android:fontFamily="@font/patrickhand"
-                    android:textAppearance="@style/Theme.GradeTracker.Text.Style2"
-                    android:textColor="#E6DBDB"
-                    android:textSize="30sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/grade_requirement_label"
-                    tools:text="35/50" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </androidx.cardview.widget.CardView>
+            android:layout_marginHorizontal="16dp"
+            android:backgroundTint="#EF6C6C"
+            android:text="@string/update"
+            app:layout_constraintEnd_toEndOf="@+id/linearLayout3"
+            app:layout_constraintStart_toStartOf="@+id/linearLayout3"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
