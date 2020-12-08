@@ -13,6 +13,7 @@ data class AssignmentStatus(
 data class AssignmentData(
         val id: Long,
         val courseID: Long,
+        val position: Int,
         val assignmentName: String,
         val points: Int,
         val totalPoints: Int,
@@ -33,6 +34,9 @@ data class Assignment(
     @ColumnInfo(name = "CourseID")
     val courseID: Long,
 
+    @ColumnInfo(name = "Position")
+    var position: Int,
+
     @ColumnInfo(name = "AssignmentName")
     val assignmentName: String,
 
@@ -47,13 +51,16 @@ data class Assignment(
 ) {
    companion object {
        fun from(a: AssignmentData) : Assignment {
-           return Assignment(a.id, a.courseID, a.assignmentName, a.points, a.totalPoints, a.weight)
+           return Assignment(a.id, a.courseID, a.position, a.assignmentName, a.points, a.totalPoints, a.weight)
        }
        fun from(a: AssignmentDialogData, courseID: Long) : Assignment {
-           return Assignment(a.id, courseID, a.name, -1, a.totalPoints, a.weight)
+           return Assignment(a.id, courseID, a.position, a.name, -1, a.totalPoints, a.weight)
+       }
+       fun from(a: AssignmentDialogData, courseID: Long, position: Int) : Assignment {
+           return Assignment(a.id, courseID, position, a.name, -1, a.totalPoints, a.weight)
        }
    }
     fun toData(): AssignmentData {
-        return AssignmentData(id, courseID, assignmentName, points, totalPoints, weight)
+        return AssignmentData(id, courseID, position, assignmentName, points, totalPoints, weight)
     }
 }

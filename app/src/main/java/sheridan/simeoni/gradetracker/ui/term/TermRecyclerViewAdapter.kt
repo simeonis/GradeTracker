@@ -1,6 +1,7 @@
 package sheridan.simeoni.gradetracker.ui.term
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,6 +30,16 @@ class TermRecyclerViewAdapter(
             notifyDataSetChanged()
         }
 
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        return ViewHolder.from(parent, context)
+    }
+
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.bind(terms!![position])
+    }
+
+    override fun getItemCount(): Int = terms?.size ?: 0
+
     override fun swap(position1: Int, position2: Int) {
         terms!![position1].position = position2
         terms!![position2].position = position1
@@ -48,16 +59,6 @@ class TermRecyclerViewAdapter(
     override fun update() {
         viewModel.update(terms!!)
     }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder.from(parent, context)
-    }
-
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(terms!![position])
-    }
-
-    override fun getItemCount(): Int = terms?.size ?: 0
 
     class ViewHolder private constructor(
             private val binding: FragmentTermItemBinding, private val context: Context): RecyclerView.ViewHolder(binding.root) {

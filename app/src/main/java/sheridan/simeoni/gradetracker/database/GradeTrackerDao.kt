@@ -21,7 +21,7 @@ interface GradeTrackerDao {
     @Query("SELECT * FROM Term WHERE TermID=:key")
     fun get(key: Long) : LiveData<Term>
 
-    @Query("SELECT * FROM Course WHERE TermID=:key")
+    @Query("SELECT * FROM Course WHERE TermID=:key ORDER BY Position")
     fun getAllCourses(key: Long) : LiveData<List<Course>>
 
     @Query("SELECT * FROM Course WHERE CourseID=:key")
@@ -30,7 +30,7 @@ interface GradeTrackerDao {
     @Query("SELECT * FROM Course WHERE CourseID=(SELECT CourseID FROM Assignment WHERE AssignmentID=:key)")
     fun getCourseFromGrade(key: Long) : LiveData<Course>
 
-    @Query("SELECT * FROM Assignment WHERE CourseID=:key")
+    @Query("SELECT * FROM Assignment WHERE CourseID=:key ORDER BY Position")
     fun getAllAssignments(key : Long) : LiveData<List<Assignment>>
 
     @Query("SELECT * FROM Assignment WHERE AssignmentID=(SELECT AssignmentID FROM Assignment WHERE AssignmentID=:key)")
@@ -70,7 +70,13 @@ interface GradeTrackerDao {
     suspend fun updateAssignment(assignment: Assignment)
 
     @Query("SELECT COUNT(TermID) FROM Term")
-    suspend fun getRowCount(): Int
+    suspend fun getTermRowCount(): Int
+
+    @Query("SELECT COUNT(CourseID) FROM Course")
+    suspend fun getCourseRowCount(): Int
+
+    @Query("SELECT COUNT(AssignmentID) FROM Assignment")
+    suspend fun getAssignmentRowCount(): Int
 
     @Query("SELECT * FROM Course WHERE TermID = :key")
     suspend fun getAllCoursesList(key : Long) : List<Course>

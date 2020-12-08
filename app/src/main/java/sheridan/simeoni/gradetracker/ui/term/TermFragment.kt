@@ -1,19 +1,15 @@
 package sheridan.simeoni.gradetracker.ui.term
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
-import sheridan.simeoni.gradetracker.R
 import sheridan.simeoni.gradetracker.database.Term
 import sheridan.simeoni.gradetracker.database.TermStatus
 import sheridan.simeoni.gradetracker.databinding.FragmentTermBinding

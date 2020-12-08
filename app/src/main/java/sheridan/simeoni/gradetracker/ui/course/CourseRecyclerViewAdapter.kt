@@ -1,6 +1,7 @@
 package sheridan.simeoni.gradetracker.ui.course
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -38,9 +39,12 @@ class CourseRecyclerViewAdapter(
     override fun getItemCount(): Int = courses?.size ?: 0
 
     override fun swap(position1: Int, position2: Int) {
-        val temp = courses!![position1]
-        courses!!.remove(temp)
-        courses!!.add(position2, temp)
+        courses!![position1].position = position2
+        courses!![position2].position = position1
+
+        val course1 = courses!![position1]
+        courses!!.remove(course1)
+        courses!!.add(position2, course1)
         notifyItemMoved(position1, position2)
     }
 
@@ -70,6 +74,10 @@ class CourseRecyclerViewAdapter(
             binding.root.setOnClickListener {
                 val action = CourseFragmentDirections.actionCourseToAssignment(KeyEnvelope(course.courseName, course.id))
                 it.findNavController().navigate(action)
+            }
+            binding.root.setOnLongClickListener {
+                it.isSelected = true
+                true
             }
             binding.executePendingBindings()
         }

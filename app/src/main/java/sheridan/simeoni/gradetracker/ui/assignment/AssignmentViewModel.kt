@@ -23,7 +23,8 @@ class AssignmentViewModel(envelopeKey: Long, application: Application) : Android
 
     fun add (a : AssignmentDialogData){
         viewModelScope.launch {
-            gradeTrackerDao.insert(Assignment.from(a, _envelopeKey))
+            val position = gradeTrackerDao.getAssignmentRowCount()
+            gradeTrackerDao.insert(Assignment.from(a, _envelopeKey, position))
             update()
         }
     }

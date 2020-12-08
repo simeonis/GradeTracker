@@ -85,11 +85,11 @@ class CourseDialog : DialogFragment() {
         if (validated){
             val savedStateHandle = findNavController().previousBackStackEntry?.savedStateHandle
             savedStateHandle?.set(CONFIRMATION_RESULT, CourseDialogData(
-                    status, course?.id ?: 0, name, code,course?.grade ?: -1f, target.toFloat()))
+                    status, course?.id ?: 0, course?.position ?: -1, name, code,course?.grade ?: -1f, target.toFloat()))
             dismiss()
         }
     }
-    data class CourseDialogData(val status: Boolean, val id: Long,
+    data class CourseDialogData(val status: Boolean, val id: Long, val position: Int,
                                 val name : String, val courseCode : String,
                                 val grade : Float, val targetGrade : Float) : Serializable
 }

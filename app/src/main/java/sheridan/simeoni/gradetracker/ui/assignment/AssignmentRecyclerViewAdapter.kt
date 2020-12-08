@@ -38,9 +38,12 @@ class AssignmentRecyclerViewAdapter(
     override fun getItemCount(): Int = assignments?.size ?: 0
 
     override fun swap(position1: Int, position2: Int) {
-        val temp = assignments!![position1]
-        assignments!!.remove(temp)
-        assignments!!.add(position2, temp)
+        assignments!![position1].position = position2
+        assignments!![position2].position = position1
+
+        val term1 = assignments!![position1]
+        assignments!!.remove(term1)
+        assignments!!.add(position2, term1)
         notifyItemMoved(position1, position2)
     }
 
@@ -78,6 +81,10 @@ class AssignmentRecyclerViewAdapter(
             binding.root.setOnClickListener {
                 val action = AssignmentFragmentDirections.actionAssignmentToGrade(KeyEnvelope(assignment.assignmentName, assignment.id))
                 it.findNavController().navigate(action)
+            }
+            binding.root.setOnLongClickListener {
+                it.isSelected = true
+                true
             }
             binding.executePendingBindings()
         }

@@ -1,6 +1,7 @@
 package sheridan.simeoni.gradetracker.ui.course
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
@@ -20,7 +21,8 @@ class CourseViewModel(envelopeKey: Long, application: Application) : AndroidView
 
     fun add (c : CourseDialogData) {
         viewModelScope.launch {
-            gradeTrackerDao.insert(Course.from(c, _envelopeKey))
+            val position = gradeTrackerDao.getCourseRowCount()
+            gradeTrackerDao.insert(Course.from(c, _envelopeKey, position))
         }
     }
 
@@ -32,6 +34,7 @@ class CourseViewModel(envelopeKey: Long, application: Application) : AndroidView
 
     fun update(newCourses: List<Course>) {
         viewModelScope.launch {
+            Log.d("AFTER: ", newCourses.toString())
             gradeTrackerDao.updateCourses(newCourses)
         }
     }
