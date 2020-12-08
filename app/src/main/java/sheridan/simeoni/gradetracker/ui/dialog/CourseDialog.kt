@@ -65,27 +65,27 @@ class CourseDialog : DialogFragment() {
     private fun confirmed(){
         val status = safeArgs.status.edit
         val course = safeArgs.status.course
-        var courseName = binding.dialogCourseNameInput.text.toString()
-        var courseCode = binding.dialogCourseCodeInput.text.toString()
-        var courseTarget = binding.dialogCourseTargetInput.text.toString()
+        var name = binding.dialogCourseNameInput.text.toString()
+        var code = binding.dialogCourseCodeInput.text.toString()
+        var target = binding.dialogCourseTargetInput.text.toString()
+        var validated = true
 
-        if(courseName.isEmpty()){
-            if (status) courseName = course!!.courseName
-            else binding.dialogCourseNameWrapper.error = "required"
+        if(name.isEmpty()){
+            if (status) name = course!!.courseName
+            else { binding.dialogCourseNameWrapper.error = "required"; validated = false }
         }
-        if(courseCode.isEmpty()) {
-            if (status) courseCode = course!!.courseCode
-            else binding.dialogCourseCodeWrapper.error = "required"
+        if(code.isEmpty()) {
+            if (status) code = course!!.courseCode
+            else { binding.dialogCourseCodeWrapper.error = "required"; validated = false }
         }
-        if(courseTarget.isEmpty()) {
-            if (status) courseTarget = course!!.targetGrade.toString()
-            else binding.dialogCourseTargetWrapper.error = "required"
+        if(target.isEmpty()) {
+            if (status) target = course!!.targetGrade.toString()
+            else { binding.dialogCourseTargetWrapper.error = "required"; validated = false }
         }
-        if ((courseName.isNotEmpty() && courseCode.isNotEmpty()) || status){
+        if (validated){
             val savedStateHandle = findNavController().previousBackStackEntry?.savedStateHandle
-            savedStateHandle?.set(CONFIRMATION_RESULT,
-                    CourseDialogData(status, course?.id ?: 0,
-                            courseName, courseCode,course?.grade ?: -1f, courseTarget.toFloat()))
+            savedStateHandle?.set(CONFIRMATION_RESULT, CourseDialogData(
+                    status, course?.id ?: 0, name, code,course?.grade ?: -1f, target.toFloat()))
             dismiss()
         }
     }
