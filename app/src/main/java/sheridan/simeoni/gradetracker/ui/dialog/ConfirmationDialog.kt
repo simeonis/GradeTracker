@@ -24,13 +24,12 @@ class ConfirmationDialog : DialogFragment() {
     private lateinit var navController: NavController
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-
         binding = DialogConfirmationBinding.inflate(inflater, container, false)
-
-        dialog?.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
+        dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
         navController = findNavController()
 
+        isCancelable = false
         binding.doneButton.setOnClickListener { confirmed() }
         binding.cancelButton.setOnClickListener { declined() }
 
