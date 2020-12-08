@@ -1,7 +1,11 @@
 package sheridan.simeoni.gradetracker.model
 
+import android.util.Log
 import sheridan.simeoni.gradetracker.database.Assignment
 import sheridan.simeoni.gradetracker.database.Course
+import java.time.Instant
+import java.time.ZoneId
+import kotlin.math.abs
 import kotlin.math.ceil
 
 class GradeCalculator {
@@ -65,9 +69,9 @@ class GradeCalculator {
         }
 
         fun getTermProgress(start: Long, end: Long, now: Long): Int {
-            val dem = (end.toFloat() - start.toFloat())
-            val num = (now.toFloat() - start.toFloat())
-            val progress = num / dem * 100f
+            val dem = (end - start).toDouble()
+            val num = (now - start).toDouble()
+            val progress = abs(num)/ abs(dem) * 100f
             return progress.toInt()
         }
     }

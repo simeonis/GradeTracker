@@ -54,18 +54,23 @@
 
                 <TextView
                     android:id="@+id/grade_total_number_label"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="125dp"
+                    android:layout_height="75dp"
                     android:layout_marginTop="32dp"
+                    android:autoSizeMaxTextSize="56dp"
+                    android:autoSizeMinTextSize="16dp"
+                    android:autoSizeStepGranularity="2dp"
+                    android:autoSizeTextType="uniform"
                     android:background="@android:color/transparent"
                     android:fontFamily="@font/patrickhand"
+                    android:gravity="center"
                     android:textAppearance="@style/Theme.GradeTracker.Text.Style2"
-                    android:textSize="60sp"
+                    android:textSize="56sp"
                     app:layout_constraintBottom_toBottomOf="@+id/grade_total_progress"
                     app:layout_constraintEnd_toEndOf="@+id/grade_total_progress"
                     app:layout_constraintStart_toStartOf="@+id/grade_total_progress"
                     app:layout_constraintTop_toTopOf="@+id/grade_total_progress"
-                    tools:text="96.5%" />
+                    tools:text="99.9%" />
 
                 <TextView
                     android:id="@+id/grade_total_label"
@@ -201,6 +206,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="#EF6C6C"
                 android:backgroundTint="#EF6C6C">
 
                 <TextView

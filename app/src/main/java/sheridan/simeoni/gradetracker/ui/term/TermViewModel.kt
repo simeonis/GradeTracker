@@ -1,7 +1,6 @@
 package sheridan.simeoni.gradetracker.ui.term
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
@@ -10,7 +9,7 @@ import kotlinx.coroutines.launch
 import sheridan.simeoni.gradetracker.database.GradeTrackerDao
 import sheridan.simeoni.gradetracker.database.GradeTrackerDatabase
 import sheridan.simeoni.gradetracker.database.Term
-import sheridan.simeoni.gradetracker.model.GradeCalculator
+
 
 
 class TermViewModel(application: Application) : AndroidViewModel(application) {
@@ -25,9 +24,9 @@ class TermViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    fun edit (id: Long, position: Int, name: String, grade: Float, progress: Int) {
+    fun edit (id: Long, position: Int, name: String, grade: Float, start: Long, end : Long) {
         viewModelScope.launch {
-            gradeTrackerDao.updateTerm(Term(id, position, name, grade, progress))
+            gradeTrackerDao.updateTerm(Term(id, position, name, grade, start, end))
         }
     }
 

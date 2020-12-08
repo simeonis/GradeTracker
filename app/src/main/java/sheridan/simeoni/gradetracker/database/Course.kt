@@ -16,6 +16,7 @@ data class CourseData(
         val id: Long,
         val termID: Long,
         val courseName: String,
+        val courseCode: String,
         val grade: Float,
         val targetGrade: Float
 )
@@ -48,10 +49,10 @@ data class Course(
 ) {
     companion object {
         fun from(c: CourseData) : Course {
-            return Course(c.id, c.termID, c.courseName, c.grade, c.targetGrade)
+            return Course(c.id, c.termID, c.courseName,c.courseCode, c.grade, c.targetGrade)
         }
     }
     fun toData(): CourseData {
-        return CourseData(id, termID, courseName, grade, targetGrade)
+        return CourseData(id, termID, courseName,courseCode, grade, targetGrade)
     }
 }

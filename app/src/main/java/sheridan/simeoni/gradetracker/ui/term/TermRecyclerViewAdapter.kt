@@ -64,8 +64,11 @@ class TermRecyclerViewAdapter(
                         context.getString(R.string.term_average).plus(context.getString(R.string.blank))
                     else
                         context.getString(R.string.term_average).plus(String.format("%.1f%%", term.grade))
-            binding.termProgressLabel.text = context.getString(R.string.term_progress).plus(String.format("%d%%", term.progress))
-            binding.termProgressBar.progress = GradeCalculator.getTermProgress(term.start, term.end, Calendar.getInstance().time.getTime())
+
+
+            val progress = GradeCalculator.getTermProgress(term.start, term.end, Calendar.getInstance().time.getTime())
+            binding.termProgressLabel.text = context.getString(R.string.term_progress).plus(String.format("%d%%", progress))
+            binding.termProgressBar.progress = progress
             binding.termEditButton.setOnClickListener {
                 val action = TermFragmentDirections.actionTermToTermDialog(TermStatus(true, term.toData()))
                 it.findNavController().navigate(action)

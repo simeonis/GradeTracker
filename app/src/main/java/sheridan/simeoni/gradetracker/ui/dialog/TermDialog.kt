@@ -31,7 +31,9 @@ class TermDialog : DialogFragment() {
 
         binding = DialogTermBinding.inflate(inflater, container, false)
 
-        dialog?.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
+        dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
+
+        if(safeArgs.status.edit){ initEdit() }
 
         binding.doneButton.setOnClickListener { submit() }
         binding.cancelButton.setOnClickListener { dismiss() }
@@ -43,21 +45,21 @@ class TermDialog : DialogFragment() {
             binding.dialogTermNameWrapper.error = null
             binding.dialogTermNameWrapper.isErrorEnabled = false
         }
-        binding.dialogTermStartInput.setOnClickListener {
+        binding.dialogTermStartDate.setOnClickListener {
             binding.dialogTermStartWrapper.error = null
             binding.dialogTermStartWrapper.isErrorEnabled = false
         }
 
-        binding.dialogTermStartInput.addTextChangedListener {
+        binding.dialogTermStartDate.addTextChangedListener {
             binding.dialogTermStartWrapper.error = null
             binding.dialogTermStartWrapper.isErrorEnabled = false
         }
-        binding.dialogTermEndInput.setOnClickListener {
+        binding.dialogTermEndDate.setOnClickListener {
             binding.dialogTermEndWrapper.error = null
             binding.dialogTermEndWrapper.isErrorEnabled = false
         }
 
-        binding.dialogTermEndInput.addTextChangedListener {
+        binding.dialogTermEndDate.addTextChangedListener {
             binding.dialogTermEndWrapper.error = null
             binding.dialogTermEndWrapper.isErrorEnabled = false
         }
@@ -77,12 +79,12 @@ class TermDialog : DialogFragment() {
         val term = safeArgs.status.term
         var termName = binding.dialogTermNameInput.text.toString()
 
-        val termStart = binding.dialogTermStartInput.text.toString()
-        val termEnd = binding.dialogTermEndInput.text.toString()
+        var termStart = binding.dialogTermStartDate.text.toString()
+        var termEnd = binding.dialogTermEndDate.text.toString()
 
         if(termName.isEmpty()) {
             if (status) termName = term!!.termName
-            else binding.dialogTermNameInput.error = "required"
+            else binding.dialogTermNameWrapper.error = "required"
         }
         if(termStart.isEmpty()){
             if (status) termStart = "TODO"
@@ -100,7 +102,7 @@ class TermDialog : DialogFragment() {
         }
 
         if ((termName.isNotEmpty() && termStart.isNotEmpty() && termEnd.isNotEmpty()) || status){
-            if (status) termViewModel.edit(term!!.id, term.position, termName, term.grade, term.progress, term.start, term.end)
+            if (status) termViewModel.edit(term!!.id, term.position, termName, term.grade, term.start, term.end)
             else{
                 val sDate = SimpleDateFormat("dd/MM/yyyy", Locale.CANADA).parse(termStart);
                 val eDate = SimpleDateFormat("dd/MM/yyyy", Locale.CANADA).parse(termEnd);

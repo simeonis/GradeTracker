@@ -42,7 +42,7 @@ class CourseDialog : DialogFragment() {
         val course = safeArgs.status.course!!
         binding.dialogCourseTitleLabel.text = getString(R.string.edit_course)
         binding.dialogCourseNameInput.hint = course.courseName
-        binding.dialogCourseCodeInput.hint = "TODO"
+        binding.dialogCourseCodeInput.hint = course.courseCode
         binding.dialogCourseTargetInput.hint = course.targetGrade.toString()
     }
 
@@ -58,7 +58,7 @@ class CourseDialog : DialogFragment() {
             else binding.dialogCourseNameInput.error = "required"
         }
         if(courseCode.isEmpty()) {
-            if (status) courseCode = "TODO"
+            if (status) courseCode = course!!.courseCode
             else binding.dialogCourseCodeInput.error = "required"
         }
         if(courseTarget.isEmpty()) {

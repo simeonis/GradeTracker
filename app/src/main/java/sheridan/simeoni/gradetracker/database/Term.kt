@@ -15,7 +15,6 @@ data class TermData(
         val position: Int,
         val termName: String,
         val grade: Float,
-        val progress: Int,
         val start: Long,
         val end: Long
 )
@@ -36,9 +35,6 @@ data class Term(
     @ColumnInfo(name = "TermGrade")
     val grade: Float,
 
-    @ColumnInfo(name = "Progress")
-    val progress: Int,
-
     @ColumnInfo(name = "Start")
     val start: Long,
 
@@ -47,10 +43,10 @@ data class Term(
 ) {
     companion object {
         fun from(t: TermData) : Term {
-            return Term(t.id, t.position, t.termName, t.grade, t.progress,t.start, t.end)
+            return Term(t.id, t.position, t.termName, t.grade,t.start, t.end)
         }
     }
     fun toData(): TermData {
-        return TermData(id, position, termName, grade, progress,start, end)
+        return TermData(id, position, termName, grade, start, end)
     }
 }

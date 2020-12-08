@@ -102,18 +102,15 @@ class SettingsFragment : Fragment() {
 
     private fun updateAll() {
         val fillerInput = binding.settingsFillerGradeInput
-        if (fillerInput.text.isEmpty()) {
-            fillerInput.error = "required"
-        } else {
-            val fillerEntered = fillerInput.text.toString().toFloat()
-            editor.putFloat("filler_grade", fillerEntered / 100f)
-            GradeCalculator.fillerGrade = fillerEntered / 100f
-            editor.apply()
-            fillerInput.setText("")
-            fillerInput.hint = String.format("%.0f%%", fillerEntered)
-            viewModel.updateAll()
-            hideKeyboard()
-        }
+        val fillerEntered = fillerInput.text.toString().toFloat()
+        editor.putFloat("filler_grade", fillerEntered / 100f)
+        GradeCalculator.fillerGrade = fillerEntered / 100f
+        editor.apply()
+        fillerInput.setText("")
+        fillerInput.hint = String.format("%.0f%%", fillerEntered)
+        viewModel.updateAll()
+        hideKeyboard()
+
     }
     fun hideKeyboard() {
         val inputMethodManager = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
