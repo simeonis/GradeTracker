@@ -18,6 +18,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import sheridan.simeoni.gradetracker.R
 import sheridan.simeoni.gradetracker.databinding.FragmentSettingsBinding
+import sheridan.simeoni.gradetracker.helper.KeyboardManager
 import sheridan.simeoni.gradetracker.model.GradeCalculator
 import sheridan.simeoni.gradetracker.ui.dialog.ConfirmationDialog
 import sheridan.simeoni.gradetracker.ui.term.TermFragmentDirections
@@ -109,13 +110,6 @@ class SettingsFragment : Fragment() {
         fillerInput.setText("")
         fillerInput.hint = String.format("%.0f%%", fillerEntered)
         viewModel.updateAll()
-        hideKeyboard()
-
+        KeyboardManager.hideKeyboard(requireActivity())
     }
-    fun hideKeyboard() {
-        val inputMethodManager = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        inputMethodManager.hideSoftInputFromWindow(
-                requireActivity().currentFocus?.getWindowToken(), 0)
-    }
-
 }

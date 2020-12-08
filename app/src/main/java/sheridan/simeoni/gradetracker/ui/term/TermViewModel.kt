@@ -10,8 +10,6 @@ import sheridan.simeoni.gradetracker.database.GradeTrackerDao
 import sheridan.simeoni.gradetracker.database.GradeTrackerDatabase
 import sheridan.simeoni.gradetracker.database.Term
 
-
-
 class TermViewModel(application: Application) : AndroidViewModel(application) {
     private val gradeTrackerDao : GradeTrackerDao = GradeTrackerDatabase.getInstance(application).gradeTrackerDao
 
@@ -27,12 +25,6 @@ class TermViewModel(application: Application) : AndroidViewModel(application) {
     fun edit (id: Long, position: Int, name: String, grade: Float, start: Long, end : Long) {
         viewModelScope.launch {
             gradeTrackerDao.updateTerm(Term(id, position, name, grade, start, end))
-        }
-    }
-
-    fun update(newTerm: List<Term>) {
-        viewModelScope.launch {
-            gradeTrackerDao.updateTerms(newTerm)
         }
     }
 

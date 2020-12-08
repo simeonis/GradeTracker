@@ -13,6 +13,7 @@ import android.widget.SeekBar
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import sheridan.simeoni.gradetracker.databinding.FragmentGradeBinding
+import sheridan.simeoni.gradetracker.helper.KeyboardManager
 import sheridan.simeoni.gradetracker.model.GradeCalculator
 
 class GradeFragment : Fragment() {
@@ -24,10 +25,7 @@ class GradeFragment : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        // Inflate the layout for this fragment
         binding = FragmentGradeBinding.inflate(inflater, container, false)
-        binding.lifecycleOwner = this
-
         activity?.title = safeArgs.keyEnvelope.title
 
         viewModel.assignment.observe(viewLifecycleOwner) {
@@ -79,7 +77,7 @@ class GradeFragment : Fragment() {
             viewModel.updateGrade(gradeEarned.text.toString().toInt())
             gradeEarned.hint = String.format("%d/50", gradeEarned.text.toString().toInt())
             gradeEarned.setText("")
-            hideKeyboard()
+            KeyboardManager.hideKeyboard(requireActivity())
         }
     }
 
@@ -91,10 +89,5 @@ class GradeFragment : Fragment() {
         val result = viewModel.getPotential(progress) ?: 0f
         binding.gradeTotalNumberLabel.text = String.format("%.1f%%", result)
         binding.gradeTotalProgress.progress = result.toInt()
-    }
-    fun hideKeyboard() {
-        val inputMethodManager = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        inputMethodManager.hideSoftInputFromWindow(
-                requireActivity().currentFocus?.getWindowToken(), 0)
     }
 }

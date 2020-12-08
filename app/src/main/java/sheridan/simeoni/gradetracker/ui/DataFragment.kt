@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import sheridan.simeoni.gradetracker.databinding.FragmentDataBinding
+import sheridan.simeoni.gradetracker.helper.KeyboardManager
 import sheridan.simeoni.gradetracker.model.GradeCalculator
 
 class DataFragment : Fragment() {
@@ -32,8 +33,8 @@ class DataFragment : Fragment() {
         val name = binding.fragmentDataNameInput.text.toString()
         val fillerGrade = binding.fragmentDataFillerGrade.text.toString()
 
-        clickCount +=1;
-        if(!name.isEmpty()){
+        clickCount +=1
+        if(name.isNotEmpty()){
             binding.fragmentDataNameInput.isVisible = false
             binding.fragmentDataFillerGrade.isVisible = true
             editor.putString("Name", name)
@@ -43,7 +44,7 @@ class DataFragment : Fragment() {
             binding.fragmentDataNameInput.error = "required"
         }
 
-        if(!fillerGrade.isEmpty()){
+        if(fillerGrade.isNotEmpty()){
             editor.putFloat("filler_grade", (fillerGrade.toFloat()/ 100f))
             GradeCalculator.fillerGrade = (fillerGrade.toFloat()/ 100f)
         }
@@ -51,9 +52,10 @@ class DataFragment : Fragment() {
             binding.fragmentDataFillerGrade.error = "required"
         }
 
-        if(!name.isEmpty() && !fillerGrade.isEmpty()){
+        if(name.isNotEmpty() && fillerGrade.isNotEmpty()){
             editor.apply()
             findNavController().navigate(DataFragmentDirections.actionDataToTerm())
+            KeyboardManager.hideKeyboard(requireActivity())
         }
     }
 }

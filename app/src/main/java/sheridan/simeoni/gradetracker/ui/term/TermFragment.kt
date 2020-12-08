@@ -42,8 +42,6 @@ class TermFragment : Fragment() {
             helper.attachToRecyclerView(termRecycler)
         }
 
-        hideKeyboard()
-
         viewModel.terms.observe(viewLifecycleOwner) { adapter.terms = it as MutableList<Term>? }
 
         binding.termAddButton.setOnClickListener {
@@ -58,11 +56,5 @@ class TermFragment : Fragment() {
         }
 
         return binding.root
-    }
-
-    fun hideKeyboard() {
-        val inputMethodManager = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        inputMethodManager.hideSoftInputFromWindow(
-                requireActivity().currentFocus?.getWindowToken(), 0)
     }
 }
