@@ -1,10 +1,7 @@
 package sheridan.simeoni.gradetracker.model
 
-import android.util.Log
 import sheridan.simeoni.gradetracker.database.Assignment
 import sheridan.simeoni.gradetracker.database.Course
-import java.time.Instant
-import java.time.ZoneId
 import kotlin.math.abs
 import kotlin.math.ceil
 
@@ -69,9 +66,14 @@ class GradeCalculator {
         }
 
         fun getTermProgress(start: Long, end: Long, now: Long): Int {
-            val dem = (end - start).toDouble()
-            val num = (now - start).toDouble()
-            val progress = abs(num)/ abs(dem) * 100f
+            //Striped time from date
+            val startStripped = start/100000
+            val endStripped = end/100000
+            val nowStripped = now/100000
+            if(endStripped <= nowStripped) return 100
+            val dem = (endStripped - startStripped).toDouble()
+            val num = (nowStripped - startStripped).toDouble()
+            val progress = if(num < 0) 0 else num/dem * 100f
             return progress.toInt()
         }
     }

@@ -1,6 +1,7 @@
 package sheridan.simeoni.gradetracker.ui.dialog
 
 
+import android.app.DatePickerDialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -11,12 +12,10 @@ import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
+import com.google.android.material.textfield.TextInputEditText
 import sheridan.simeoni.gradetracker.R
-import sheridan.simeoni.gradetracker.ui.term.TermViewModel
 import sheridan.simeoni.gradetracker.databinding.DialogTermBinding
-import sheridan.simeoni.gradetracker.model.GradeCalculator
-
-
+import sheridan.simeoni.gradetracker.ui.term.TermViewModel
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -35,6 +34,7 @@ class TermDialog : DialogFragment() {
 
         if(safeArgs.status.edit){ initEdit() }
 
+
         binding.doneButton.setOnClickListener { submit() }
         binding.cancelButton.setOnClickListener { dismiss() }
         binding.dialogTermNameInput.setOnClickListener {
@@ -48,21 +48,15 @@ class TermDialog : DialogFragment() {
         binding.dialogTermStartDate.setOnClickListener {
             binding.dialogTermStartWrapper.error = null
             binding.dialogTermStartWrapper.isErrorEnabled = false
+            datePicker(binding.dialogTermStartDate)
         }
 
-        binding.dialogTermStartDate.addTextChangedListener {
-            binding.dialogTermStartWrapper.error = null
-            binding.dialogTermStartWrapper.isErrorEnabled = false
-        }
         binding.dialogTermEndDate.setOnClickListener {
             binding.dialogTermEndWrapper.error = null
             binding.dialogTermEndWrapper.isErrorEnabled = false
+            datePicker(binding.dialogTermEndDate)
         }
 
-        binding.dialogTermEndDate.addTextChangedListener {
-            binding.dialogTermEndWrapper.error = null
-            binding.dialogTermEndWrapper.isErrorEnabled = false
-        }
         return binding.root
     }
 
@@ -101,17 +95,42 @@ class TermDialog : DialogFragment() {
             }
         }
 
-        if ((termName.isNotEmpty() && termStart.isNotEmpty() && termEnd.isNotEmpty()) || status){
-            if (status) termViewModel.edit(term!!.id, term.position, termName, term.grade, term.start, term.end)
-            else{
-                val sDate = SimpleDateFormat("dd/MM/yyyy", Locale.CANADA).parse(termStart);
-                val eDate = SimpleDateFormat("dd/MM/yyyy", Locale.CANADA).parse(termEnd);
-                val start = sDate!!.getTime()
-                val end = eDate!!.getTime()
-                termViewModel.add(termName, start, end)
-                binding.dialogTermNameWrapper.error = null
+
+        if ((termName.isNotEmpty() && termStart.isNotEmpty() && termEnd.isNotEmpty()) || status  ){
+
+            val sDate = SimpleDateFormat("dd/MM/yyyy", Locale.CANADA).parse(termStart);
+            val eDate = SimpleDateFormat("dd/MM/yyyy", Locale.CANADA).parse(termEnd);
+            val start = sDate!!.getTime()
+            val end = eDate!!.getTime()
+
+            if((end - start) < 0){
+               binding.dialogTermEndWrapper.isErrorEnabled = true
+               binding.dialogTermEndWrapper.error = "Invalid date range"
             }
-            dismiss()
+            else{
+                if (status) {
+                    termViewModel.edit(term!!.id, term.position, termName, term.grade, start, end)
+                }
+                else{
+                    termViewModel.add(termName, start, end)
+                    binding.dialogTermNameWrapper.error = null
+                }
+                dismiss()
+            }
         }
+    }
+
+    private fun datePicker(text : TextInputEditText){
+        val cldr = Calendar.getInstance()
+        val _day = cldr[Calendar.DAY_OF_MONTH]
+        val _month = cldr[Calendar.MONTH]
+        val _year = cldr[Calendar.YEAR]
+
+        // date picker dialog
+        val picker = DatePickerDialog(this.binding.root.context,
+                { view, year, monthOfYear, dayOfMonth ->
+                    text.setText("$dayOfMonth" + "/" + (monthOfYear + 1) + "/" + year)
+                }, _year, _month, _day)
+        picker.show()
     }
 }

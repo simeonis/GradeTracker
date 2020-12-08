@@ -14,6 +14,7 @@ import sheridan.simeoni.gradetracker.databinding.FragmentTermItemBinding
 import sheridan.simeoni.gradetracker.model.*
 import sheridan.simeoni.gradetracker.helper.DragRecyclerView
 import java.util.*
+import kotlin.time.days
 
 class TermRecyclerViewAdapter(
         private val context: Context,
@@ -65,8 +66,12 @@ class TermRecyclerViewAdapter(
                     else
                         context.getString(R.string.term_average).plus(String.format("%.1f%%", term.grade))
 
+            val cal =  Calendar.getInstance().time
+            cal.seconds = 0
+            cal.hours = 0
+            cal.minutes = 0
 
-            val progress = GradeCalculator.getTermProgress(term.start, term.end, Calendar.getInstance().time.getTime())
+            val progress = GradeCalculator.getTermProgress(term.start, term.end, cal.time)
             binding.termProgressLabel.text = context.getString(R.string.term_progress).plus(String.format("%d%%", progress))
             binding.termProgressBar.progress = progress
             binding.termEditButton.setOnClickListener {
