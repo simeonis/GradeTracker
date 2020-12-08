@@ -92,6 +92,7 @@
                         android:hint="@string/enter_course_hint"
                         android:inputType="text"
                         android:padding="0dp"
+                        android:maxLength="150"
                         android:imeOptions="flagNoExtractUi"
                         android:textAppearance="@style/Theme.GradeTracker.input"
                         android:textSize="14sp"
@@ -132,6 +133,7 @@
                         android:hint="@string/course_code_hint"
                         android:inputType="number"
                         android:padding="0dp"
+                        android:maxLength="50"
                         android:textAppearance="@style/Theme.GradeTracker.input"
                         android:textSize="14sp" />
 
@@ -169,6 +171,7 @@
                         android:hint="@string/target_grade_hint"
                         android:inputType="number"
                         android:padding="0dp"
+                        android:maxLength="4"
                         android:textAppearance="@style/Theme.GradeTracker.input"
                         android:textSize="14sp" />
                 </com.google.android.material.textfield.TextInputLayout>

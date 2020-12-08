@@ -93,7 +93,9 @@
                         android:padding="0dp"
                         android:textAppearance="@style/Theme.GradeTracker.input"
                         android:textSize="14sp"
+                        android:maxLength="150"
                         app:layout_constraintStart_toStartOf="parent"
+
                         tools:layout_editor_absoluteY="49dp" />
                 </com.google.android.material.textfield.TextInputLayout>
 

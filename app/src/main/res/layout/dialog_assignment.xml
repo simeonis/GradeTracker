@@ -100,7 +100,7 @@
 
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/dialog_assignment_grade_wrapper"
+                    android:id="@+id/dialog_assignment_code_wrapper"
                     style="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                     android:layout_width="300dp"
                     android:layout_height="wrap_content"
@@ -116,7 +116,7 @@
                     app:hintTextColor="#000000">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/dialog_assignment_grade_input"
+                        android:id="@+id/dialog_assignment_code_input"
                         style="@style/Theme.GradeTracker.dialog_text_edit"
                         android:layout_width="match_parent"
                         android:imeOptions="flagNoExtractUi"
@@ -169,6 +169,7 @@
                         android:inputType="number"
                         android:padding="0dp"
                         android:textAppearance="@style/Theme.GradeTracker.input"
+                        android:maxLength="4"
                         android:textSize="14sp" />
                 </com.google.android.material.textfield.TextInputLayout>
 

@@ -1,6 +1,5 @@
 package sheridan.simeoni.gradetracker.ui.dialog
 
-
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -35,8 +34,8 @@ class AssignmentDialog : DialogFragment() {
                 isErrorEnabled = false
             }
         }
-        binding.dialogAssignmentGradeInput.setOnClickListener {
-            binding.dialogAssignmentGradeWrapper.apply{
+        binding.dialogAssignmentCodeInput.setOnClickListener {
+            binding.dialogAssignmentCodeWrapper.apply{
                 error = null
                 isErrorEnabled = false
             }
@@ -58,7 +57,7 @@ class AssignmentDialog : DialogFragment() {
         val assignment = safeArgs.status.assignment!!
         binding.dialogAssignmentTitleLabel.text = getString(R.string.edit_assignment)
         binding.dialogAssignmentNameInput.hint = assignment.assignmentName
-        binding.dialogAssignmentGradeInput.hint = String.format("%s/%d",
+        binding.dialogAssignmentCodeInput.hint = String.format("%s/%d",
                 if (assignment.points == -1) "-" else assignment.points.toString(),
                 assignment.totalPoints)
         binding.dialogAssignmentWeightInput.hint = assignment.weight.toString()
@@ -68,7 +67,7 @@ class AssignmentDialog : DialogFragment() {
         val status = safeArgs.status.edit
         val assignment = safeArgs.status.assignment
         var name = binding.dialogAssignmentNameInput.text.toString()
-        var grade = binding.dialogAssignmentGradeInput.text.toString()
+        var grade = binding.dialogAssignmentCodeInput.text.toString()
         var weight = binding.dialogAssignmentWeightInput.text.toString()
         var validated = true
 
@@ -78,7 +77,7 @@ class AssignmentDialog : DialogFragment() {
         }
         if(grade.isEmpty()){
             if (status) grade = assignment!!.totalPoints.toString()
-            else { binding.dialogAssignmentGradeWrapper.error = "required"; validated = false }
+            else { binding.dialogAssignmentCodeWrapper.error = "required"; validated = false }
         }
         if(weight.isEmpty()){
             if (status) weight = assignment!!.weight.toString()
