@@ -5,6 +5,7 @@ import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.ForeignKey.CASCADE
 import androidx.room.PrimaryKey
+import sheridan.simeoni.gradetracker.ui.dialog.CourseDialog.CourseDialogData
 import java.io.Serializable
 
 data class CourseStatus(
@@ -50,6 +51,9 @@ data class Course(
     companion object {
         fun from(c: CourseData) : Course {
             return Course(c.id, c.termID, c.courseName,c.courseCode, c.grade, c.targetGrade)
+        }
+        fun from(c: CourseDialogData, termID: Long) : Course {
+            return Course(c.id, termID, c.name, c.courseCode, c.grade, c.targetGrade)
         }
     }
     fun toData(): CourseData {

@@ -1,7 +1,5 @@
 package sheridan.simeoni.gradetracker.ui.course
 
-import android.content.Context
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -32,38 +30,41 @@ class CourseFragment : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
         binding = FragmentCourseBinding.inflate(inflater, container, false)
-        binding.lifecycleOwner = this
         adapter = CourseRecyclerViewAdapter(requireContext(), binding.root)
+        activity?.title = safeArgs.keyEnveloppe.title
 
+        // Enabling Drag and Swipe Support
         val callback = DragManageAdapter(adapter, ItemTouchHelper.UP.or(ItemTouchHelper.DOWN),
                 ItemTouchHelper.RIGHT)
         val helper = ItemTouchHelper(callback)
 
+        // Connect RecyclerView adapter
         with(binding) {
             courseRecycler.adapter = adapter
             courseRecycler.layoutManager = LinearLayoutManager(context)
             helper.attachToRecyclerView(courseRecycler)
         }
 
-        activity?.title = safeArgs.keyEnveloppe.title
+        // Update RecyclerView on Courses LiveData change
         viewModel.courses.observe(viewLifecycleOwner) { adapter.courses = it as MutableList<Course>? }
 
+        // Navigate to CourseDialog
         binding.courseAddButton.setOnClickListener {
             val action = CourseFragmentDirections.actionCourseToCourseDialog(CourseStatus(false, null))
             findNavController().navigate(action)
         }
 
+        // Prepare to listen for data from previous BackStack
         val savedStateHandle: SavedStateHandle? = findNavController().currentBackStackEntry?.savedStateHandle
         savedStateHandle?.set(CourseDialog.CONFIRMATION_RESULT, null) // Dialog will override this
+
+        // Listen for data coming from CourseDialog
         savedStateHandle?.getLiveData<CourseDialogData>(CourseDialog.CONFIRMATION_RESULT)?.observe(viewLifecycleOwner)
         {
-            if (it != null) {
-                if (it.status) viewModel.edit(it.id, it.name,it.courseCode, it.grade, it.targetGrade)
-                else viewModel.add(it.name,it.courseCode, it.grade, it.targetGrade)
-            }
+            if (it != null) { if (it.status) viewModel.edit(it) else viewModel.add(it) }
         }
+        // Listen for data coming from ConfirmationDialog
         savedStateHandle?.getLiveData<Long>(ConfirmationDialog.CONFIRMATION_RESULT)?.observe(viewLifecycleOwner)
         {
             if (it >= 0) viewModel.delete(it) else adapter.notifyDataSetChanged()
