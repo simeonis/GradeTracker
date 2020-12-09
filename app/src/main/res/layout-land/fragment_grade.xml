@@ -97,14 +97,13 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="4dp"
                     android:fontFamily="@font/baloo"
-                    android:text="@string/days_until_due"
+                    android:text="@string/grade_predictor"
                     android:textAppearance="@style/Theme.GradeTracker.Text.Style1"
                     android:textSize="26sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.491"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:text="Potential Course Grade" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/grade_possible_label"

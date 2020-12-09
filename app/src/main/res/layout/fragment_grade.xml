@@ -92,7 +92,7 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="8dp"
                     android:fontFamily="@font/baloo"
-                    android:text="@string/days_until_due"
+                    android:text="@string/grade_predictor"
                     android:textAppearance="@style/Theme.GradeTracker.Text.Style1"
                     android:textSize="30sp"
                     app:layout_constraintEnd_toEndOf="parent"

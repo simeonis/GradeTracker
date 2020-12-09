@@ -77,7 +77,7 @@
 
     <!-- Grade Fragment -->
     <string name="course_grade">Course Grade</string>
-    <string name="days_until_due">Days Until Due:</string>
+    <string name="grade_predictor">Grade Predictor</string>
     <string name="possible_grades">Possible Grades</string>
     <string name="minimum_requirement">Minimum Requirement</string>
     <string name="grade_earned">Grade Earned</string>
@@ -87,5 +87,6 @@
     <string name="delete_confirmation">Delete Confirmation</string>
     <string name="date_picker_string">%1$d/%2$d/%3$d</string>
     <string name="logo">Logo</string>
+
 
 </resources>

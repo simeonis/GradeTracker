@@ -1,17 +1,30 @@
 package sheridan.simeoni.gradetracker.ui.dialog
 
-import android.app.Dialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import androidx.appcompat.app.AlertDialog
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
-import sheridan.simeoni.gradetracker.R
+import sheridan.simeoni.gradetracker.databinding.DialogAboutBinding
+
 
 class AboutDialog : DialogFragment() {
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        return AlertDialog.Builder(requireActivity())
-                .setTitle(R.string.app_name)
-                .setMessage(R.string.authors)
-                .setPositiveButton(android.R.string.ok,null)
-                .create()
+
+    private lateinit var binding: DialogAboutBinding
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        binding = DialogAboutBinding.inflate(inflater, container, false)
+        dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+//        return AlertDialog.Builder(requireActivity())
+//                .setTitle(R.string.app_name)
+//                .setMessage(R.string.authors)
+//                .setPositiveButton(android.R.string.ok,null)
+//                .create()
+        binding.doneButton.setOnClickListener { dismiss() }
+
+        return binding.root
     }
 }

@@ -62,7 +62,6 @@ class TermDialog : DialogFragment() {
             KeyboardManager.hideKeyboard(requireActivity())
             datePicker(binding.dialogTermEndDate)
         }
-
         return binding.root
     }
 

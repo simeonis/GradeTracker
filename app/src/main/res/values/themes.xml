@@ -11,6 +11,7 @@
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">#2D2E30</item>
+
     </style>
 
     <style name="Theme.GradeTracker.NoActionBar">
