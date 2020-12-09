@@ -228,7 +228,6 @@
                     android:id="@+id/grade_requirement_label"
                     android:layout_width="320dp"
                     android:layout_height="60dp"
-                    android:layout_marginTop="8dp"
                     android:autoSizeMaxTextSize="36sp"
                     android:autoSizeMinTextSize="12sp"
                     android:autoSizeStepGranularity="2sp"
@@ -246,19 +245,36 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
+                    android:id="@+id/grade_requirement_tip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="44dp"
+                    android:fontFamily="@font/patrickhand"
+                    android:textAppearance="@style/Theme.GradeTracker.Text.Style1"
+                    android:textColor="#FFFFFF"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="(Course Grade: 99.9%)" />
+
+                <TextView
                     android:id="@+id/grade_percentage_label"
-                    android:layout_width="100dp"
+                    android:layout_width="125dp"
                     android:layout_height="60dp"
-                    android:layout_marginEnd="32dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
                     android:layout_marginBottom="16dp"
-                    android:autoSizeMaxTextSize="50sp"
+                    android:autoSizeMaxTextSize="36sp"
                     android:autoSizeMinTextSize="12sp"
                     android:autoSizeStepGranularity="2sp"
                     android:autoSizeTextType="uniform"
                     android:fontFamily="@font/patrickhand"
+                    android:textAlignment="center"
                     android:textAppearance="@style/Theme.GradeTracker.Text.Style2"
                     android:textColor="#E6DBDB"
-                    android:textSize="50sp"
+                    android:textSize="36sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/grade_requirement_label"
@@ -266,23 +282,26 @@
 
                 <TextView
                     android:id="@+id/grade_fraction_label"
-                    android:layout_width="100dp"
+                    android:layout_width="125dp"
                     android:layout_height="60dp"
-                    android:layout_marginStart="32dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
                     android:layout_marginBottom="16dp"
-                    android:autoSizeMaxTextSize="50sp"
+                    android:autoSizeMaxTextSize="36sp"
                     android:autoSizeMinTextSize="12sp"
                     android:autoSizeStepGranularity="2sp"
                     android:autoSizeTextType="uniform"
                     android:fontFamily="@font/patrickhand"
+                    android:textAlignment="center"
                     android:textAppearance="@style/Theme.GradeTracker.Text.Style2"
                     android:textColor="#E6DBDB"
-                    android:textSize="50sp"
+                    android:textSize="36sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/grade_requirement_label"
                     app:layout_constraintVertical_bias="0.0"
                     tools:text="35/50" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.cardview.widget.CardView>

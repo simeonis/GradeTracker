@@ -83,8 +83,8 @@
     <string name="grade_earned">Grade Earned</string>
     <string name="update">Update</string>
     <string name="grade_hint">-/70</string>
-    <string name="delete_confirmation">Delete Confirmation</string>
 
+    <string name="delete_confirmation">Delete Confirmation</string>
     <string name="date_picker_string">%1$d/%2$d/%3$d</string>
     <string name="logo">Logo</string>
 
