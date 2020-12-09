@@ -211,7 +211,6 @@
                     android:id="@+id/grade_requirement_label"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
                     android:fontFamily="@font/patrickhand"
                     android:gravity="center"
                     android:padding="8dp"
@@ -220,22 +219,9 @@
                     android:textColor="#FFFFFF"
                     android:textSize="24sp"
                     android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/grade_requirement_tip"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/patrickhand"
-                    android:textAppearance="@style/Theme.GradeTracker.Text.Style1"
-                    android:textColor="#FFFFFF"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="@+id/grade_requirement_label"
-                    app:layout_constraintStart_toEndOf="@+id/grade_requirement_label"
-                    app:layout_constraintTop_toTopOf="@+id/grade_requirement_label"
-                    tools:text="(Course Grade: 99.9%)" />
 
                 <TextView
                     android:id="@+id/grade_percentage_label"

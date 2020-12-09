@@ -48,7 +48,7 @@ class GradeFragment : Fragment() {
         }
 
         // Update Minimum Grade Requirement
-        viewModel.setRequired(binding.gradeFractionLabel, binding.gradePercentageLabel, binding.gradeRequirementTip)
+        viewModel.setRequired(binding.gradeFractionLabel, binding.gradePercentageLabel)
 
         // OnSubmit Listener for Input Text
         binding.gradeEarnedInput.setOnEditorActionListener {

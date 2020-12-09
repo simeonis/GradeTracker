@@ -41,8 +41,9 @@ class GradeCalculator {
         }
 
         // Calculate minimum grade required by assignment passed in to hit target grade
-        fun minimumRequirement(assignment: Assignment, course: Course): Int {
-            val grade = removeAssignmentFromAverageGrade(assignment, course)
+        fun minimumRequirement(assignment: Assignment, course: Course, isAlone : Boolean): Int {
+            var grade = removeAssignmentFromAverageGrade(assignment, course)
+            if(!isAlone && grade <= 0.0f) grade = this.fillerGrade * (100f - assignment.weight)
             return ceil((((course.targetGrade - grade) / assignment.weight) * assignment.totalPoints)).toInt()
         }
 

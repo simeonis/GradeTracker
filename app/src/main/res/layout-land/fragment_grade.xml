@@ -57,8 +57,8 @@
 
                 <TextView
                     android:id="@+id/grade_total_number_label"
-                    android:layout_width="160dp"
-                    android:layout_height="86dp"
+                    android:layout_width="146dp"
+                    android:layout_height="77dp"
                     android:autoSizeMaxTextSize="128dp"
                     android:autoSizeMinTextSize="16dp"
                     android:autoSizeStepGranularity="2dp"
@@ -70,7 +70,6 @@
                     android:textSize="128sp"
                     app:layout_constraintBottom_toBottomOf="@+id/grade_total_progress"
                     app:layout_constraintEnd_toEndOf="@+id/grade_total_progress"
-                    app:layout_constraintHorizontal_bias="0.506"
                     app:layout_constraintStart_toStartOf="@+id/grade_total_progress"
                     app:layout_constraintTop_toBottomOf="@+id/grade_total_label"
                     app:layout_constraintVertical_bias="0.0"
@@ -245,27 +244,10 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/grade_requirement_tip"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="44dp"
-                    android:fontFamily="@font/patrickhand"
-                    android:textAppearance="@style/Theme.GradeTracker.Text.Style1"
-                    android:textColor="#FFFFFF"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:text="(Course Grade: 99.9%)" />
-
-                <TextView
                     android:id="@+id/grade_percentage_label"
                     android:layout_width="125dp"
                     android:layout_height="60dp"
-                    android:layout_marginTop="8dp"
                     android:layout_marginEnd="16dp"
-                    android:layout_marginBottom="16dp"
                     android:autoSizeMaxTextSize="36sp"
                     android:autoSizeMinTextSize="12sp"
                     android:autoSizeStepGranularity="2sp"
@@ -275,7 +257,7 @@
                     android:textAppearance="@style/Theme.GradeTracker.Text.Style2"
                     android:textColor="#E6DBDB"
                     android:textSize="36sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintBottom_toBottomOf="@+id/grade_fraction_label"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/grade_requirement_label"
                     tools:text="70%" />
@@ -284,9 +266,8 @@
                     android:id="@+id/grade_fraction_label"
                     android:layout_width="125dp"
                     android:layout_height="60dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="16dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="8dp"
                     android:autoSizeMaxTextSize="36sp"
                     android:autoSizeMinTextSize="12sp"
                     android:autoSizeStepGranularity="2sp"
@@ -297,9 +278,9 @@
                     android:textColor="#E6DBDB"
                     android:textSize="36sp"
                     app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/grade_percentage_label"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/grade_requirement_label"
-                    app:layout_constraintVertical_bias="0.0"
                     tools:text="35/50" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>

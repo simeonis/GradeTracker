@@ -43,14 +43,14 @@ class GradeViewModel(envelopeKey: Long, application: Application) : AndroidViewM
         }
     }
 
-    fun setRequired(gradeFractionLabel: TextView, gradePercentageLabel: TextView, gradeRequirementTip: TextView) {
+    fun setRequired(gradeFractionLabel: TextView, gradePercentageLabel: TextView) {
         viewModelScope.launch {
             val assignment = gradeTrackerDao.getAssignmentData(_envelopeKey)
+            val assignments = gradeTrackerDao.getAllAssignmentsList(assignment.courseID)
             val course = gradeTrackerDao.getCourseData(assignment.courseID)
-            val points = GradeCalculator.minimumRequirement(assignment, course)
+            val points = GradeCalculator.minimumRequirement(assignment, course, assignments.size < 2 )
             gradeFractionLabel.text = String.format("%s/%s", points, assignment.totalPoints)
             gradePercentageLabel.text = String.format("%.1f%%", (points / assignment.totalPoints.toFloat()*100))
-            gradeRequirementTip.text = String.format("(Course Grade: %.1f%%)", if (course.grade < 0) 0.0f else course.grade)
         }
     }
 }
