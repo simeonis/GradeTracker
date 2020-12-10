@@ -19,6 +19,7 @@ class GradeViewModel(envelopeKey: Long, application: Application) : AndroidViewM
     private val _envelopeKey : Long = envelopeKey
 
     val assignment : LiveData<Assignment> = gradeTrackerDao.getAssignment(_envelopeKey)
+    val course : LiveData<Course> = gradeTrackerDao.getCourseFromGrade(_envelopeKey)
 
     fun updateGrade(points : Int){
         viewModelScope.launch {
