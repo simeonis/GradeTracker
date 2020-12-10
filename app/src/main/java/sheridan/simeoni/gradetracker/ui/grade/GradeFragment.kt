@@ -1,6 +1,7 @@
 package sheridan.simeoni.gradetracker.ui.grade
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -33,17 +34,6 @@ class GradeFragment : Fragment() {
             } else {
                 binding.gradeSeekBar.progress = (it.points / it.totalPoints.toFloat() * 100).toInt()
                 binding.gradeEarnedInput.hint = String.format("%s/%s", it.points, it.totalPoints)
-            }
-        }
-
-        // Update UI on Course LiveData change
-        viewModel.course.observe(viewLifecycleOwner) {
-            if (it.grade < 0) {
-                binding.gradeTotalNumberLabel.text = String.format("%s", "-")
-                binding.gradeTotalProgress.progress = 0
-            } else {
-                binding.gradeTotalNumberLabel.text = String.format("%.1f%%", it.grade)
-                binding.gradeTotalProgress.progress = it.grade.toInt()
             }
         }
 
@@ -87,8 +77,6 @@ class GradeFragment : Fragment() {
         binding.gradeEarnedInput.hint =
                 String.format("%d/%d", assignment?.totalPoints?.times(progress / 100f)?.toInt(),
                         assignment?.totalPoints)
-        val result = viewModel.getPotential(progress) ?: 0f
-        binding.gradeTotalNumberLabel.text = String.format("%.1f%%", result)
-        binding.gradeTotalProgress.progress = result.toInt()
+        viewModel.setPotential(binding.gradeTotalNumberLabel, binding.gradeTotalProgress, progress)
     }
 }

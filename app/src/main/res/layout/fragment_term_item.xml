@@ -44,21 +44,20 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/ic_edit" />
 
-            <com.google.android.material.progressindicator.LinearProgressIndicator
+            <ProgressBar
                 android:id="@+id/term_progress_bar"
+                style="?android:attr/progressBarStyleHorizontal"
                 android:layout_width="0dp"
                 android:layout_height="2dp"
-                android:layout_marginStart="24dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
-                android:indeterminate="false"
+                android:orientation="horizontal"
                 android:progressTint="#47b27c"
                 android:scaleY="3"
-                style="@style/Theme.GradeTracker.Progress_Bar"
                 app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
                 app:layout_constraintEnd_toStartOf="@+id/term_edit_button"
                 app:layout_constraintStart_toEndOf="@+id/term_item_label"
                 app:layout_constraintTop_toTopOf="@+id/term_item_label"
-                app:trackCornerRadius="3dp"
                 app:trackThickness="2dp" />
 
             <LinearLayout
