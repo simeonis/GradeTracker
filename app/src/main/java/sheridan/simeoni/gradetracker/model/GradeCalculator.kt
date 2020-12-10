@@ -31,12 +31,16 @@ class GradeCalculator {
         // Calculate Average
         fun termAverage(list: List<Course>): Float {
             var total = 0.0f
+            var size = list.size
             for (item in list) {
                 if (item.grade != -1f)
                     total += item.grade
+                else{
+                    size--
+                }
             }
-            return if (list.isNotEmpty() && total > 0)
-                total / list.size.toFloat()
+            return if (size > 0 && total > 0)
+                total / size.toFloat()
             else -1.0f
         }
 

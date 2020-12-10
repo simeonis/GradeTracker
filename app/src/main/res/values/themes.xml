@@ -93,6 +93,10 @@
     <style name="Theme.GradeTracker.dialog_text_edit" parent="Widget.AppCompat.EditText" >
         <item name="android:background">#FFFFFF</item>
     </style>
+    <style name="Theme.GradeTracker.Progress_Bar" parent="Widget.MaterialComponents.LinearProgressIndicator">
+        <item name="indicatorColor">#EF6C6C</item>
+        <item name="trackColor">#ACA7A7</item>
+    </style>
 
     <style name="Theme.GradeTracker.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 </resources>

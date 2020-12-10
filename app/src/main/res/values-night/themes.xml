@@ -77,4 +77,9 @@
         <item name="android:background">#3C3F49</item>
     </style>
 
+    <style name="Theme.GradeTracker.Progress_Bar" parent="Widget.MaterialComponents.LinearProgressIndicator">
+        <item name="indicatorColor">#7289DA</item>
+        <item name="trackColor">#ACA7A7</item>
+    </style>
+
 </resources>
