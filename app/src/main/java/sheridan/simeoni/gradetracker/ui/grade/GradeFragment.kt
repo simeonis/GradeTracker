@@ -37,6 +37,17 @@ class GradeFragment : Fragment() {
             }
         }
 
+        // Update UI on Course LiveData change
+        viewModel.course.observe(viewLifecycleOwner) {
+            if (it.grade < 0) {
+                binding.gradeTotalNumberLabel.text = String.format("%s", "-")
+                binding.gradeTotalProgress.progress = 0
+            } else {
+                binding.gradeTotalNumberLabel.text = String.format("%.1f%%", it.grade)
+                binding.gradeTotalProgress.progress = it.grade.toInt()
+            }
+        }
+
         // Update Minimum Grade Requirement
         viewModel.setRequired(binding.gradeFractionLabel, binding.gradePercentageLabel)
 
@@ -53,7 +64,7 @@ class GradeFragment : Fragment() {
         // SeekBar Listener
         binding.gradeSeekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
-                possibleGrade(progress)
+                if (fromUser) { possibleGrade(progress) }
             }
             override fun onStartTrackingTouch(seekBar: SeekBar) {}
             override fun onStopTrackingTouch(seekBar: SeekBar) {}
