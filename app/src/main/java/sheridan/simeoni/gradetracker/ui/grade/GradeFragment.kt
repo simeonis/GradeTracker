@@ -74,8 +74,7 @@ class GradeFragment : Fragment() {
 
     private fun updateGrade() {
         val gradeEarned = binding.gradeEarnedInput
-        if (gradeEarned.text.isEmpty()) gradeEarned.error = "required"
-        else {
+        if (gradeEarned.text.isNotEmpty()) {
             viewModel.updateGrade(gradeEarned.text.toString().toInt())
             gradeEarned.hint = String.format("%d/50", gradeEarned.text.toString().toInt())
             gradeEarned.setText("")

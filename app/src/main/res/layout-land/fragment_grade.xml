@@ -197,6 +197,7 @@
                     android:maxLength="3"
                     android:padding="0dp"
                     android:textSize="50sp"
+                    android:imeOptions="flagNoExtractUi"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/grade_earned_label" />
