@@ -1,5 +1,6 @@
 package sheridan.simeoni.gradetracker.model
 
+import android.util.Log
 import sheridan.simeoni.gradetracker.database.Assignment
 import sheridan.simeoni.gradetracker.database.Course
 import kotlin.math.abs
@@ -47,7 +48,7 @@ class GradeCalculator {
         // Calculate minimum grade required by assignment passed in to hit target grade
         fun minimumRequirement(assignment: Assignment, course: Course, isAlone : Boolean): Int {
             var grade = removeAssignmentFromAverageGrade(assignment, course)
-            if(!isAlone && grade <= 0.0f) grade = this.fillerGrade * (100f - assignment.weight)
+            if(!isAlone && grade < 0) grade = this.fillerGrade * assignment.weight
             return ceil((((course.targetGrade - grade) / assignment.weight) * assignment.totalPoints)).toInt()
         }
 
@@ -61,7 +62,7 @@ class GradeCalculator {
         private fun removeAssignmentFromAverageGrade(assignment: Assignment, course: Course): Float {
             val assignmentGrade =
                     // Course Average: Non blank | Assignment Grade: blank ---> Filler grade was used
-                    if (course.grade >= 0 && assignment.points < 0) this.fillerGrade * (100f - assignment.weight)
+                    if (course.grade >= 0 && assignment.points < 0) this.fillerGrade * assignment.weight
                     // Course Average: blank | Assignment Grade: blank ---> No grade i.e. -1
                     else if (course.grade < 0 && assignment.points < 0) -1f
                     // Otherwise ...
