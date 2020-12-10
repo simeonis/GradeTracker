@@ -65,7 +65,7 @@ class AssignmentRecyclerViewAdapter(
             binding.assignmentItemGradeLabel.apply {
                 var message = context.getString(R.string.grade)
                 if (assignment.points == -1) {
-                    message += (GradeCalculator.fillerGrade * 100).toString().plus("%")
+                    message += (String.format("%.1f%%", GradeCalculator.fillerGrade * 100))
                     this.alpha = 0.25f
                 } else {
                     message += (String.format("%.1f%%", (assignment.points / assignment.totalPoints.toFloat()) * 100f))

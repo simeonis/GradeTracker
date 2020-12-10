@@ -103,13 +103,15 @@ class SettingsFragment : Fragment() {
 
     private fun updateAll() {
         val fillerInput = binding.settingsFillerGradeInput
-        val fillerEntered = fillerInput.text.toString().toFloat()
-        editor.putFloat("filler_grade", fillerEntered / 100f)
-        GradeCalculator.fillerGrade = fillerEntered / 100f
-        editor.apply()
-        fillerInput.setText("")
-        fillerInput.hint = String.format("%.0f%%", fillerEntered)
-        viewModel.updateAll()
-        KeyboardManager.hideKeyboard(requireActivity())
+        if (fillerInput.text.isNotEmpty()) {
+            val fillerEntered = fillerInput.text.toString().toFloat()
+            editor.putFloat("filler_grade", fillerEntered / 100f)
+            GradeCalculator.fillerGrade = fillerEntered / 100f
+            editor.apply()
+            fillerInput.setText("")
+            fillerInput.hint = String.format("%.0f%%", fillerEntered)
+            viewModel.updateAll()
+            KeyboardManager.hideKeyboard(requireActivity())
+        }
     }
 }
