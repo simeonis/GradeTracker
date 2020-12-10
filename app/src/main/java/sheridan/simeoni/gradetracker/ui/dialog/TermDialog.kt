@@ -30,7 +30,7 @@ class TermDialog : DialogFragment() {
         binding = DialogTermBinding.inflate(inflater, container, false)
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
-        if(safeArgs.status.edit){ initEdit() }
+        if(safeArgs.status.edit){ initEdit() } // Couldn't use data-binding due to Long -> Date conversion
 
         binding.doneButton.setOnClickListener { submit() }
         binding.cancelButton.setOnClickListener { dismiss() }

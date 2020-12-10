@@ -24,10 +24,8 @@ class CourseDialog : DialogFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = DialogCourseBinding.inflate(inflater, container, false)
-
+        binding.status = safeArgs.status
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-
-        if (safeArgs.status.edit) { initEdit() }
 
         binding.dialogCourseNameWrapper.setOnClickListener {
             binding.dialogCourseNameWrapper.apply{
@@ -52,14 +50,6 @@ class CourseDialog : DialogFragment() {
         binding.doneButton.setOnClickListener { confirmed() }
         binding.cancelButton.setOnClickListener { dismiss() }
         return binding.root
-    }
-
-    private fun initEdit() {
-        val course = safeArgs.status.course!!
-        binding.dialogCourseTitleLabel.text = getString(R.string.edit_course)
-        binding.dialogCourseNameInput.hint = course.courseName
-        binding.dialogCourseCodeInput.hint = course.courseCode
-        binding.dialogCourseTargetInput.hint = course.targetGrade.toString()
     }
 
     private fun confirmed(){
