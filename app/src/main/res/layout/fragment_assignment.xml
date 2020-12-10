@@ -156,7 +156,6 @@
             android:clickable="true"
             android:contentDescription="@string/add"
             app:borderWidth="0dp"
-            app:elevation="0dp"
             app:srcCompat="@android:drawable/ic_input_add" />
 
     </RelativeLayout>

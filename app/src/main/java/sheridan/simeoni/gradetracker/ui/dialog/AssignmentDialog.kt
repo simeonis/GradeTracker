@@ -25,9 +25,8 @@ class AssignmentDialog : DialogFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = DialogAssignmentBinding.inflate(inflater, container, false)
+        binding.status = safeArgs.status
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-
-        if (safeArgs.status.edit) initEdit()
 
         binding.dialogAssignmentNameInput.setOnClickListener {
             binding.dialogAssignmentNameWrapper.apply{
@@ -52,16 +51,6 @@ class AssignmentDialog : DialogFragment() {
         binding.doneButton.setOnClickListener { confirmed() }
         binding.cancelButton.setOnClickListener { dismiss() }
         return binding.root
-    }
-
-    private fun initEdit() {
-        val assignment = safeArgs.status.assignment!!
-        binding.dialogAssignmentTitleLabel.text = getString(R.string.edit_assignment)
-        binding.dialogAssignmentNameInput.hint = assignment.assignmentName
-        binding.dialogAssignmentCodeInput.hint = String.format("%s/%d",
-                if (assignment.points == -1) "-" else assignment.points.toString(),
-                assignment.totalPoints)
-        binding.dialogAssignmentWeightInput.hint = assignment.weight.toString()
     }
 
     private fun confirmed(){

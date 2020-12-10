@@ -3,8 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
-
-
+        <variable
+            name="status"
+            type="sheridan.simeoni.gradetracker.database.CourseStatus" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -41,7 +42,7 @@
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/asap"
                 android:gravity="center"
-                android:text="@string/add_course"
+                android:text="@{status.edit ? @string/edit_course : @string/add_course}"
                 android:textAppearance="@style/Theme.GradeTracker.Text.Style1"
                 android:textSize="22sp"
                 android:textStyle="bold"
@@ -88,7 +89,7 @@
                         android:autofillHints="Term "
                         android:fontFamily="@font/patrickhand"
                         android:gravity="center"
-                        android:hint="@string/enter_course_hint"
+                        android:hint="@{status.edit ? status.course.courseName : @string/enter_course_hint}"
                         android:imeOptions="flagNoExtractUi"
                         android:inputType="text"
                         android:maxLength="150"
@@ -127,7 +128,7 @@
                         android:autofillHints="Term "
                         android:fontFamily="@font/patrickhand"
                         android:gravity="center"
-                        android:hint="@string/course_code_hint"
+                        android:hint="@{status.edit ? status.course.courseCode : @string/course_code_hint}"
                         android:imeOptions="flagNoExtractUi"
                         android:inputType="text"
                         android:maxLength="50"
@@ -164,7 +165,7 @@
                         android:autofillHints="Term "
                         android:fontFamily="@font/patrickhand"
                         android:gravity="center"
-                        android:hint="@string/target_grade_hint"
+                        android:hint="@{status.edit ? @string/floatToString(status.course.targetGrade) : @string/target_grade_hint}"
                         android:imeOptions="flagNoExtractUi"
                         android:inputType="number"
                         android:maxLength="4"

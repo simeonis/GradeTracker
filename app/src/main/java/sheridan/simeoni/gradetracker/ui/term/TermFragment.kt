@@ -1,5 +1,7 @@
 package sheridan.simeoni.gradetracker.ui.term
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,10 +12,12 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import sheridan.simeoni.gradetracker.R
 import sheridan.simeoni.gradetracker.database.Term
 import sheridan.simeoni.gradetracker.database.TermStatus
 import sheridan.simeoni.gradetracker.databinding.FragmentTermBinding
 import sheridan.simeoni.gradetracker.helper.DragManageAdapter
+import sheridan.simeoni.gradetracker.model.GradeCalculator
 import sheridan.simeoni.gradetracker.ui.dialog.ConfirmationDialog.Companion.CONFIRMATION_RESULT
 
 class TermFragment : Fragment() {
@@ -21,6 +25,16 @@ class TermFragment : Fragment() {
     private lateinit var binding: FragmentTermBinding
     private lateinit var adapter: TermRecyclerViewAdapter
     private val viewModel : TermViewModel by viewModels()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val sharedPreferences : SharedPreferences = requireActivity().getSharedPreferences("My_Prefs", Context.MODE_PRIVATE)
+        if (sharedPreferences.contains("filler_grade"))
+            GradeCalculator.fillerGrade = sharedPreferences.getFloat("filler_grade", 1f)
+        if (!sharedPreferences.contains("filler_grade")) {
+            findNavController().navigate(R.id.action_term_to_data)
+        }
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentTermBinding.inflate(inflater, container, false)
