@@ -46,7 +46,6 @@
 
             <com.google.android.material.progressindicator.LinearProgressIndicator
                 android:id="@+id/term_progress_bar"
-                style="@style/Theme.GradeTracker.Progress_Bar"
                 android:layout_width="0dp"
                 android:layout_height="2dp"
                 android:layout_marginStart="24dp"
@@ -54,6 +53,7 @@
                 android:indeterminate="false"
                 android:progressTint="#47b27c"
                 android:scaleY="3"
+                style="@style/Theme.GradeTracker.Progress_Bar"
                 app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
                 app:layout_constraintEnd_toStartOf="@+id/term_edit_button"
                 app:layout_constraintStart_toEndOf="@+id/term_item_label"

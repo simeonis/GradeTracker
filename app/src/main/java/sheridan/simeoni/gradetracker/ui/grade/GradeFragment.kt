@@ -28,7 +28,7 @@ class GradeFragment : Fragment() {
         // Update UI on Assignment LiveData change
         viewModel.assignment.observe(viewLifecycleOwner) {
             if (it.points < 0) {
-                binding.gradeSeekBar.progress = (GradeCalculator.fillerGrade * it.totalPoints).toInt()
+                binding.gradeSeekBar.progress = (GradeCalculator.fillerGrade * 100).toInt()
                 binding.gradeEarnedInput.hint = String.format("%s/%s", "-", it.totalPoints)
             } else {
                 binding.gradeSeekBar.progress = (it.points / it.totalPoints.toFloat() * 100).toInt()

@@ -42,7 +42,6 @@
                         android:id="@+id/assignment_summary_label"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
                         android:fontFamily="@font/baloo"
                         android:text="@string/summary"
                         android:textAppearance="@style/Theme.GradeTracker.Text.Style1"
@@ -56,9 +55,13 @@
                         android:id="@+id/assignment_current_progress"
                         android:layout_width="150dp"
                         android:layout_height="150dp"
+                        android:layout_marginBottom="8dp"
                         android:indeterminateOnly="false"
                         android:progress="96"
                         android:progressDrawable="@drawable/circular_progress"
+                        android:scaleX="1.25"
+                        android:scaleY="1.25"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/guideline10"
                         app:layout_constraintHorizontal_bias="0.125"
                         app:layout_constraintStart_toStartOf="parent"
@@ -71,6 +74,8 @@
                         android:indeterminateOnly="false"
                         android:progress="90"
                         android:progressDrawable="@drawable/circular_progress"
+                        android:scaleX="1.25"
+                        android:scaleY="1.25"
                         app:layout_constraintBottom_toBottomOf="@+id/assignment_current_progress"
                         app:layout_constraintEnd_toStartOf="@+id/guideline10"
                         app:layout_constraintStart_toEndOf="@+id/assignment_current_progress"
@@ -84,7 +89,7 @@
                         android:fontFamily="@font/patrickhand"
                         android:text="@string/current"
                         android:textAppearance="@style/Theme.GradeTracker.Text.Style2"
-                        android:textSize="26sp"
+                        android:textSize="24sp"
                         app:layout_constraintBottom_toTopOf="@+id/assignment_current_number_label"
                         app:layout_constraintEnd_toEndOf="@+id/assignment_current_number_label"
                         app:layout_constraintStart_toStartOf="@+id/assignment_current_number_label" />
@@ -97,7 +102,7 @@
                         android:fontFamily="@font/patrickhand"
                         android:text="@string/goal"
                         android:textAppearance="@style/Theme.GradeTracker.Text.Style2"
-                        android:textSize="26sp"
+                        android:textSize="24sp"
                         app:layout_constraintBottom_toTopOf="@+id/assignment_goal_number_label"
                         app:layout_constraintEnd_toEndOf="@+id/assignment_goal_number_label"
                         app:layout_constraintStart_toStartOf="@+id/assignment_goal_number_label" />
@@ -112,10 +117,9 @@
                         android:textSize="30sp"
                         app:layout_constraintBottom_toBottomOf="@+id/assignment_current_progress"
                         app:layout_constraintEnd_toEndOf="@+id/assignment_current_progress"
-                        app:layout_constraintHorizontal_bias="0.522"
                         app:layout_constraintStart_toStartOf="@+id/assignment_current_progress"
                         app:layout_constraintTop_toTopOf="@+id/assignment_current_progress"
-                        app:layout_constraintVertical_bias="0.678"
+                        app:layout_constraintVertical_bias="0.65"
                         tools:text="96.5%" />
 
                     <TextView
@@ -130,7 +134,7 @@
                         app:layout_constraintEnd_toEndOf="@+id/assignment_goal_progress"
                         app:layout_constraintStart_toStartOf="@+id/assignment_goal_progress"
                         app:layout_constraintTop_toTopOf="@+id/assignment_goal_progress"
-                        app:layout_constraintVertical_bias="0.669"
+                        app:layout_constraintVertical_bias="0.65"
                         tools:text="90.0%" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -163,7 +167,7 @@
                 style="@style/Theme.GradeTracker.FloatingButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="16dp"
                 android:clickable="true"
                 android:contentDescription="@string/add"
                 app:borderWidth="0dp"
