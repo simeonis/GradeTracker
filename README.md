@@ -13,10 +13,9 @@ git clone https://github.com/simeonis/GradeTracker.git
 ## Key Project Implementations
 * Database and Room 
 * Navigation Drawer
-* Databinding
+* Databinding & ViewModel
 
 ## Maintainers
 This project is mantained by:
 * [Shae Simeoni]
-* [Jacob Collins]
 * [Seth Climenhaga]
