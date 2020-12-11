@@ -120,7 +120,9 @@
                         android:id="@+id/dialog_term_start_date"
                         style="@style/Theme.GradeTracker.dialog_text_edit"
                         android:layout_width="match_parent"
-
+                        android:focusable="false"
+                        android:clickable="false"
+                        android:cursorVisible="false"
                         android:layout_height="40dp"
                         android:layout_margin="5dp"
                         android:layout_marginHorizontal="8dp"
@@ -156,7 +158,9 @@
                         android:id="@+id/dialog_term_end_date"
                         style="@style/Theme.GradeTracker.dialog_text_edit"
                         android:layout_width="match_parent"
-
+                        android:focusable="false"
+                        android:clickable="false"
+                        android:cursorVisible="false"
                         android:layout_height="40dp"
                         android:layout_margin="5dp"
                         android:layout_marginHorizontal="8dp"
