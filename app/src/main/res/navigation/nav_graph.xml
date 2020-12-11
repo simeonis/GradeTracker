@@ -24,7 +24,9 @@
             app:destination="@id/termDialog" />
         <action
             android:id="@+id/action_term_to_data"
-            app:destination="@id/dataFragment" />
+            app:destination="@id/dataFragment"
+            app:popUpTo="@id/TermFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/courseFragment"
@@ -123,8 +125,8 @@
         <action
             android:id="@+id/action_data_to_term"
             app:destination="@id/TermFragment"
-            app:popUpTo="@id/TermFragment"
-            app:popUpToInclusive="false" />
+            app:popUpTo="@id/dataFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"

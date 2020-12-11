@@ -17,12 +17,6 @@ class AboutDialog : DialogFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = DialogAboutBinding.inflate(inflater, container, false)
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-
-//        return AlertDialog.Builder(requireActivity())
-//                .setTitle(R.string.app_name)
-//                .setMessage(R.string.authors)
-//                .setPositiveButton(android.R.string.ok,null)
-//                .create()
         binding.doneButton.setOnClickListener { dismiss() }
 
         return binding.root
